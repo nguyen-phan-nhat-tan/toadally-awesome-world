@@ -10,15 +10,32 @@ import compiler.ast.expression.*;
 import compiler.lexer.*;
 import compiler.error.SyntaxException;
 
+/**
+ * Uses recursive descent to keep precedence and associativity rules explicit in code,
+ * which makes grammar evolution and debugging simpler than table-driven parsing here.
+ */
 public final class Parser {
     private final List<Token> tokens;
     private int currentIndex;
 
+    /**
+     * Tokenizes once up front so syntax routines work with stable token categories instead
+     * of repeating low-level character checks.
+     *
+     * @param source source text to parse
+     */
     public Parser(String source) {
         this.tokens = new Lexer(source).tokenize();
         this.currentIndex = 0;
     }
 
+    /**
+     * Builds a complete AST in one pass so later compiler stages can assume structural
+     * validity and avoid partial-tree edge cases.
+     *
+     * @return root AST node for the parsed program
+     * @throws SyntaxException when grammar expectations are violated
+     */
     public Program parseProgram() {
         List<Rule> parsedRules = new ArrayList<>();
     
@@ -67,6 +84,12 @@ public final class Parser {
         if (match(TokenType.LBRACE)) {
             Condition condition = parseCondition();
             consume(TokenType.RBRACE, "Expected '}' after condition");
+            return condition;
+        }
+
+        if (match(TokenType.LPAREN)) {
+            Condition condition = parseCondition();
+            consume(TokenType.RPAREN, "Expected ')' after condition");
             return condition;
         }
 
@@ -197,12 +220,6 @@ public final class Parser {
 
         return new SensorNode(type, argument, sensorToken.getLine(), sensorToken.getColumn());
     }
-
-
-
-
-
-
 
     // Helper methods for parsing
     private boolean isRelOp(TokenType type) {

@@ -4,6 +4,10 @@ import compiler.error.SyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Front-loads lexical validation so parser rules can focus on grammar shape instead of
+ * character-level concerns.
+ */
 public class Lexer {
     private final String source;
     private int currentIndex;
@@ -13,6 +17,12 @@ public class Lexer {
     private int tokenColumn;
     private final List<Token> tokens;
 
+    /**
+     * Keeps source text and scan position in one place so line and column tracking stays
+     * consistent across all token kinds.
+     *
+     * @param source full source text to tokenize
+     */
     public Lexer(String source) {
         this.source = source;
         this.currentIndex = 0;
@@ -22,6 +32,13 @@ public class Lexer {
         this.tokens = new ArrayList<>();
     }
 
+    /**
+     * Produces a token stream with an explicit EOF sentinel so parser loops can terminate
+     * without extra boundary checks.
+     *
+     * @return token list in source order
+     * @throws SyntaxException when lexical errors are found early, before parsing starts
+     */
     public List<Token> tokenize() {
         while (!isAtEnd()) {
            start = currentIndex;

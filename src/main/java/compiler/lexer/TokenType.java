@@ -1,5 +1,9 @@
 package compiler.lexer;
 
+/**
+ * Shared grammar vocabulary between lexer and parser, preventing fragile string-based
+ * coupling across compiler stages.
+ */
 public enum TokenType {
     // Punctuation
     ARROW("-->"),
@@ -51,6 +55,12 @@ public enum TokenType {
         this.literal = literal;
     }
 
+    /**
+     * Exposes canonical text for operators/keywords when pretty-printing or reporting
+     * errors; null is intentional for token kinds that are category-only.
+     *
+     * @return literal representation, or null for synthetic token categories
+     */
     public String getliteral() {
         return literal;
     }
