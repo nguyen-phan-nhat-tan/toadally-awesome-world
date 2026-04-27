@@ -54,7 +54,7 @@ public class PrettyPrinter implements ASTVisitor<String> {
     public String visit(BinaryExpr expr) {
         String left = expr.getLeft().accept(this);
         String right = expr.getRight().accept(this);
-        String op = expr.getOperator().toString();
+        String op = expr.getOperator();
         
         return "(" + left + " " + op + " " + right + ")";
     }

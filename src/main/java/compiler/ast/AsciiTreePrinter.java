@@ -5,6 +5,28 @@ import compiler.ast.expression.*;
 import compiler.ast.condition.*;
 import java.util.List;
 
+/**
+ * Pretty-prints the abstract syntax tree as an ASCII tree diagram.
+ * 
+ * This visitor visualizes the tree structure using ASCII art, showing how nodes are nested
+ * and their relationships. Useful for debugging and understanding parsed code structure.
+ * 
+ * Example output:
+ * <pre>
+ * Program
+ * ├── Rule
+ * │   ├── RelationNode [<]
+ * │   │   ├── MemoryNode
+ * │   │   │   └── NumberNode [0]
+ * │   │   └── NumberNode [50]
+ * │   └── ActionNode [forward]
+ * └── Rule
+ *     ...
+ * </pre>
+ * 
+ * @see ASTVisitor
+ * @see PrettyPrinter
+ */
 public class AsciiTreePrinter implements ASTVisitor<String> {
     private String indentChild(String childText, boolean isLast) {
         if (childText == null || childText.isEmpty()) return "";

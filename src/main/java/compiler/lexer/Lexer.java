@@ -5,23 +5,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Front-loads lexical validation so parser rules can focus on grammar shape instead of
- * character-level concerns.
+ * Performs lexical analysis on source code, converting raw text into a sequence of tokens.
+ * 
+ * This is the first stage of the compiler pipeline. The lexer reads source text character-by-character,
+ * recognizes keywords, operators, identifiers, and numeric literals, and produces an ordered list of tokens
+ * that the parser can easily work with. Position information (line and column) is preserved at each token
+ * to enable precise error reporting.
+ * 
+ * The lexer handles:
+ * <ul>
+ *   <li>Single-character tokens: brackets, braces, parentheses, semicolons</li>
+ *   <li>Multi-character operators: := (assign), --> (arrow), <= >= != (relations)</li>
+ *   <li>Keywords: wait, forward, backward, left, right, eat, attack, grow, bud, serve, mem, nearby, ahead, random, smell, and, or</li>
+ *   <li>Numeric literals: integers (e.g., 42)</li>
+ *   <li>Identifiers: variable and rule names</li>
+ *   <li>Comments: line comments starting with //</li>
+ *   <li>Whitespace: spaces, tabs, newlines (skipped but tracked for position)</li>
+ * </ul>
+ * 
+ * Throws {@link SyntaxException} when encountering invalid characters or malformed tokens.
+ * 
+ * @see Lexer#tokenize()
+ * @see Token
+ * @see TokenType
  */
 public class Lexer {
+    /** Complete source text being tokenized. */
     private final String source;
+    
+    /** Current position in source (0-based absolute offset). */
     private int currentIndex;
+    
+    /** Current line in source (1-based); incremented on each newline. */
     private int line;
+    
+    /** Current column in source (1-based); reset to 1 after each newline. */
     private int column;
+    
+    /** Start position of the current token being scanned. */
     private int start;
+    
+    /** Column number where the current token started. */
     private int tokenColumn;
+    
+    /** Accumulator for tokens found during scanning; finalized by {@link #tokenize()}. */
     private final List<Token> tokens;
 
     /**
-     * Keeps source text and scan position in one place so line and column tracking stays
-     * consistent across all token kinds.
-     *
-     * @param source full source text to tokenize
+     * Initializes the lexer with source code to tokenize.
+     * 
+     * Position tracking begins at line 1, column 1. All internal state is reset for fresh scanning.
+     * 
+     * @param source the complete source code to lex (non-null)
+     * @throws NullPointerException if source is null
      */
     public Lexer(String source) {
         this.source = source;
@@ -33,11 +69,14 @@ public class Lexer {
     }
 
     /**
-     * Produces a token stream with an explicit EOF sentinel so parser loops can terminate
-     * without extra boundary checks.
-     *
-     * @return token list in source order
-     * @throws SyntaxException when lexical errors are found early, before parsing starts
+     * Tokenizes the entire source code and returns a list of tokens in source order.
+     * 
+     * This method processes the entire source text from start to finish, recognizing all token types
+     * and recording their positions. An EOF token is appended to signal end-of-input to the parser.
+     * After this method completes, the lexer state is frozen and cannot be reused.
+     * 
+     * @return immutable token list in source order (always ends with EOF token)
+     * @throws SyntaxException when a lexical error is detected (e.g., invalid character, malformed token)
      */
     public List<Token> tokenize() {
         while (!isAtEnd()) {
@@ -49,6 +88,13 @@ public class Lexer {
         return tokens;
     }
 
+    /**
+     * Scans the next token from the source and adds it to the token list.
+     * Handles single-character tokens, multi-character operators, literals, identifiers as well as custom "sugar" syntax, 
+     * and skips whitespace and comments.
+     * 
+     * @throws SyntaxException for any lexical errors encountered during scanning
+     */
     private void scanToken() {
         char c = advance();
         switch (c) {
@@ -92,7 +138,9 @@ public class Lexer {
                 addToken(TokenType.MULOP, "*");
                 return;
             case '-':
-                if (match('-') && match('>')) {
+                if (peek() == '-' && peekNext() == '>') {
+                    advance();
+                    advance();
                     addToken(TokenType.ARROW, "-->");
                 } else {
                     addToken(TokenType.ADDOP, "-");
@@ -143,6 +191,9 @@ public class Lexer {
         }
     }
 
+    /**
+     * Scans a number literal from the source, validates it, and adds it as a token.
+     */
     private void number(){
         while (isDigit(peek())) {
             advance();
@@ -157,6 +208,11 @@ public class Lexer {
         addToken(TokenType.NUMBER, lexeme, value);
     }
 
+
+    /**
+     * Scans an identifier or keyword from the source, checks for reserved words and "sugar" syntax, 
+     * and adds the appropriate token(s).
+     */
     private void identifier() {
         while (isAlpha(peek()) || isDigit(peek())) {
             advance();
@@ -171,6 +227,12 @@ public class Lexer {
         addToken(type, lexeme);
     }
 
+    /**
+     * Checks if the given lexeme matches a reserved keyword and returns the corresponding token type.
+     * @param lexeme the identifier string to check against reserved keywords
+     * @return the TokenType corresponding to the keyword, or 
+     * @throws SyntaxException if it's not a recognized keyword
+     */
     private TokenType keyword(String lexeme){
         switch (lexeme.toLowerCase()) {
             case "and":
@@ -214,6 +276,11 @@ public class Lexer {
         }
     }
     
+    /**
+     * Injects a sequence of tokens representing a sugar access for the given sugar index.
+     * 
+     * @param index the sugar index to inject (e.g., 0 for MEMSIZE, 1 for DEFENSE, etc.)
+     */
     private void injectSugarToken(int index) {
         addToken(TokenType.MEM, "mem");
         addToken(TokenType.LBRACKET, "[");
@@ -265,6 +332,13 @@ public class Lexer {
             return '\0';
         }
         return source.charAt(currentIndex);
+    }
+
+    private char peekNext() {
+        if (currentIndex + 1 >= source.length()) {
+            return '\0';
+        }
+        return source.charAt(currentIndex + 1);
     }
 
     private boolean isAtEnd() {

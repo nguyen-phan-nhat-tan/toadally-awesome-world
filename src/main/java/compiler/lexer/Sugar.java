@@ -25,11 +25,14 @@ public enum Sugar {
         return assignable;
     }
 
-    public static Integer getIndexSugar(String name){
+    /*
+
+    */
+    public static Integer getIndexSugar(String name) {
         try {
             return Sugar.valueOf(name.toUpperCase()).getIndex();
-        } catch (IllegalArgumentException e) {
-            return null;
+        } catch (Exception e) {
+            throw new IllegalStateException("Sugar enum lookup failed unexpectedly for name: " + name, e);
         }
     }
 

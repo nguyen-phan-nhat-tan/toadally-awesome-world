@@ -1,52 +1,148 @@
 package compiler.ast;
 
+import java.util.List;
+
 /**
- * Centralizes source location in the base type so diagnostics and tooling can rely on
- * every node carrying position data, regardless of concrete subtype.
+ * Base class for all abstract syntax tree nodes.
+ * 
+ * Every AST node carries source position information (line and column) so that error
+ * diagnostics, debug output, and IDE tooling can pinpoint issues in the source code.
+ * Additionally, each node tracks the total size of its subtree for metrics and traversal.
+ * 
+ * All AST nodes are immutable after construction; their children and attributes cannot change.
+ * This design enables safe sharing of AST references across compiler phases.
+ * 
+ * <b>Visitor Pattern:</b>
+ * AST traversal is implemented using the visitor pattern via the {@link #accept(ASTVisitor)} method.
+ * This decouples tree structure from operations, allowing new analyses and transformations
+ * without modifying node classes.
+ * 
+ * @see ASTVisitor
+ * @see Program
+ * @see Rule
  */
 public abstract class ASTNode {
+    /** Source line number (1-based) where this node begins in the source code. */
     protected final int line;
+    
+    /** Source column number (1-based) where this node begins in the source code. */
     protected final int column;
+    
+    /** Total number of nodes in this subtree (including this node). Used for metrics and bounds-checking. */
+    public final int subtreeSize; //AI-Generated
+    
+    /** Deprecated alias for subtreeSize; use {@link #subtreeSize} instead. */
+    @Deprecated
+    public final int subTreeSize; //AI-Generated
 
     /**
-     * Stores location once at creation time to preserve the original parse context for
-     * later error reporting and debug output.
+     * Initializes an AST node at the given source location.
+     * 
+     * This constructor is called by concrete AST node subclasses. Position information is
+     * recorded at creation time so it remains available for error reporting throughout compilation,
+     * even if source text is no longer accessible.
      *
-     * @param line source line (1-based)
-     * @param column source column (1-based)
+     * @param line source line number (1-based, where line 1 is the first line)
+     * @param column source column number (1-based, where column 1 is the first character)
+     * @param children direct child nodes in source order (may be null or empty)
      */
-    public ASTNode(int line, int column) {
+    protected ASTNode(int line, int column, ASTNode... children) {
         this.line = line;
         this.column = column;
+        this.subtreeSize = 1 + sumChildren(children); //AI-Generated
+        this.subTreeSize = this.subtreeSize; //AI-Generated
+    }
+
+    /**
+     * Alternative constructor accepting children as a List.
+     * 
+     * Useful for parsing phases that accumulate children in a collection before
+     * creating the parent node.
+     *
+     * @param line source line number (1-based)
+     * @param column source column number (1-based)
+     * @param children direct child nodes as a list (may be null or empty)
+     */
+    //AI-Generated
+    protected ASTNode(int line, int column, List<? extends ASTNode> children) {
+        this.line = line;
+        this.column = column;
+        this.subtreeSize = 1 + sumChildren(children);
+        this.subTreeSize = this.subtreeSize;
+    }
+
+    //AI-Generated
+    private static int sumChildren(ASTNode... children) {
+        int sum = 0;
+        if (children == null) {
+            return 0;
+        }
+        for (ASTNode child : children) {
+            if (child != null) {
+                sum += child.subtreeSize;
+            }
+        }
+        return sum;
+    }
+
+    //AI-Generated
+    private static int sumChildren(List<? extends ASTNode> children) {
+        int sum = 0;
+        if (children == null) {
+            return 0;
+        }
+        for (ASTNode child : children) {
+            if (child != null) {
+                sum += child.subtreeSize;
+            }
+        }
+        return sum;
     }
     
     /**
-     * Exposed so downstream passes can report precise diagnostics without re-threading
-     * positional metadata through every API.
-     *
-     * @return source line where the node starts
+     * Returns the source line number where this node begins.
+     * 
+     * Used by error reporting, debugging, and IDE features to show the user
+     * exactly where in the source file a problem occurred.
+     * 
+     * @return the line number (1-based)
      */
     public int getLine() {
         return line;
     }
 
     /**
-     * Exposed for the same reason as line information: consistent, high-fidelity error
-     * messages across all compiler stages.
-     *
-     * @return source column where the node starts
+     * Returns the source column number where this node begins.
+     * 
+     * Used by error reporting, debugging, and IDE features to pinpoint the exact
+     * character position in the source line where an issue starts.
+     * 
+     * @return the column number (1-based)
      */
     public int getColumn() {
         return column;
     }
 
     /**
-     * Maintains operation extensibility (printing, analysis, transforms) without forcing
-     * behavior into the node classes themselves.
+     * Returns the immediate children of this node in source order.
+     * 
+     * This method is used by tree traversal algorithms (printing, analysis, transforms)
+     * to navigate the AST structure. The order of children mirrors their appearance in source code.
+     * 
+     * @return list of direct child nodes (may be empty, never null)
+     */
+    public abstract List<ASTNode> getChildren();
+
+    /**
+     * Accepts a visitor to perform an operation on this node.
+     * 
+     * This implements the visitor design pattern, allowing new operations to be added
+     * without modifying the AST node classes. The visitor pattern enables clean separation
+     * between tree structure and algorithms (printing, analysis, code generation, etc.).
      *
-     * @param visitor visitor implementation
-     * @param <T> return type produced by the visitor
-     * @return visitor result
+     * @param visitor the visitor to apply (non-null)
+     * @param <T> the return type produced by the visitor
+     * @return the result produced by the visitor's visit method for this node type
      */
     public abstract <T> T accept(ASTVisitor<T> visitor);    
 

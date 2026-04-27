@@ -1,8 +1,21 @@
 package compiler.lexer;
 
 /**
- * Immutable token object so parser logic can safely pass references around without
- * accidental mutation of lexical context.
+ * Represents a single lexical token extracted from source code.
+ * 
+ * Tokens are immutable and carry four essential pieces of information:
+ * <ul>
+ *   <li><b>Type:</b> the grammatical category (keyword, operator, literal, etc.)</li>
+ *   <li><b>Lexeme:</b> the exact text as it appeared in source</li>
+ *   <li><b>Line & Column:</b> source position for error reporting</li>
+ *   <li><b>Value:</b> pre-parsed numeric form (for number tokens only)</li>
+ * </ul>
+ * 
+ * The parser receives an ordered list of tokens and makes decisions based on type and lookahead,
+ * without needing to re-scan source text. Position information is preserved for diagnostics.
+ * 
+ * @see TokenType
+ * @see Lexer#tokenize()
  */
 public class Token {
     private final TokenType type;
@@ -12,27 +25,30 @@ public class Token {
     private final int value;
 
     /**
-     * Convenience overload for non-numeric tokens to keep call sites concise while
-     * preserving a single canonical constructor.
+     * Convenience overload for non-numeric tokens (keywords, operators, identifiers).
+     * 
+     * Initializes the numeric value to 0 since these token types do not represent numbers.
      *
-     * @param type token category
-     * @param lexeme token text from source
-     * @param line source line (1-based)
-     * @param column source column (1-based)
+     * @param type token category (non-null)
+     * @param lexeme token text as it appeared in source (non-null)
+     * @param line source line number (1-based)
+     * @param column source column number (1-based)
      */
     public Token(TokenType type, String lexeme, int line, int column) {
         this(type, lexeme, line, column, 0);
     }
 
     /**
-     * Carries both textual and interpreted numeric form so parser/AST construction can
-     * avoid reparsing number lexemes.
+     * Full constructor carrying both textual and numeric forms.
+     * 
+     * For number tokens, the value is pre-parsed during lexing to avoid re-parsing in the parser.
+     * For non-numeric tokens, value is typically 0.
      *
-     * @param type token category
-     * @param lexeme token text from source
-     * @param line source line (1-based)
-     * @param column source column (1-based)
-     * @param value numeric value for number-like tokens
+     * @param type token category (non-null)
+     * @param lexeme token text from source (non-null)
+     * @param line source line number (1-based)
+     * @param column source column number (1-based)
+     * @param value pre-parsed numeric value (0 for non-numeric tokens)
      */
     public Token(TokenType type, String lexeme, int line, int column, int value) {
         this.type = type;
@@ -43,7 +59,11 @@ public class Token {
     }
 
     /**
-     * @return token category used by parser dispatch
+     * Returns the token type (category).
+     * 
+     * The parser uses this to make dispatch decisions about how to handle the token.
+     * 
+     * @return the token type (never null)
      */
     public TokenType getType() {
         return type;
