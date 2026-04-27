@@ -10,7 +10,7 @@ import java.util.List;
  * Memory nodes retrieve values from the critter's persistent memory, indexed by
  * the index expression. This is used in:
  * <ul>
- *   <li>Condition expressions: comparing memory values (mem[0] < 50)</li>
+ *   <li>Condition expressions: comparing memory values (mem[0] &lt; 50)</li>
  *   <li>Arithmetic expressions: using memory in calculations (mem[1] * 2)</li>
  *   <li>Memory updates: as targets (mem[0] := 10) or sources (mem[0] := mem[1])</li>
  * </ul>

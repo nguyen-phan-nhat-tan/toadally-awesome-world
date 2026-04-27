@@ -13,9 +13,9 @@ import java.util.List;
  * 
  * <b>Examples:</b>
  * <ul>
- *   <li>health < 50 and energy >= 10</li>
+ *   <li>health &lt; 50 and energy &gt;= 10</li>
  *   <li>nearby[0] = 1 or nearby[1] = 1 or nearby[2] = 1</li>
- *   <li>energy >= 20 and (nearby[0] = 2 or nearby[1] = 2)</li>
+ *   <li>energy &gt;= 20 and (nearby[0] = 2 or nearby[1] = 2)</li>
  * </ul>
  * 
  * LogicNodes form a binary tree of conditions, with RelationNode leaves representing

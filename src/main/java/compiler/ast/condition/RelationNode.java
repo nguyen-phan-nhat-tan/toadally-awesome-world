@@ -12,18 +12,18 @@ import java.util.List;
  * A relation compares two expressions using a relational operator, producing a boolean result.
  * Relational operators supported:
  * <ul>
- *   <li>< (less than)</li>
- *   <li>> (greater than)</li>
- *   <li><= (less than or equal)</li>
- *   <li>>= (greater than or equal)</li>
+ *   <li>&lt; (less than)</li>
+ *   <li>&gt; (greater than)</li>
+ *   <li>&lt;= (less than or equal)</li>
+ *   <li>&gt;= (greater than or equal)</li>
  *   <li>= (equal)</li>
  *   <li>!= (not equal)</li>
  * </ul>
  * 
  * <b>Examples:</b>
  * <ul>
- *   <li>health < 50</li>
- *   <li>energy >= 10</li>
+ *   <li>health &lt; 50</li>
+ *   <li>energy &gt;= 10</li>
  *   <li>nearby[0] = 2</li>
  * </ul>
  * 
@@ -37,7 +37,7 @@ public class RelationNode extends Condition {
     /** Left-hand side expression of the relation. */
     private final Expression left;
     
-    /** The relational operator (<, >, <=, >=, =, !=). */
+    /** The relational operator (&lt;, &gt;, &lt;=, &gt;=, =, !=). */
     private final String operator;
     
     /** Right-hand side expression of the relation. */
@@ -47,7 +47,7 @@ public class RelationNode extends Condition {
      * Creates a relational condition node.
      * 
      * @param left the left-hand side expression
-     * @param operator the relational operator as a string (<, >, <=, >=, =, !=)
+        * @param operator the relational operator as a string (&lt;, &gt;, &lt;=, &gt;=, =, !=)
      * @param right the right-hand side expression
      * @param line source line where the relation appears
      * @param column source column where the relation appears
@@ -71,7 +71,7 @@ public class RelationNode extends Condition {
     /**
      * Returns the relational operator.
      * 
-     * @return operator string: <, >, <=, >=, =, or !=
+     * @return operator string: &lt;, &gt;, &lt;=, &gt;=, =, or !=
      */
     public String getOperator() {
         return operator;

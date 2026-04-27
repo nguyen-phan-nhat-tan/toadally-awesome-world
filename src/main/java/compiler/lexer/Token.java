@@ -7,7 +7,7 @@ package compiler.lexer;
  * <ul>
  *   <li><b>Type:</b> the grammatical category (keyword, operator, literal, etc.)</li>
  *   <li><b>Lexeme:</b> the exact text as it appeared in source</li>
- *   <li><b>Line & Column:</b> source position for error reporting</li>
+ *   <li><b>Line &amp; Column:</b> source position for error reporting</li>
  *   <li><b>Value:</b> pre-parsed numeric form (for number tokens only)</li>
  * </ul>
  * 
@@ -70,6 +70,8 @@ public class Token {
     }
 
     /**
+     * Returns the original source lexeme text.
+     *
      * @return original text, useful for preserving user-facing formatting and messages
      */
     public String getLexeme() {
@@ -77,6 +79,8 @@ public class Token {
     }
 
     /**
+     * Returns the source line number.
+     *
      * @return line metadata for precise diagnostics
      */
     public int getLine() {
@@ -84,6 +88,8 @@ public class Token {
     }
 
     /**
+     * Returns the source column number.
+     *
      * @return column metadata for precise diagnostics
      */
     public int getColumn() {
@@ -91,6 +97,8 @@ public class Token {
     }
 
     /**
+     * Returns the numeric payload associated with this token.
+     *
      * @return pre-parsed numeric payload to avoid repeated string-to-int conversion
      */
     public int getValue() {

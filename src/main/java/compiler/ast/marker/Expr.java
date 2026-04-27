@@ -1,5 +1,5 @@
 package compiler.ast.marker;
 
-//AI-Generated
+/** Marker interface for AST expression nodes. */
 public interface Expr {
 }

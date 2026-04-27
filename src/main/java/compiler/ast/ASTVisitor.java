@@ -43,34 +43,79 @@ public interface ASTVisitor<T> {
     
     // ========== Command Nodes ==========
     
-    /** Visits an action command (e.g., wait, forward, eat). */
+    /**
+     * Visits an action command node.
+     *
+     * @param action action command AST node
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.command.ActionNode action);
     
-    /** Visits a memory update command (mem[i] := value). */
+    /**
+     * Visits a memory update command node.
+     *
+     * @param update update command AST node
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.command.UpdateNode update);
     
-    /** Visits a command list (sequence of updates followed by an action). */
+    /**
+     * Visits a command list node.
+     *
+     * @param commandList ordered update/action command sequence
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.command.CommandList commandList);
 
     // ========== Expression Nodes ==========
     
-    /** Visits a binary arithmetic expression (e.g., a + b, c * d). */
+    /**
+     * Visits a binary arithmetic expression node.
+     *
+     * @param expr binary expression AST node
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.expression.BinaryExpr expr);
     
-    /** Visits a numeric literal. */
+    /**
+     * Visits a numeric literal node.
+     *
+     * @param number number AST node
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.expression.NumberNode number);
     
-    /** Visits a memory access expression (mem[index]). */
+    /**
+     * Visits a memory access expression node.
+     *
+     * @param memory memory expression AST node
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.expression.MemoryNode memory);
     
-    /** Visits a sensor query expression (e.g., nearby[dir], smell). */
+    /**
+     * Visits a sensor query expression node.
+     *
+     * @param sensor sensor expression AST node
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.expression.SensorNode sensor);
 
     // ========== Condition Nodes ==========
     
-    /** Visits a relational condition (e.g., x < 5, energy >= 10). */
+    /**
+     * Visits a relational condition node.
+     *
+     * @param relation relation condition AST node
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.condition.RelationNode relation);
     
-    /** Visits a logical condition (and/or combinations of relations). */
+    /**
+     * Visits a logical condition node.
+     *
+     * @param logic logical condition AST node
+     * @return visitor-defined result
+     */
     T visit(compiler.ast.condition.LogicNode logic);
 }

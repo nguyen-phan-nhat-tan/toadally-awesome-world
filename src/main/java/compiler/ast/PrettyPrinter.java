@@ -4,7 +4,17 @@ import compiler.ast.command.*;
 import compiler.ast.expression.*;
 import compiler.ast.condition.*;
 
+/**
+ * Formats an AST back into source-like text.
+ *
+ * This visitor emits a readable representation suitable for debugging,
+ * snapshots, and round-trip validation of parser output.
+ */
 public class PrettyPrinter implements ASTVisitor<String> {
+
+    /** Creates a pretty-printer visitor. */
+    public PrettyPrinter() {
+    }
 
     @Override
     public String visit(Program program) {

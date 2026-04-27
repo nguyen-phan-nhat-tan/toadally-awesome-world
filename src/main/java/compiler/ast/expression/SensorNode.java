@@ -24,7 +24,7 @@ import java.util.List;
  * <ul>
  *   <li>nearby[0] = 1 (check if there's food nearby)</li>
  *   <li>ahead[2] != 0 (check if there's something 2 steps ahead)</li>
- *   <li>random[100] < 50 (50% chance condition)</li>
+ *   <li>random[100] &lt; 50 (50% chance condition)</li>
  *   <li>smell (check for odors)</li>
  * </ul>
  * 

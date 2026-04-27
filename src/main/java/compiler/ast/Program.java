@@ -15,7 +15,7 @@ import java.util.List;
  * and debuggable behavior.
  * 
  * @see Rule
- * @see Parser#parseProgram()
+ * @see compiler.parser.Parser#parseProgram()
  */
 public class Program extends ASTNode {
     /** Ordered list of all rules in the program. */

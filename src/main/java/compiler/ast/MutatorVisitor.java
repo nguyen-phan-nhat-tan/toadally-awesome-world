@@ -18,7 +18,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-//AI-Generated
+/**
+ * Applies random structural mutations to AST programs.
+ *
+ * This visitor is primarily used for fuzzing, robustness checks, and mutation-style
+ * experiments that require syntactically valid but varied tree structures.
+ */
 public final class MutatorVisitor implements ASTVisitor<ASTNode> {
     private static final int MAX_ATTEMPTS = 20;
 
@@ -65,7 +70,13 @@ public final class MutatorVisitor implements ASTVisitor<ASTNode> {
         this.operation = operation;
     }
 
-    //AI-Generated
+    /**
+     * Applies one or more random mutations to the input program.
+     *
+     * @param root program to mutate
+     * @param random randomness source controlling target and operation selection
+     * @return mutated program (or original when no mutation is chosen)
+     */
     public static Program mutate(Program root, Random random) {
         Program current = root;
         if (random.nextInt(4) != 0) {
@@ -85,7 +96,13 @@ public final class MutatorVisitor implements ASTVisitor<ASTNode> {
         return current;
     }
 
-    //AI-Generated
+    /**
+     * Selects a random AST node by subtree-size-weighted index.
+     *
+     * @param root root node to sample from
+     * @param random randomness source
+     * @return selected node within the subtree rooted at root
+     */
     public static ASTNode selectRandomNode(ASTNode root, Random random) {
         int index = random.nextInt(root.subtreeSize);
         return selectByIndex(root, index);

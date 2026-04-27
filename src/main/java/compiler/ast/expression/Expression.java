@@ -8,7 +8,7 @@ import compiler.ast.ASTNode;
  * Expressions represent arithmetic and lookup operations that produce values (integers).
  * They appear in:
  * <ul>
- *   <li>Conditions: expressions on both sides of relational operators (e.g., health < 50)</li>
+ *   <li>Conditions: expressions on both sides of relational operators (e.g., health &lt; 50)</li>
  *   <li>Commands: memory indices and values for updates (e.g., mem[0] := energy + 10)</li>
  *   <li>Sensors: arguments to sensor queries (e.g., nearby[direction])</li>
  * </ul>

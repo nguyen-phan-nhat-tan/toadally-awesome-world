@@ -15,7 +15,7 @@ import java.util.List;
  * The lexer handles:
  * <ul>
  *   <li>Single-character tokens: brackets, braces, parentheses, semicolons</li>
- *   <li>Multi-character operators: := (assign), --> (arrow), <= >= != (relations)</li>
+ *   <li>Multi-character operators: := (assign), --&gt; (arrow), &lt;= &gt;= != (relations)</li>
  *   <li>Keywords: wait, forward, backward, left, right, eat, attack, grow, bud, serve, mem, nearby, ahead, random, smell, and, or</li>
  *   <li>Numeric literals: integers (e.g., 42)</li>
  *   <li>Identifiers: variable and rule names</li>

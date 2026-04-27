@@ -14,7 +14,7 @@ package compiler.lexer;
  *   <li><b>Sensor Keywords:</b> mem (memory), nearby, ahead, random, smell</li>
  *   <li><b>Logical Operators:</b> and, or</li>
  *   <li><b>Arithmetic Operators:</b> +, -, *, / (addop, mulop)</li>
- *   <li><b>Relational Operators:</b> <, >, <=, >=, =, != (rel)</li>
+ *   <li><b>Relational Operators:</b> &lt;, &gt;, &lt;=, &gt;=, =, != (rel)</li>
  *   <li><b>Literals:</b> numeric values</li>
  *   <li><b>Special:</b> EOF (end of file)</li>
  * </ul>
@@ -120,7 +120,7 @@ public enum TokenType {
     /** Category: multiplicative operators (* or /). */
     MULOP,
     
-    /** Category: relational operators (<, >, <=, >=, =, !=). */
+    /** Category: relational operators (&lt;, &gt;, &lt;=, &gt;=, =, !=). */
     REL,
 
     // ========== Literals ==========

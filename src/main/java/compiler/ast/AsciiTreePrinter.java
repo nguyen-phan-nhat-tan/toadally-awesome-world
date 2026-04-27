@@ -15,7 +15,7 @@ import java.util.List;
  * <pre>
  * Program
  * ├── Rule
- * │   ├── RelationNode [<]
+ * │   ├── RelationNode [&lt;]
  * │   │   ├── MemoryNode
  * │   │   │   └── NumberNode [0]
  * │   │   └── NumberNode [50]
@@ -28,6 +28,10 @@ import java.util.List;
  * @see PrettyPrinter
  */
 public class AsciiTreePrinter implements ASTVisitor<String> {
+    /** Creates an ASCII tree printer visitor. */
+    public AsciiTreePrinter() {
+    }
+
     private String indentChild(String childText, boolean isLast) {
         if (childText == null || childText.isEmpty()) return "";
         

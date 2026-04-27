@@ -26,6 +26,15 @@ import compiler.parser.*;
  * @see AsciiTreePrinter
  */
 public class Main {
+    /** Utility class; do not instantiate. */
+    private Main() {
+    }
+
+    /**
+     * Demonstrates parsing and printing for a built-in sample program.
+     *
+     * @param args command-line arguments (unused)
+     */
     public static void main(String[] args) {
         String source = "POSTURE != 17 --> POSTURE := 17; // we are species 17!\n" + //
                         "nearby[3] = 0 and ENERGY > 2500 --> bud;\n" + //
