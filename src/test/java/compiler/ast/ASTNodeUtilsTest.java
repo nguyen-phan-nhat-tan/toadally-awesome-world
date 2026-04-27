@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Test cases for ASTNodeUtils - the consolidated utility for common AST operations.
  * Verifies that the DRY principle fix for null-check patterns works correctly.
- * //AI-Generated - DRY principle test suite
  */
 @DisplayName("AST Node Utils Tests")
 public class ASTNodeUtilsTest {

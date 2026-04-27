@@ -3,7 +3,7 @@ package compiler.ast.command;
 import compiler.ast.expression.Expression;
 
 import compiler.ast.ASTNode;
-import compiler.ast.ASTNodeUtils; //AI-Generated - DRY principle consolidation
+import compiler.ast.ASTNodeUtils;
 import compiler.ast.ASTVisitor;
 import compiler.lexer.TokenType;
 import java.util.List;
@@ -40,7 +40,7 @@ public class ActionNode extends Command {
      * @param argument optional argument (non-null only for SERVE; the memory slot to serve)
      */
     public ActionNode(TokenType actionType, int line, int column, Expression argument) {
-        super(line, column, argument); //AI-Generated
+        super(line, column, argument);
         this.actionType = actionType;
         this.argument = argument;
     }
@@ -75,7 +75,7 @@ public class ActionNode extends Command {
 
     @Override
     public List<ASTNode> getChildren() {
-        return ASTNodeUtils.toChildList(argument); //AI-Generated - DRY principle consolidation
+        return ASTNodeUtils.toChildList(argument);
     }
 
     @Override

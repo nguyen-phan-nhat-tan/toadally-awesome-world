@@ -51,7 +51,7 @@ public class BinaryExpr extends Expression {
      * @param column source column where the expression appears
      */
     public BinaryExpr(Expression left, String operator, Expression right, int line, int column) {
-        super(line, column, left, right); //AI-Generated
+        super(line, column, left, right);
         this.left = left;
         this.operator = operator;
         this.right = right;
@@ -86,7 +86,7 @@ public class BinaryExpr extends Expression {
 
     @Override
     public List<ASTNode> getChildren() {
-        return List.of(left, right); //AI-Generated
+        return List.of(left, right);
     }
     
     @Override

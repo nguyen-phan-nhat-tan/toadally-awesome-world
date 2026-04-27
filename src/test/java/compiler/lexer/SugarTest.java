@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * Test cases for Sugar enum null-safety and error handling improvements.
  * Verifies that the enum provides explicit Optional-based API instead of
  * swallowing exceptions with null returns.
- * //AI-Generated - Error handling test suite
  */
 @DisplayName("Sugar Enum Safety Tests")
 public class SugarTest {

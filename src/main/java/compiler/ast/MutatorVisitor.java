@@ -1,17 +1,8 @@
 package compiler.ast;
 
-import compiler.ast.command.ActionNode;
-import compiler.ast.command.Command;
-import compiler.ast.command.CommandList;
-import compiler.ast.command.UpdateNode;
-import compiler.ast.condition.Condition;
-import compiler.ast.condition.LogicNode;
-import compiler.ast.condition.RelationNode;
-import compiler.ast.expression.BinaryExpr;
-import compiler.ast.expression.Expression;
-import compiler.ast.expression.MemoryNode;
-import compiler.ast.expression.NumberNode;
-import compiler.ast.expression.SensorNode;
+import compiler.ast.command.*;
+import compiler.ast.condition.*;
+import compiler.ast.expression.*;
 import compiler.lexer.TokenType;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -108,7 +99,7 @@ public final class MutatorVisitor implements ASTVisitor<ASTNode> {
         return selectByIndex(root, index);
     }
 
-    //AI-Generated
+    
     private static ASTNode selectByIndex(ASTNode node, int index) {
         if (index == 0) {
             return node;
@@ -184,7 +175,7 @@ public final class MutatorVisitor implements ASTVisitor<ASTNode> {
 
     private ASTNode transformNode(ASTNode node) {
         if (node instanceof Program program) {
-            List<Rule> rules = new ArrayList<>(program.getRules()); //AI-Generated
+            List<Rule> rules = new ArrayList<>(program.getRules()); 
             if (rules.isEmpty()) {
                 rules.add(randomRule(program.getLine(), program.getColumn()));
             } else {

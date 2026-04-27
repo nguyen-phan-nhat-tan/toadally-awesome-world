@@ -31,7 +31,7 @@ public class UpdateNode extends Command {
      * @param column source column where the update appears
      */
     public UpdateNode(Expression targetMemory, Expression value, int line, int column) {
-        super(line, column, targetMemory, value); //AI-Generated
+        super(line, column, targetMemory, value);
         this.targetMemory = targetMemory;
         this.value = value;
     }
@@ -56,7 +56,7 @@ public class UpdateNode extends Command {
 
     @Override
     public List<ASTNode> getChildren() {
-        return List.of(targetMemory, value); //AI-Generated
+        return List.of(targetMemory, value);
     }
 
     @Override

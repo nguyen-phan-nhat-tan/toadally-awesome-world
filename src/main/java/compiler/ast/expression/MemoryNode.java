@@ -41,7 +41,7 @@ public class MemoryNode extends Expression {
      * @param column source column where the memory access appears
      */
     public MemoryNode(Expression index, int line, int column) {
-        super(line, column, index); //AI-Generated
+        super(line, column, index);
         this.index = index;
     }
 
@@ -56,7 +56,7 @@ public class MemoryNode extends Expression {
 
     @Override
     public List<ASTNode> getChildren() {
-        return List.of(index); //AI-Generated
+        return List.of(index);
     }
 
     @Override

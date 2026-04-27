@@ -33,7 +33,7 @@ public class NumberNode extends Expression {
      * @param column source column where the number appears
      */
     public NumberNode(int value, int line, int column) {
-        super(line, column); //AI-Generated
+        super(line, column);
         this.value = value;
     }
 
@@ -48,7 +48,7 @@ public class NumberNode extends Expression {
 
     @Override
     public List<ASTNode> getChildren() {
-        return List.of(); //AI-Generated
+        return List.of();
     }
 
     @Override

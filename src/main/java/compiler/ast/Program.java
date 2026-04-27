@@ -29,7 +29,7 @@ public class Program extends ASTNode {
      * @param column source column for the program start
      */
     public Program(List<Rule> rules, int line, int column) {
-        super(line, column, rules); //AI-Generated
+        super(line, column, rules);
         this.rules = rules;
     }
 
@@ -47,7 +47,7 @@ public class Program extends ASTNode {
 
     @Override
     public List<ASTNode> getChildren() {
-        return new ArrayList<>(rules); //AI-Generated
+        return new ArrayList<>(rules);
     }
 
     @Override

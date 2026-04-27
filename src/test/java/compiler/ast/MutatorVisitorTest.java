@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//AI-Generated
 public class MutatorVisitorTest {
     @Test
     void mutationCreatesNewRootAndSharesUnchangedBranches() {
@@ -44,9 +43,8 @@ public class MutatorVisitorTest {
         assertTrue(foundChangedBranch, "At least one branch should differ after mutation.");
     }
 
-    //AI-Generated
     private Program mutateUntilChanged(Program root) {
-        Random random = new Random(0); //AI-Generated
+        Random random = new Random(0);
         for (int attempt = 0; attempt < 2000; attempt++) {
             Program mutated = MutatorVisitor.mutate(root, random);
             if (mutated != root) {

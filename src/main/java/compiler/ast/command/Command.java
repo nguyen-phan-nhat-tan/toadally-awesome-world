@@ -20,7 +20,6 @@ import compiler.ast.ASTNode;
  * @see CommandList
  * @see compiler.ast.Rule
  */
-//AI-Generated
 public abstract class Command extends ASTNode implements compiler.ast.marker.Cmd {
     /**
      * Initializes a Command node at the given source location.

@@ -2,7 +2,7 @@ package compiler.ast.expression;
 
 import compiler.ast.ASTVisitor;
 import compiler.ast.ASTNode;
-import compiler.ast.ASTNodeUtils; //AI-Generated - DRY principle consolidation
+import compiler.ast.ASTNodeUtils;
 import compiler.lexer.TokenType;
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class SensorNode extends Expression {
      * @param column source column where the sensor appears
      */
     public SensorNode(TokenType sensorType, Expression argument, int line, int column) {
-        super(line, column, argument); //AI-Generated
+        super(line, column, argument);
         this.sensorType = sensorType;
         this.argument = argument;
     }
@@ -85,7 +85,7 @@ public class SensorNode extends Expression {
 
     @Override
     public List<ASTNode> getChildren() {
-        return ASTNodeUtils.toChildList(argument); //AI-Generated - DRY principle consolidation
+        return ASTNodeUtils.toChildList(argument);
     }
     
     @Override

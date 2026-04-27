@@ -29,12 +29,8 @@ public abstract class ASTNode {
     protected final int column;
     
     /** Total number of nodes in this subtree (including this node). Used for metrics and bounds-checking. */
-    public final int subtreeSize; //AI-Generated
+    public final int subtreeSize;
     
-    /** Deprecated alias for subtreeSize; use {@link #subtreeSize} instead. */
-    @Deprecated
-    public final int subTreeSize; //AI-Generated
-
     /**
      * Initializes an AST node at the given source location.
      * 
@@ -49,8 +45,7 @@ public abstract class ASTNode {
     protected ASTNode(int line, int column, ASTNode... children) {
         this.line = line;
         this.column = column;
-        this.subtreeSize = 1 + sumChildren(children); //AI-Generated
-        this.subTreeSize = this.subtreeSize; //AI-Generated
+        this.subtreeSize = 1 + sumChildren(children);
     }
 
     /**
@@ -63,15 +58,14 @@ public abstract class ASTNode {
      * @param column source column number (1-based)
      * @param children direct child nodes as a list (may be null or empty)
      */
-    //AI-Generated
+
     protected ASTNode(int line, int column, List<? extends ASTNode> children) {
         this.line = line;
         this.column = column;
         this.subtreeSize = 1 + sumChildren(children);
-        this.subTreeSize = this.subtreeSize;
     }
 
-    //AI-Generated
+
     private static int sumChildren(ASTNode... children) {
         int sum = 0;
         if (children == null) {
@@ -85,7 +79,7 @@ public abstract class ASTNode {
         return sum;
     }
 
-    //AI-Generated
+
     private static int sumChildren(List<? extends ASTNode> children) {
         int sum = 0;
         if (children == null) {

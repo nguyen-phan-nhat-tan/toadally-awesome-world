@@ -18,7 +18,6 @@ import compiler.ast.ASTNode;
  * @see LogicNode
  * @see compiler.ast.Rule
  */
-//AI-Generated
 public abstract class Condition extends ASTNode implements compiler.ast.marker.Cond {
     /**
      * Initializes a Condition node at the given source location.

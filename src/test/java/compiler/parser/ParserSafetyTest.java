@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * Test cases for Parser token stream safety and bounds checking.
  * These tests verify that the parser handles edge cases and malformed input
  * without throwing IndexOutOfBoundsException or NullPointerException.
- * //AI-Generated - Critical null-safety test suite
  */
 @DisplayName("Parser Token Stream Safety Tests")
 public class ParserSafetyTest {

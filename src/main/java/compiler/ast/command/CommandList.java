@@ -39,12 +39,11 @@ public class CommandList extends Command {
      * @param column source column where the command begins
      */
     public CommandList(List<UpdateNode> updates, Command terminalAction, int line, int column) {
-        super(line, column, collectChildren(updates, terminalAction).toArray(new ASTNode[0])); //AI-Generated
+        super(line, column, collectChildren(updates, terminalAction).toArray(new ASTNode[0]));
         this.updates = updates;
         this.terminalAction = terminalAction;
     }
 
-    //AI-Generated
     private static List<ASTNode> collectChildren(List<UpdateNode> updates, Command terminalAction) {
         List<ASTNode> children = new ArrayList<>(updates);
         children.add(terminalAction);
@@ -71,7 +70,7 @@ public class CommandList extends Command {
 
     @Override
     public List<ASTNode> getChildren() {
-        return collectChildren(updates, terminalAction); //AI-Generated
+        return collectChildren(updates, terminalAction);
     }
 
     @Override

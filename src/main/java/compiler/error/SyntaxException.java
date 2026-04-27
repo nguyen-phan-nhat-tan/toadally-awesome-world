@@ -11,12 +11,10 @@ package compiler.error;
  * @see compiler.parser.Parser
  */
 public class SyntaxException extends RuntimeException {
-    private final int line;
-    private final int column;
-
     /** Source line number (1-based) where the error was detected. */
-    
+    private final int line;
     /** Source column number (1-based) where the error was detected. */
+    private final int column;
 
     /**
      * Creates a syntax error with the given message and source location.

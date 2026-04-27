@@ -19,7 +19,7 @@ import java.util.List;
  * @see Command
  * @see Program
  */
-public class Rule extends ASTNode implements compiler.ast.marker.Rule { //AI-Generated
+public class Rule extends ASTNode implements compiler.ast.marker.Rule {
     /** The guard condition that determines whether this rule should fire. */
     private final Condition condition;
     
@@ -39,7 +39,7 @@ public class Rule extends ASTNode implements compiler.ast.marker.Rule { //AI-Gen
      * @param column source column where the rule starts
      */
     public Rule(Condition condition, Command command, int line, int column) {
-        super(line, column, condition, command); //AI-Generated
+        super(line, column, condition, command);
         this.condition = condition;
         this.command = command;
     }
@@ -64,7 +64,7 @@ public class Rule extends ASTNode implements compiler.ast.marker.Rule { //AI-Gen
 
     @Override
     public List<ASTNode> getChildren() {
-        return List.of(condition, command); //AI-Generated
+        return List.of(condition, command);
     }
     
     @Override

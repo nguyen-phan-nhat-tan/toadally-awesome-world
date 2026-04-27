@@ -454,7 +454,6 @@ public final class Parser {
      *
      * @return current token, guaranteed to be non-null (EOF token if at end)
      * @throws SyntaxException if token stream integrity is violated
-     * //AI-Generated - Critical null-safety fix
      */
     private Token peek() {
         if (currentIndex < 0 || currentIndex >= tokens.size()) {
@@ -472,7 +471,6 @@ public final class Parser {
      *
      * @return previous token
      * @throws SyntaxException if no previous token exists (index underflow)
-     * //AI-Generated - Critical null-safety fix
      */
     private Token previous() {
         if (currentIndex <= 0 || currentIndex - 1 < 0 || currentIndex - 1 >= tokens.size()) {
@@ -485,7 +483,7 @@ public final class Parser {
     }
 
     private boolean isAtEnd() {
-        // Check bounds BEFORE calling peek() to avoid NPE/AIOOB //AI-Generated
+        // Check bounds BEFORE calling peek() to avoid NPE/AIOOB.
         if (currentIndex < 0 || currentIndex >= tokens.size()) {
             return true;
         }
