@@ -62,7 +62,31 @@ public final class MutatorVisitor implements ASTVisitor<ASTNode> {
     }
 
     /**
+     * Creates a new mutator with the given random source.
+     * This constructor is used for instance-based mutation calls.
+     *
+     * @param random randomness source for mutation choices
+     */
+    public MutatorVisitor(Random random) {
+        this.root = null;
+        this.target = null;
+        this.random = random;
+        this.operation = null;
+    }
+
+    /**
      * Applies one or more random mutations to the input program.
+     * Wraps the static mutate method for instance-based mutation.
+     *
+     * @param program program to mutate
+     * @return mutated program
+     */
+    public Program mutate(Program program) {
+        return mutate(program, random);
+    }
+
+    /**
+     * Applies zero or more random mutations to the input program.
      *
      * @param root program to mutate
      * @param random randomness source controlling target and operation selection
@@ -507,8 +531,15 @@ public final class MutatorVisitor implements ASTVisitor<ASTNode> {
             }
         }
 
-        Command terminal = (Command) commandList.getTerminalAction().accept(this);
-        if (terminal != commandList.getTerminalAction()) {
+        Command terminal = null;
+        if (commandList.getTerminalAction() != null) {
+            terminal = (Command) commandList.getTerminalAction().accept(this);
+            if (terminal != commandList.getTerminalAction()) {
+                changed = true;
+            }
+        } else {
+            // If terminal action is null, use a default wait action
+            terminal = new ActionNode(TokenType.WAIT, commandList.getLine(), commandList.getColumn(), null);
             changed = true;
         }
 

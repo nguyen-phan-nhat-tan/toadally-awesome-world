@@ -32,3 +32,8 @@ build
 
 # Ignore Kotlin plugin data
 .kotlin
+
+# Custom
+a4
+*.txt
+

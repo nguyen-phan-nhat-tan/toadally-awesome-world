@@ -21,7 +21,7 @@ import compiler.error.SyntaxException;
  *   <li>Grammar rules map directly to methods (e.g., parseExpression() for expression production)</li>
  *   <li>Left recursion is eliminated via iteration (e.g., using while loops for operator chains)</li>
  *   <li>Precedence and associativity are encoded in method nesting (higher precedence = deeper nesting)</li>
- *   <li>Backtracking is minimal; the grammar is LL(1) compatible</li>
+ *   <li>Backtracking is minimal</li>
  * </ul>
  * 
  * <b>Grammar Overview:</b>
