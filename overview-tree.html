@@ -51,82 +51,88 @@ loadScripts(document, 'script');</script>
 </div>
 <span class="package-hierarchy-label">Package Hierarchies:</span>
 <ul class="horizontal contents-list">
-<li><a href="compiler/ast/package-tree.html">compiler.ast</a>, </li>
-<li><a href="compiler/ast/command/package-tree.html">compiler.ast.command</a>, </li>
-<li><a href="compiler/ast/condition/package-tree.html">compiler.ast.condition</a>, </li>
-<li><a href="compiler/ast/expression/package-tree.html">compiler.ast.expression</a>, </li>
-<li><a href="compiler/ast/marker/package-tree.html">compiler.ast.marker</a>, </li>
-<li><a href="compiler/error/package-tree.html">compiler.error</a>, </li>
-<li><a href="compiler/io/package-tree.html">compiler.io</a>, </li>
-<li><a href="compiler/lexer/package-tree.html">compiler.lexer</a>, </li>
-<li><a href="compiler/parser/package-tree.html">compiler.parser</a>, </li>
-<li><a href="compiler/simulation/package-tree.html">compiler.simulation</a></li>
+<li><a href="ast/package-tree.html">ast</a>, </li>
+<li><a href="ast/marker/package-tree.html">ast.marker</a>, </li>
+<li><a href="error/package-tree.html">error</a>, </li>
+<li><a href="io/package-tree.html">io</a>, </li>
+<li><a href="lexer/package-tree.html">lexer</a>, </li>
+<li><a href="parser/package-tree.html">parser</a>, </li>
+<li><a href="simulation/package-tree.html">simulation</a></li>
 </ul>
 <section class="hierarchy">
 <h2 title="Class Hierarchy">Class Hierarchy</h2>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" class="type-name-link external-link" title="class or interface in java.lang">Object</a>
 <ul>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/Action.html" class="type-name-link" title="class in compiler.simulation">Action</a></li>
-<li class="circle">compiler.ast.<a href="compiler/ast/AsciiTreePrinter.html" class="type-name-link" title="class in compiler.ast">AsciiTreePrinter</a> (implements compiler.ast.<a href="compiler/ast/ASTVisitor.html" title="interface in compiler.ast">ASTVisitor</a>&lt;T&gt;)</li>
-<li class="circle">compiler.ast.<a href="compiler/ast/ASTNode.html" class="type-name-link" title="class in compiler.ast">ASTNode</a>
+<li class="circle">simulation.<a href="simulation/Action.html" class="type-name-link" title="class in simulation">Action</a></li>
+<li class="circle">javafx.application.Application
 <ul>
-<li class="circle">compiler.ast.command.<a href="compiler/ast/command/Command.html" class="type-name-link" title="class in compiler.ast.command">Command</a> (implements compiler.ast.marker.<a href="compiler/ast/marker/Cmd.html" title="interface in compiler.ast.marker">Cmd</a>)
-<ul>
-<li class="circle">compiler.ast.command.<a href="compiler/ast/command/ActionNode.html" class="type-name-link" title="class in compiler.ast.command">ActionNode</a></li>
-<li class="circle">compiler.ast.command.<a href="compiler/ast/command/CommandList.html" class="type-name-link" title="class in compiler.ast.command">CommandList</a></li>
-<li class="circle">compiler.ast.command.<a href="compiler/ast/command/UpdateNode.html" class="type-name-link" title="class in compiler.ast.command">UpdateNode</a></li>
+<li class="circle"><a href="GuiMain.html" class="type-name-link" title="class in Unnamed Package">GuiMain</a></li>
 </ul>
 </li>
-<li class="circle">compiler.ast.condition.<a href="compiler/ast/condition/Condition.html" class="type-name-link" title="class in compiler.ast.condition">Condition</a> (implements compiler.ast.marker.<a href="compiler/ast/marker/Cond.html" title="interface in compiler.ast.marker">Cond</a>)
+<li class="circle">ast.<a href="ast/AsciiTreePrinter.html" class="type-name-link" title="class in ast">AsciiTreePrinter</a></li>
+<li class="circle">ast.<a href="ast/ASTNode.html" class="type-name-link" title="class in ast">ASTNode</a>
 <ul>
-<li class="circle">compiler.ast.condition.<a href="compiler/ast/condition/LogicNode.html" class="type-name-link" title="class in compiler.ast.condition">LogicNode</a></li>
-<li class="circle">compiler.ast.condition.<a href="compiler/ast/condition/RelationNode.html" class="type-name-link" title="class in compiler.ast.condition">RelationNode</a></li>
-</ul>
-</li>
-<li class="circle">compiler.ast.expression.<a href="compiler/ast/expression/Expression.html" class="type-name-link" title="class in compiler.ast.expression">Expression</a> (implements compiler.ast.marker.<a href="compiler/ast/marker/Expr.html" title="interface in compiler.ast.marker">Expr</a>)
+<li class="circle">ast.<a href="ast/Command.html" class="type-name-link" title="class in ast">Command</a> (implements ast.marker.<a href="ast/marker/Cmd.html" title="interface in ast.marker">Cmd</a>)
 <ul>
-<li class="circle">compiler.ast.expression.<a href="compiler/ast/expression/BinaryExpr.html" class="type-name-link" title="class in compiler.ast.expression">BinaryExpr</a></li>
-<li class="circle">compiler.ast.expression.<a href="compiler/ast/expression/MemoryNode.html" class="type-name-link" title="class in compiler.ast.expression">MemoryNode</a></li>
-<li class="circle">compiler.ast.expression.<a href="compiler/ast/expression/NumberNode.html" class="type-name-link" title="class in compiler.ast.expression">NumberNode</a></li>
-<li class="circle">compiler.ast.expression.<a href="compiler/ast/expression/SensorNode.html" class="type-name-link" title="class in compiler.ast.expression">SensorNode</a></li>
+<li class="circle">ast.<a href="ast/ActionNode.html" class="type-name-link" title="class in ast">ActionNode</a></li>
+<li class="circle">ast.<a href="ast/CommandList.html" class="type-name-link" title="class in ast">CommandList</a></li>
+<li class="circle">ast.<a href="ast/UpdateNode.html" class="type-name-link" title="class in ast">UpdateNode</a></li>
 </ul>
 </li>
-<li class="circle">compiler.ast.<a href="compiler/ast/Program.html" class="type-name-link" title="class in compiler.ast">Program</a></li>
-<li class="circle">compiler.ast.<a href="compiler/ast/Rule.html" class="type-name-link" title="class in compiler.ast">Rule</a> (implements compiler.ast.marker.<a href="compiler/ast/marker/Rule.html" title="interface in compiler.ast.marker">Rule</a>)</li>
+<li class="circle">ast.<a href="ast/Condition.html" class="type-name-link" title="class in ast">Condition</a> (implements ast.marker.<a href="ast/marker/Cond.html" title="interface in ast.marker">Cond</a>)
+<ul>
+<li class="circle">ast.<a href="ast/LogicNode.html" class="type-name-link" title="class in ast">LogicNode</a></li>
+<li class="circle">ast.<a href="ast/RelationNode.html" class="type-name-link" title="class in ast">RelationNode</a></li>
 </ul>
 </li>
-<li class="circle">compiler.ast.<a href="compiler/ast/ASTNodeUtils.html" class="type-name-link" title="class in compiler.ast">ASTNodeUtils</a></li>
-<li class="circle">compiler.io.<a href="compiler/io/Console.html" class="type-name-link" title="class in compiler.io">Console</a></li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/Constants.html" class="type-name-link" title="class in compiler.simulation">Constants</a></li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/Controller.html" class="type-name-link" title="class in compiler.simulation">Controller</a></li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/Critter.html" class="type-name-link" title="class in compiler.simulation">Critter</a></li>
-<li class="circle">compiler.io.<a href="compiler/io/CritterLoader.html" class="type-name-link" title="class in compiler.io">CritterLoader</a></li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/HexMath.html" class="type-name-link" title="class in compiler.simulation">HexMath</a></li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/HexState.html" class="type-name-link" title="class in compiler.simulation">HexState</a></li>
-<li class="circle">compiler.lexer.<a href="compiler/lexer/Lexer.html" class="type-name-link" title="class in compiler.lexer">Lexer</a></li>
+<li class="circle">ast.<a href="ast/Expression.html" class="type-name-link" title="class in ast">Expression</a> (implements ast.marker.<a href="ast/marker/Expr.html" title="interface in ast.marker">Expr</a>)
+<ul>
+<li class="circle">ast.<a href="ast/BinaryExpr.html" class="type-name-link" title="class in ast">BinaryExpr</a></li>
+<li class="circle">ast.<a href="ast/MemoryNode.html" class="type-name-link" title="class in ast">MemoryNode</a></li>
+<li class="circle">ast.<a href="ast/NumberNode.html" class="type-name-link" title="class in ast">NumberNode</a></li>
+<li class="circle">ast.<a href="ast/SensorNode.html" class="type-name-link" title="class in ast">SensorNode</a></li>
+</ul>
+</li>
+<li class="circle">ast.<a href="ast/Program.html" class="type-name-link" title="class in ast">Program</a></li>
+<li class="circle">ast.<a href="ast/Rule.html" class="type-name-link" title="class in ast">Rule</a> (implements ast.marker.<a href="ast/marker/Rule.html" title="interface in ast.marker">Rule</a>)</li>
+</ul>
+</li>
+<li class="circle">ast.<a href="ast/ASTNodeUtils.html" class="type-name-link" title="class in ast">ASTNodeUtils</a></li>
+<li class="circle">simulation.<a href="simulation/BinaryHeap.html" class="type-name-link" title="class in simulation">BinaryHeap</a>&lt;E&gt; (implements simulation.<a href="simulation/AdjustablePriorityQueue.html" title="interface in simulation">AdjustablePriorityQueue</a>&lt;E&gt;)</li>
+<li class="circle">io.<a href="io/Console.html" class="type-name-link" title="class in io">Console</a></li>
+<li class="circle">simulation.<a href="simulation/Constants.html" class="type-name-link" title="class in simulation">Constants</a></li>
+<li class="circle">simulation.<a href="simulation/Controller.html" class="type-name-link" title="class in simulation">Controller</a></li>
+<li class="circle">simulation.<a href="simulation/Critter.html" class="type-name-link" title="class in simulation">Critter</a></li>
+<li class="circle">io.<a href="io/CritterLoader.html" class="type-name-link" title="class in io">CritterLoader</a></li>
+<li class="circle">simulation.<a href="simulation/CritterSnapshot.html" class="type-name-link" title="class in simulation">CritterSnapshot</a></li>
+<li class="circle">simulation.<a href="simulation/HexMath.html" class="type-name-link" title="class in simulation">HexMath</a></li>
+<li class="circle">simulation.<a href="simulation/HexSnapshot.html" class="type-name-link" title="class in simulation">HexSnapshot</a></li>
+<li class="circle">simulation.<a href="simulation/HexState.html" class="type-name-link" title="class in simulation">HexState</a></li>
+<li class="circle">lexer.<a href="lexer/Lexer.html" class="type-name-link" title="class in lexer">Lexer</a></li>
 <li class="circle"><a href="Main.html" class="type-name-link" title="class in Unnamed Package">Main</a></li>
-<li class="circle">compiler.ast.<a href="compiler/ast/MutatorVisitor.html" class="type-name-link" title="class in compiler.ast">MutatorVisitor</a> (implements compiler.ast.<a href="compiler/ast/ASTVisitor.html" title="interface in compiler.ast">ASTVisitor</a>&lt;T&gt;)</li>
-<li class="circle">compiler.parser.<a href="compiler/parser/Parser.html" class="type-name-link" title="class in compiler.parser">Parser</a></li>
-<li class="circle">compiler.ast.<a href="compiler/ast/PrettyPrinter.html" class="type-name-link" title="class in compiler.ast">PrettyPrinter</a> (implements compiler.ast.<a href="compiler/ast/ASTVisitor.html" title="interface in compiler.ast">ASTVisitor</a>&lt;T&gt;)</li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/ProgramCritterInterpreter.html" class="type-name-link" title="class in compiler.simulation">ProgramCritterInterpreter</a> (implements compiler.simulation.<a href="compiler/simulation/InterpreterVisitor.html" title="interface in compiler.simulation">InterpreterVisitor</a>)</li>
+<li class="circle">ast.<a href="ast/Mutator.html" class="type-name-link" title="class in ast">Mutator</a></li>
+<li class="circle">parser.<a href="parser/Parser.html" class="type-name-link" title="class in parser">Parser</a></li>
+<li class="circle">ast.<a href="ast/PrettyPrinter.html" class="type-name-link" title="class in ast">PrettyPrinter</a></li>
+<li class="circle">simulation.<a href="simulation/ProgramCritterInterpreter.html" class="type-name-link" title="class in simulation">ProgramCritterInterpreter</a> (implements simulation.<a href="simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a>)</li>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Throwable.html" class="type-name-link external-link" title="class or interface in java.lang">Throwable</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" class="type-name-link external-link" title="class or interface in java.lang">Exception</a>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/RuntimeException.html" class="type-name-link external-link" title="class or interface in java.lang">RuntimeException</a>
 <ul>
-<li class="circle">compiler.error.<a href="compiler/error/SyntaxException.html" class="type-name-link" title="class in compiler.error">SyntaxException</a></li>
+<li class="circle">error.<a href="error/SyntaxException.html" class="type-name-link" title="class in error">SyntaxException</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="circle">compiler.lexer.<a href="compiler/lexer/Token.html" class="type-name-link" title="class in compiler.lexer">Token</a></li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/World.html" class="type-name-link" title="class in compiler.simulation">World</a></li>
-<li class="circle">compiler.io.<a href="compiler/io/WorldLoader.html" class="type-name-link" title="class in compiler.io">WorldLoader</a></li>
-<li class="circle">compiler.io.<a href="compiler/io/WorldLoader.WorldAndController.html" class="type-name-link" title="class in compiler.io">WorldLoader.WorldAndController</a></li>
+<li class="circle">lexer.<a href="lexer/Token.html" class="type-name-link" title="class in lexer">Token</a></li>
+<li class="circle">simulation.<a href="simulation/World.html" class="type-name-link" title="class in simulation">World</a></li>
+<li class="circle">io.<a href="io/WorldLoader.html" class="type-name-link" title="class in io">WorldLoader</a></li>
+<li class="circle">io.<a href="io/WorldLoader.WorldAndController.html" class="type-name-link" title="class in io">WorldLoader.WorldAndController</a></li>
+<li class="circle">simulation.<a href="simulation/WorldSnapshot.html" class="type-name-link" title="class in simulation">WorldSnapshot</a></li>
 </ul>
 </li>
 </ul>
@@ -134,12 +140,20 @@ loadScripts(document, 'script');</script>
 <section class="hierarchy">
 <h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
-<li class="circle">compiler.ast.<a href="compiler/ast/ASTVisitor.html" class="type-name-link" title="interface in compiler.ast">ASTVisitor</a>&lt;T&gt;</li>
-<li class="circle">compiler.ast.marker.<a href="compiler/ast/marker/Cmd.html" class="type-name-link" title="interface in compiler.ast.marker">Cmd</a></li>
-<li class="circle">compiler.ast.marker.<a href="compiler/ast/marker/Cond.html" class="type-name-link" title="interface in compiler.ast.marker">Cond</a></li>
-<li class="circle">compiler.ast.marker.<a href="compiler/ast/marker/Expr.html" class="type-name-link" title="interface in compiler.ast.marker">Expr</a></li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/InterpreterVisitor.html" class="type-name-link" title="interface in compiler.simulation">InterpreterVisitor</a></li>
-<li class="circle">compiler.ast.marker.<a href="compiler/ast/marker/Rule.html" class="type-name-link" title="interface in compiler.ast.marker">Rule</a></li>
+<li class="circle">ast.marker.<a href="ast/marker/Cmd.html" class="type-name-link" title="interface in ast.marker">Cmd</a></li>
+<li class="circle">ast.marker.<a href="ast/marker/Cond.html" class="type-name-link" title="interface in ast.marker">Cond</a></li>
+<li class="circle">simulation.<a href="simulation/CritterInterpreter.html" class="type-name-link" title="interface in simulation">CritterInterpreter</a></li>
+<li class="circle">ast.marker.<a href="ast/marker/Expr.html" class="type-name-link" title="interface in ast.marker">Expr</a></li>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Iterable.html" class="type-name-link external-link" title="class or interface in java.lang">Iterable</a>&lt;T&gt;
+<ul>
+<li class="circle">java.util.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collection.html" class="type-name-link external-link" title="class or interface in java.util">Collection</a>&lt;E&gt;
+<ul>
+<li class="circle">simulation.<a href="simulation/AdjustablePriorityQueue.html" class="type-name-link" title="interface in simulation">AdjustablePriorityQueue</a>&lt;E&gt;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="circle">ast.marker.<a href="ast/marker/Rule.html" class="type-name-link" title="interface in ast.marker">Rule</a></li>
 </ul>
 </section>
 <section class="hierarchy">
@@ -149,10 +163,10 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Enum.html" class="type-name-link external-link" title="class or interface in java.lang">Enum</a>&lt;E&gt; (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;, java.lang.constant.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/constant/Constable.html" title="class or interface in java.lang.constant" class="external-link">Constable</a>, java.io.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
 <ul>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/ActionType.html" class="type-name-link" title="enum class in compiler.simulation">ActionType</a></li>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/HexDirection.html" class="type-name-link" title="enum class in compiler.simulation">HexDirection</a></li>
-<li class="circle">compiler.lexer.<a href="compiler/lexer/Sugar.html" class="type-name-link" title="enum class in compiler.lexer">Sugar</a></li>
-<li class="circle">compiler.lexer.<a href="compiler/lexer/TokenType.html" class="type-name-link" title="enum class in compiler.lexer">TokenType</a></li>
+<li class="circle">simulation.<a href="simulation/ActionType.html" class="type-name-link" title="enum class in simulation">ActionType</a></li>
+<li class="circle">simulation.<a href="simulation/HexDirection.html" class="type-name-link" title="enum class in simulation">HexDirection</a></li>
+<li class="circle">lexer.<a href="lexer/Sugar.html" class="type-name-link" title="enum class in lexer">Sugar</a></li>
+<li class="circle">lexer.<a href="lexer/TokenType.html" class="type-name-link" title="enum class in lexer">TokenType</a></li>
 </ul>
 </li>
 </ul>
@@ -166,7 +180,7 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Record.html" class="type-name-link external-link" title="class or interface in java.lang">Record</a>
 <ul>
-<li class="circle">compiler.simulation.<a href="compiler/simulation/HexCoordinate.html" class="type-name-link" title="class in compiler.simulation">HexCoordinate</a></li>
+<li class="circle">simulation.<a href="simulation/HexCoordinate.html" class="type-name-link" title="class in simulation">HexCoordinate</a></li>
 </ul>
 </li>
 </ul>
