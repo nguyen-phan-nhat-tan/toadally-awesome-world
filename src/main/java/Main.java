@@ -1,7 +1,7 @@
 
-import compiler.io.WorldLoader;
-import compiler.simulation.World;
-import compiler.simulation.Controller;
+import io.WorldLoader;
+import simulation.World;
+import simulation.Controller;
 
 import java.nio.file.Path;
 
@@ -125,8 +125,8 @@ public class Main {
     private static void printAsciiMap(World world) {
         int width = world.getWidth();
         int height = world.getHeight();
-        int displayWidth = Math.min(width, 40);
-        int displayHeight = Math.min(height, 20);
+        int displayWidth = width;
+        int displayHeight = height;
 
         // Print rows from top to bottom
         for (int y = displayHeight - 1; y >= 0; y--) {
@@ -176,23 +176,6 @@ public class Main {
             } else {
                 System.out.print("-");
             }
-        }
-    }
-
-    /**
-     * Formats elapsed time in ms to a readable string.
-     */
-    private static String formatTime(long ms) {
-        long seconds = ms / 1000;
-        long minutes = seconds / 60;
-        long hours = minutes / 60;
-
-        if (hours > 0) {
-            return String.format("%dh %dm %ds", hours, minutes % 60, seconds % 60);
-        } else if (minutes > 0) {
-            return String.format("%dm %ds", minutes, seconds % 60);
-        } else {
-            return String.format("%ds", seconds);
         }
     }
 

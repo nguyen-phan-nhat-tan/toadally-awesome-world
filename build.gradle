@@ -7,6 +7,8 @@
 plugins {
     // Apply the java plugin to add support for Java
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 repositories {
@@ -35,4 +37,19 @@ test {
     testLogging {
         showStandardStreams = true
     }
+}
+
+javadoc {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    failOnError = false
+}
+
+javafx {
+    version = "21"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'GuiMain'
 }
