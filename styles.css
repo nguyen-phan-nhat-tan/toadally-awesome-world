@@ -1,0 +1,36 @@
+.floating-panel {
+    -fx-background-color: #F8E297; /* Retro yellow */
+    -fx-border-color: #000000;
+    -fx-border-width: 3px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 15px;
+    /* Drop shadow for floating effect */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 4, 4);
+}
+
+.title-badge {
+    -fx-background-color: #F8E297;
+    -fx-border-color: #000000;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-family: "Impact", "Segoe UI Black", sans-serif;
+    -fx-font-size: 24px;
+    -fx-padding: 5px 20px;
+}
+
+.mono-area, .mono-field {
+    -fx-font-family: "Consolas", monospace;
+    -fx-background-color: #F4F4F4;
+    -fx-border-color: #CCCCCC;
+}
+
+.circle-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-shape: "M 10 0 A 10 10 0 1 1 10 20 A 10 10 0 1 1 10 0 Z"; /* Circle */
+    -fx-min-width: 30px;
+    -fx-min-height: 30px;
+}
