@@ -95,15 +95,14 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract sealed class </span><span class="element-name type-name-label">ASTNode</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span>
-<span class="permits">permits <a href="Program.html" title="class in ast">Program</a>, <a href="Rule.html" title="class in ast">Rule</a>, <a href="Command.html" title="class in ast">Command</a>, <a href="Condition.html" title="class in ast">Condition</a>, <a href="Expression.html" title="class in ast">Expression</a></span></div>
+<span class="permits">permits <a href="Program.html" title="class in ast">Program</a>, <a href="Rule.html" title="class in ast">Rule</a>, <a href="Expression.html" title="class in ast">Expression</a>, <a href="Condition.html" title="class in ast">Condition</a>, <a href="Command.html" title="class in ast">Command</a></span></div>
 <div class="block">Base class for all abstract syntax tree nodes.
- 
- Every AST node carries source position information (line and column) so that error
- diagnostics, debug output, and IDE tooling can pinpoint issues in the source code.
- Additionally, each node tracks the total size of its subtree for metrics and traversal.
- 
- All AST nodes are immutable after construction; their children and attributes cannot change.
- This design enables safe sharing of AST references across compiler phases.</div>
+  
+ * Class Invariants:
+ - Nodes are strictly immutable.
+ - getLine() &gt;= 1 and getColumn() &gt;= 1.
+ - subtreeSize &gt;= 1, representing this node plus the sum of all descendants' subtree sizes.
+ - The order of children in getChildren() perfectly mirrors their appearance in the source code.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -157,7 +156,7 @@ loadScripts(document, 'script');</script>
  int&nbsp;column,
  <a href="ASTNode.html" title="class in ast">ASTNode</a>...&nbsp;children)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Initializes an AST node at the given source location.</div>
+<div class="block">Initializes an AST node at the given source location using a variadic array of children.</div>
 </div>
 <div class="col-first odd-row-color"><code>protected </code></div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,int,java.util.List)" class="member-name-link">ASTNode</a><wbr>(int&nbsp;line,
@@ -247,16 +246,16 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">ASTNode</span><wbr><span class="parameters">(int&nbsp;line,
  int&nbsp;column,
  <a href="ASTNode.html" title="class in ast">ASTNode</a>...&nbsp;children)</span></div>
-<div class="block">Initializes an AST node at the given source location.
+<div class="block">Initializes an AST node at the given source location using a variadic array of children.
  
- This constructor is called by concrete AST node subclasses. Position information is
- recorded at creation time so it remains available for error reporting throughout compilation,
- even if source text is no longer accessible.</div>
+ Position information is recorded at creation time to ensure accurate 
+ error reporting during interpretation or mutation, even if the original source 
+ text is discarded.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>line</code> - source line number (1-based, where line 1 is the first line)</dd>
-<dd><code>column</code> - source column number (1-based, where column 1 is the first character)</dd>
-<dd><code>children</code> - direct child nodes in source order (may be null or empty)</dd>
+<dd><code>line</code> - The source line number (1-based)</dd>
+<dd><code>column</code> - The source column number (1-based)</dd>
+<dd><code>children</code> - Direct child nodes in source order (null elements are ignored in size calculations)</dd>
 </dl>
 </section>
 </li>
@@ -266,10 +265,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">ASTNode</span><wbr><span class="parameters">(int&nbsp;line,
  int&nbsp;column,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="ASTNode.html" title="class in ast">ASTNode</a>&gt;&nbsp;children)</span></div>
-<div class="block">Alternative constructor accepting children as a List.
- 
- Useful for parsing phases that accumulate children in a collection before
- creating the parent node.</div>
+<div class="block">Alternative constructor accepting children as a List.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>line</code> - source line number (1-based)</dd>
@@ -290,10 +286,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getLine()">
 <h3>getLine</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getLine</span>()</div>
-<div class="block">Returns the source line number where this node begins.
- 
- Used by error reporting, debugging, and IDE features to show the user
- exactly where in the source file a problem occurred.</div>
+<div class="block">Returns the source line number where this node begins.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the line number (1-based)</dd>
@@ -304,10 +297,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getColumn()">
 <h3>getColumn</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getColumn</span>()</div>
-<div class="block">Returns the source column number where this node begins.
- 
- Used by error reporting, debugging, and IDE features to pinpoint the exact
- character position in the source line where an issue starts.</div>
+<div class="block">Returns the source column number where this node begins.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the column number (1-based)</dd>

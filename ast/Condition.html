@@ -94,31 +94,28 @@ loadScripts(document, 'script');</script>
 <dt>All Implemented Interfaces:</dt>
 <dd><code><a href="marker/Cond.html" title="interface in ast.marker">Cond</a></code></dd>
 </dl>
-<dl class="notes">
-<dt>Direct Known Subclasses:</dt>
-<dd><code><a href="LogicNode.html" title="class in ast">LogicNode</a></code>, <code><a href="RelationNode.html" title="class in ast">RelationNode</a></code></dd>
-</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract sealed class </span><span class="element-name type-name-label">Condition</span>
 <span class="extends-implements">extends <a href="ASTNode.html" title="class in ast">ASTNode</a>
-implements <a href="marker/Cond.html" title="interface in ast.marker">Cond</a></span>
-<span class="permits">permits <a href="LogicNode.html" title="class in ast">LogicNode</a>, <a href="RelationNode.html" title="class in ast">RelationNode</a></span></div>
+implements <a href="marker/Cond.html" title="interface in ast.marker">Cond</a></span></div>
 <div class="block">Base class for all condition AST nodes.
- 
+ <p>
  Conditions represent boolean expressions that determine whether a rule should fire.
  They are the "guard" part of a rule; a rule only executes if its condition evaluates to true.
- 
+ </p>
+ <p>
  Condition types include:
+ </p>
  <ul>
-   <li><a href="RelationNode.html" title="class in ast"><code>RelationNode</code></a>: atomic comparison (expr relop expr)</li>
-   <li><a href="LogicNode.html" title="class in ast"><code>LogicNode</code></a>: logical combinations (and/or chains of conditions)</li>
+   <li><code>RelationNode</code>: atomic comparison (expr relop expr)</li>
+   <li><code>LogicNode</code>: logical combinations (and/or chains of conditions)</li>
  </ul></div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
-<li><a href="RelationNode.html" title="class in ast"><code>RelationNode</code></a></li>
-<li><a href="LogicNode.html" title="class in ast"><code>LogicNode</code></a></li>
+<li><code>RelationNode</code></li>
+<li><code>LogicNode</code></li>
 <li><a href="Rule.html" title="class in ast"><code>Rule</code></a></li>
 </ul>
 </dd>

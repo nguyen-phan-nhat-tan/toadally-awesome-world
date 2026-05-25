@@ -5,16 +5,16 @@
 <title>ProgramCritterInterpreter (toadally-awesome-world API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: compiler.simulation, class: ProgramCritterInterpreter">
+<meta name="description" content="declaration: package: ast, class: ProgramCritterInterpreter">
 <meta name="generator" content="javadoc/ClassWriterImpl">
-<link rel="stylesheet" type="text/css" href="../../stylesheet.css" title="Style">
-<link rel="stylesheet" type="text/css" href="../../script-dir/jquery-ui.min.css" title="Style">
-<script type="text/javascript" src="../../script.js"></script>
-<script type="text/javascript" src="../../script-dir/jquery-3.7.1.min.js"></script>
-<script type="text/javascript" src="../../script-dir/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+<link rel="stylesheet" type="text/css" href="../script-dir/jquery-ui.min.css" title="Style">
+<script type="text/javascript" src="../script.js"></script>
+<script type="text/javascript" src="../script-dir/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
-<script type="text/javascript">var pathtoroot = "../../";
+<script type="text/javascript">var pathtoroot = "../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -26,12 +26,12 @@ loadScripts(document, 'script');</script>
 <div class="top-nav" id="navbar-top"><button id="navbar-toggle-button" aria-controls="navbar-top" aria-expanded="false" aria-label="Toggle navigation links"><span class="nav-bar-toggle-icon">&nbsp;</span><span class="nav-bar-toggle-icon">&nbsp;</span><span class="nav-bar-toggle-icon">&nbsp;</span></button>
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
-<li><a href="../../index.html">Overview</a></li>
+<li><a href="../index.html">Overview</a></li>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
-<li><a href="../../index-all.html">Index</a></li>
-<li><a href="../../help-doc.html#class">Help</a></li>
+<li><a href="../index-all.html">Index</a></li>
+<li><a href="../help-doc.html#class">Help</a></li>
 </ul>
 <ul class="sub-nav-list-small">
 <li>
@@ -69,7 +69,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-detail">Method</a></li>
 </ul>
 </div>
-<div class="nav-list-search"><a href="../../search.html">SEARCH</a>
+<div class="nav-list-search"><a href="../search.html">SEARCH</a>
 <input type="text" id="search-input" disabled placeholder="Search">
 <input type="reset" id="reset-button" disabled value="reset">
 </div>
@@ -81,21 +81,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">compiler.simulation</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">ast</a></div>
 <h1 title="Class ProgramCritterInterpreter" class="title">Class ProgramCritterInterpreter</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">compiler.simulation.ProgramCritterInterpreter</div>
+<div class="inheritance">ast.ProgramCritterInterpreter</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="InterpreterVisitor.html" title="interface in compiler.simulation">InterpreterVisitor</a></code></dd>
+<dd><code><a href="../simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">ProgramCritterInterpreter</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="InterpreterVisitor.html" title="interface in compiler.simulation">InterpreterVisitor</a></span></div>
+implements <a href="../simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a></span></div>
 <div class="block">Interprets a parsed AST program for one critter.
  The interpreter operates on the critter's owned memory array rather than maintaining its own.</div>
 </section>
@@ -109,11 +109,11 @@ implements <a href="InterpreterVisitor.html" title="interface in compiler.simula
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(compiler.ast.Program)" class="member-name-link">ProgramCritterInterpreter</a><wbr>(<a href="../ast/Program.html" title="class in compiler.ast">Program</a>&nbsp;program)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ast.Program)" class="member-name-link">ProgramCritterInterpreter</a><wbr>(<a href="Program.html" title="class in ast">Program</a>&nbsp;program)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates an interpreter with a default random source.</div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(compiler.ast.Program,java.util.Random)" class="member-name-link">ProgramCritterInterpreter</a><wbr>(<a href="../ast/Program.html" title="class in compiler.ast">Program</a>&nbsp;program,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(ast.Program,java.util.Random)" class="member-name-link">ProgramCritterInterpreter</a><wbr>(<a href="Program.html" title="class in ast">Program</a>&nbsp;program,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link">Random</a>&nbsp;random)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Creates an interpreter with an explicit random source.</div>
@@ -137,7 +137,7 @@ implements <a href="InterpreterVisitor.html" title="interface in compiler.simula
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Reads a value from the critter's memory array (for testing/debugging).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../ast/Program.html" title="class in compiler.ast">Program</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Program.html" title="class in ast">Program</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getProgram()" class="member-name-link">getProgram</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the backing program (immutable reference).</div>
@@ -147,13 +147,13 @@ implements <a href="InterpreterVisitor.html" title="interface in compiler.simula
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the number of rules in the backing program.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Action.html" title="class in compiler.simulation">Action</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#interpret(compiler.simulation.Critter,compiler.simulation.World)" class="member-name-link">interpret</a><wbr>(<a href="Critter.html" title="class in compiler.simulation">Critter</a>&nbsp;critter,
- <a href="World.html" title="class in compiler.simulation">World</a>&nbsp;world)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../simulation/Action.html" title="class in simulation">Action</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#interpret(simulation.Critter,simulation.World)" class="member-name-link">interpret</a><wbr>(<a href="../simulation/Critter.html" title="class in simulation">Critter</a>&nbsp;critter,
+ <a href="../simulation/World.html" title="class in simulation">World</a>&nbsp;world)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Chooses the next action for a critter in the current world state.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="InterpreterVisitor.html" title="interface in compiler.simulation">InterpreterVisitor</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#offspringCopy()" class="member-name-link">offspringCopy</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Creates an interpreter copy suitable for an offspring critter.</div>
@@ -176,9 +176,9 @@ implements <a href="InterpreterVisitor.html" title="interface in compiler.simula
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(compiler.ast.Program)">
+<section class="detail" id="&lt;init&gt;(ast.Program)">
 <h3>ProgramCritterInterpreter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ProgramCritterInterpreter</span><wbr><span class="parameters">(<a href="../ast/Program.html" title="class in compiler.ast">Program</a>&nbsp;program)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ProgramCritterInterpreter</span><wbr><span class="parameters">(<a href="Program.html" title="class in ast">Program</a>&nbsp;program)</span></div>
 <div class="block">Creates an interpreter with a default random source.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -187,9 +187,9 @@ implements <a href="InterpreterVisitor.html" title="interface in compiler.simula
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(compiler.ast.Program,java.util.Random)">
+<section class="detail" id="&lt;init&gt;(ast.Program,java.util.Random)">
 <h3>ProgramCritterInterpreter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ProgramCritterInterpreter</span><wbr><span class="parameters">(<a href="../ast/Program.html" title="class in compiler.ast">Program</a>&nbsp;program,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ProgramCritterInterpreter</span><wbr><span class="parameters">(<a href="Program.html" title="class in ast">Program</a>&nbsp;program,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link">Random</a>&nbsp;random)</span></div>
 <div class="block">Creates an interpreter with an explicit random source.</div>
 <dl class="notes">
@@ -208,15 +208,15 @@ implements <a href="InterpreterVisitor.html" title="interface in compiler.simula
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="interpret(compiler.simulation.Critter,compiler.simulation.World)">
+<section class="detail" id="interpret(simulation.Critter,simulation.World)">
 <h3>interpret</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Action.html" title="class in compiler.simulation">Action</a></span>&nbsp;<span class="element-name">interpret</span><wbr><span class="parameters">(<a href="Critter.html" title="class in compiler.simulation">Critter</a>&nbsp;critter,
- <a href="World.html" title="class in compiler.simulation">World</a>&nbsp;world)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="InterpreterVisitor.html#interpret(compiler.simulation.Critter,compiler.simulation.World)">InterpreterVisitor</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../simulation/Action.html" title="class in simulation">Action</a></span>&nbsp;<span class="element-name">interpret</span><wbr><span class="parameters">(<a href="../simulation/Critter.html" title="class in simulation">Critter</a>&nbsp;critter,
+ <a href="../simulation/World.html" title="class in simulation">World</a>&nbsp;world)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../simulation/CritterInterpreter.html#interpret(simulation.Critter,simulation.World)">CritterInterpreter</a></code></span></div>
 <div class="block">Chooses the next action for a critter in the current world state.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="InterpreterVisitor.html#interpret(compiler.simulation.Critter,compiler.simulation.World)">interpret</a></code>&nbsp;in interface&nbsp;<code><a href="InterpreterVisitor.html" title="interface in compiler.simulation">InterpreterVisitor</a></code></dd>
+<dd><code><a href="../simulation/CritterInterpreter.html#interpret(simulation.Critter,simulation.World)">interpret</a></code>&nbsp;in interface&nbsp;<code><a href="../simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>critter</code> - acting critter</dd>
 <dd><code>world</code> - world snapshot/mutable context</dd>
@@ -252,7 +252,7 @@ implements <a href="InterpreterVisitor.html" title="interface in compiler.simula
 <li>
 <section class="detail" id="getProgram()">
 <h3>getProgram</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../ast/Program.html" title="class in compiler.ast">Program</a></span>&nbsp;<span class="element-name">getProgram</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Program.html" title="class in ast">Program</a></span>&nbsp;<span class="element-name">getProgram</span>()</div>
 <div class="block">Returns the backing program (immutable reference).</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -263,12 +263,12 @@ implements <a href="InterpreterVisitor.html" title="interface in compiler.simula
 <li>
 <section class="detail" id="offspringCopy()">
 <h3>offspringCopy</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="InterpreterVisitor.html" title="interface in compiler.simulation">InterpreterVisitor</a></span>&nbsp;<span class="element-name">offspringCopy</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="InterpreterVisitor.html#offspringCopy()">InterpreterVisitor</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a></span>&nbsp;<span class="element-name">offspringCopy</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../simulation/CritterInterpreter.html#offspringCopy()">CritterInterpreter</a></code></span></div>
 <div class="block">Creates an interpreter copy suitable for an offspring critter.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="InterpreterVisitor.html#offspringCopy()">offspringCopy</a></code>&nbsp;in interface&nbsp;<code><a href="InterpreterVisitor.html" title="interface in compiler.simulation">InterpreterVisitor</a></code></dd>
+<dd><code><a href="../simulation/CritterInterpreter.html#offspringCopy()">offspringCopy</a></code>&nbsp;in interface&nbsp;<code><a href="../simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a></code></dd>
 <dt>Returns:</dt>
 <dd>interpreter instance for offspring behavior</dd>
 </dl>

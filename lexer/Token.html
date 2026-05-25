@@ -128,7 +128,7 @@ loadScripts(document, 'script');</script>
  int&nbsp;line,
  int&nbsp;column)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Convenience overload for non-numeric tokens (keywords, operators, identifiers).</div>
+<div class="block">Overload for non-numeric tokens (keywords, operators, identifiers).</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(lexer.TokenType,java.lang.String,int,int,int)" class="member-name-link">Token</a><wbr>(<a href="TokenType.html" title="enum class in lexer">TokenType</a>&nbsp;type,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;lexeme,
@@ -136,7 +136,7 @@ loadScripts(document, 'script');</script>
  int&nbsp;column,
  int&nbsp;value)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Full constructor carrying both textual and numeric forms.</div>
+<div class="block">Constructor carrying both textual and numeric forms.</div>
 </div>
 </div>
 </section>
@@ -201,7 +201,7 @@ loadScripts(document, 'script');</script>
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;lexeme,
  int&nbsp;line,
  int&nbsp;column)</span></div>
-<div class="block">Convenience overload for non-numeric tokens (keywords, operators, identifiers).
+<div class="block">Overload for non-numeric tokens (keywords, operators, identifiers).
  
  Initializes the numeric value to 0 since these token types do not represent numbers.</div>
 <dl class="notes">
@@ -221,7 +221,7 @@ loadScripts(document, 'script');</script>
  int&nbsp;line,
  int&nbsp;column,
  int&nbsp;value)</span></div>
-<div class="block">Full constructor carrying both textual and numeric forms.
+<div class="block">Constructor carrying both textual and numeric forms.
  
  For number tokens, the value is pre-parsed during lexing to avoid re-parsing in the parser.
  For non-numeric tokens, value is typically 0.</div>
@@ -247,9 +247,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getType()">
 <h3>getType</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">getType</span>()</div>
-<div class="block">Returns the token type (category).
- 
- The parser uses this to make dispatch decisions about how to handle the token.</div>
+<div class="block">Returns the token type (category).</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the token type (never null)</dd>

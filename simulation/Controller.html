@@ -167,14 +167,34 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the controlled world.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMannaEnabled()" class="member-name-link">isMannaEnabled</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isForceMutationEnabled()" class="member-name-link">isForceMutationEnabled</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns current manna enabled state.</div>
+<div class="block">Returns whether budding should force at least one mutation when possible.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMannaEnabled()" class="member-name-link">isMannaEnabled</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether random manna drops are enabled.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isMutationEnabled()" class="member-name-link">isMutationEnabled</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns whether mutations are enabled for budding offspring.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMannaEnabled(boolean)" class="member-name-link">setMannaEnabled</a><wbr>(boolean&nbsp;enabled)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setForceMutationEnabled(boolean)" class="member-name-link">setForceMutationEnabled</a><wbr>(boolean&nbsp;enabled)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Enable or disable manna drops.</div>
+<div class="block">Enables or disables forced mutation mode for budding.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMannaEnabled(boolean)" class="member-name-link">setMannaEnabled</a><wbr>(boolean&nbsp;enabled)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Enables or disables random manna drops during simulation steps.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMutationEnabled(boolean)" class="member-name-link">setMutationEnabled</a><wbr>(boolean&nbsp;enabled)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Enables or disables mutation mode for budding offspring.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#step()" class="member-name-link">step</a>()</code></div>
@@ -269,20 +289,6 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="setMannaEnabled(boolean)">
-<h3>setMannaEnabled</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setMannaEnabled</span><wbr><span class="parameters">(boolean&nbsp;enabled)</span></div>
-<div class="block">Enable or disable manna drops.</div>
-</section>
-</li>
-<li>
-<section class="detail" id="isMannaEnabled()">
-<h3>isMannaEnabled</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isMannaEnabled</span>()</div>
-<div class="block">Returns current manna enabled state.</div>
-</section>
-</li>
-<li>
 <section class="detail" id="getWorld()">
 <h3>getWorld</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="World.html" title="class in simulation">World</a></span>&nbsp;<span class="element-name">getWorld</span>()</div>
@@ -301,6 +307,72 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>ordered critter list</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isMannaEnabled()">
+<h3>isMannaEnabled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isMannaEnabled</span>()</div>
+<div class="block">Returns whether random manna drops are enabled.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true when manna may spawn during step()</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setMannaEnabled(boolean)">
+<h3>setMannaEnabled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setMannaEnabled</span><wbr><span class="parameters">(boolean&nbsp;enabled)</span></div>
+<div class="block">Enables or disables random manna drops during simulation steps.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>enabled</code> - true to allow manna spawning</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isMutationEnabled()">
+<h3>isMutationEnabled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isMutationEnabled</span>()</div>
+<div class="block">Returns whether mutations are enabled for budding offspring.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true when mutation mode is enabled</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setMutationEnabled(boolean)">
+<h3>setMutationEnabled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setMutationEnabled</span><wbr><span class="parameters">(boolean&nbsp;enabled)</span></div>
+<div class="block">Enables or disables mutation mode for budding offspring.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>enabled</code> - true to allow mutations on offspring</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="isForceMutationEnabled()">
+<h3>isForceMutationEnabled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isForceMutationEnabled</span>()</div>
+<div class="block">Returns whether budding should force at least one mutation when possible.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true when forced mutation mode is enabled</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setForceMutationEnabled(boolean)">
+<h3>setForceMutationEnabled</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setForceMutationEnabled</span><wbr><span class="parameters">(boolean&nbsp;enabled)</span></div>
+<div class="block">Enables or disables forced mutation mode for budding.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>enabled</code> - true to force at least one mutation attempt on offspring</dd>
 </dl>
 </section>
 </li>

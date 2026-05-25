@@ -129,9 +129,23 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Applies one or more random mutations to the input program.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Program.html" title="class in ast">Program</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#mutate(ast.Program,java.util.Random)" class="member-name-link">mutate</a><wbr>(<a href="Program.html" title="class in ast">Program</a>&nbsp;root,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Program.html" title="class in ast">Program</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mutate(ast.Program,boolean)" class="member-name-link">mutate</a><wbr>(<a href="Program.html" title="class in ast">Program</a>&nbsp;program,
+ boolean&nbsp;forceMutation)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Applies random structural mutations to the input program, forcing at least one
+ visible change in the rendered source when requested.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Program.html" title="class in ast">Program</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#mutate(ast.Program,java.util.Random)" class="member-name-link">mutate</a><wbr>(<a href="Program.html" title="class in ast">Program</a>&nbsp;root,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link">Random</a>&nbsp;random)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Applies zero or more random mutations to the input program.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Program.html" title="class in ast">Program</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#mutate(ast.Program,java.util.Random,boolean)" class="member-name-link">mutate</a><wbr>(<a href="Program.html" title="class in ast">Program</a>&nbsp;root,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link">Random</a>&nbsp;random,
+ boolean&nbsp;forceMutation)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Applies zero or more random mutations to the input program.</div>
 </div>
@@ -193,6 +207,22 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="mutate(ast.Program,boolean)">
+<h3>mutate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Program.html" title="class in ast">Program</a></span>&nbsp;<span class="element-name">mutate</span><wbr><span class="parameters">(<a href="Program.html" title="class in ast">Program</a>&nbsp;program,
+ boolean&nbsp;forceMutation)</span></div>
+<div class="block">Applies random structural mutations to the input program, forcing at least one
+ visible change in the rendered source when requested.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>program</code> - program to mutate</dd>
+<dd><code>forceMutation</code> - true to retry until the pretty-printed program changes</dd>
+<dt>Returns:</dt>
+<dd>mutated program</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="mutate(ast.Program,java.util.Random)">
 <h3>mutate</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Program.html" title="class in ast">Program</a></span>&nbsp;<span class="element-name">mutate</span><wbr><span class="parameters">(<a href="Program.html" title="class in ast">Program</a>&nbsp;root,
@@ -202,6 +232,23 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>root</code> - program to mutate</dd>
 <dd><code>random</code> - randomness source controlling target and operation selection</dd>
+<dt>Returns:</dt>
+<dd>mutated program (or original when no mutation is chosen)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="mutate(ast.Program,java.util.Random,boolean)">
+<h3>mutate</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Program.html" title="class in ast">Program</a></span>&nbsp;<span class="element-name">mutate</span><wbr><span class="parameters">(<a href="Program.html" title="class in ast">Program</a>&nbsp;root,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Random.html" title="class or interface in java.util" class="external-link">Random</a>&nbsp;random,
+ boolean&nbsp;forceMutation)</span></div>
+<div class="block">Applies zero or more random mutations to the input program.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>root</code> - program to mutate</dd>
+<dd><code>random</code> - randomness source controlling target and operation selection</dd>
+<dd><code>forceMutation</code> - true to keep retrying until the rendered program changes</dd>
 <dt>Returns:</dt>
 <dd>mutated program (or original when no mutation is chosen)</dd>
 </dl>

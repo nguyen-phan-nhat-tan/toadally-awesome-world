@@ -94,15 +94,10 @@ loadScripts(document, 'script');</script>
 <dt>All Implemented Interfaces:</dt>
 <dd><code><a href="marker/Cmd.html" title="interface in ast.marker">Cmd</a></code></dd>
 </dl>
-<dl class="notes">
-<dt>Direct Known Subclasses:</dt>
-<dd><code><a href="ActionNode.html" title="class in ast">ActionNode</a></code>, <code><a href="CommandList.html" title="class in ast">CommandList</a></code>, <code><a href="UpdateNode.html" title="class in ast">UpdateNode</a></code></dd>
-</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract sealed class </span><span class="element-name type-name-label">Command</span>
 <span class="extends-implements">extends <a href="ASTNode.html" title="class in ast">ASTNode</a>
-implements <a href="marker/Cmd.html" title="interface in ast.marker">Cmd</a></span>
-<span class="permits">permits <a href="ActionNode.html" title="class in ast">ActionNode</a>, <a href="CommandList.html" title="class in ast">CommandList</a>, <a href="UpdateNode.html" title="class in ast">UpdateNode</a></span></div>
+implements <a href="marker/Cmd.html" title="interface in ast.marker">Cmd</a></span></div>
 <div class="block">Base class for all command AST nodes.
  
  Commands represent actions that the critter can execute. A command is the "effect" part
@@ -110,17 +105,17 @@ implements <a href="marker/Cmd.html" title="interface in ast.marker">Cmd</a></sp
  
  Command types include:
  <ul>
-   <li><a href="ActionNode.html" title="class in ast"><code>ActionNode</code></a>: single action keywords (wait, forward, eat, etc.)</li>
-   <li><a href="UpdateNode.html" title="class in ast"><code>UpdateNode</code></a>: memory assignments (mem[i] := value)</li>
-   <li><a href="CommandList.html" title="class in ast"><code>CommandList</code></a>: sequences of updates followed by a terminal action</li>
+   <li><code>ActionNode</code>: single action keywords (wait, forward, eat, etc.)</li>
+   <li><code>UpdateNode</code>: memory assignments (mem[i] := value)</li>
+   <li><code>CommandList</code>: sequences of updates followed by a terminal action</li>
  </ul></div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
 <ul class="tag-list">
-<li><a href="ActionNode.html" title="class in ast"><code>ActionNode</code></a></li>
-<li><a href="UpdateNode.html" title="class in ast"><code>UpdateNode</code></a></li>
-<li><a href="CommandList.html" title="class in ast"><code>CommandList</code></a></li>
+<li><code>ActionNode</code></li>
+<li><code>UpdateNode</code></li>
+<li><code>CommandList</code></li>
 <li><a href="Rule.html" title="class in ast"><code>Rule</code></a></li>
 </ul>
 </dd>
@@ -150,9 +145,12 @@ implements <a href="marker/Cmd.html" title="interface in ast.marker">Cmd</a></sp
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,ast.ASTNode...)" class="member-name-link">Command</a><wbr>(int&nbsp;line,
  int&nbsp;column,
  <a href="ASTNode.html" title="class in ast">ASTNode</a>...&nbsp;children)</code></div>
-<div class="col-last even-row-color">
-<div class="block">Initializes a Command node at the given source location.</div>
-</div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>protected </code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(int,int,java.util.List)" class="member-name-link">Command</a><wbr>(int&nbsp;line,
+ int&nbsp;column,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="ASTNode.html" title="class in ast">ASTNode</a>&gt;&nbsp;children)</code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -183,13 +181,14 @@ implements <a href="marker/Cmd.html" title="interface in ast.marker">Cmd</a></sp
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">Command</span><wbr><span class="parameters">(int&nbsp;line,
  int&nbsp;column,
  <a href="ASTNode.html" title="class in ast">ASTNode</a>...&nbsp;children)</span></div>
-<div class="block">Initializes a Command node at the given source location.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>line</code> - source line number (1-based)</dd>
-<dd><code>column</code> - source column number (1-based)</dd>
-<dd><code>children</code> - direct child nodes in source order</dd>
-</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(int,int,java.util.List)">
+<h3>Command</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">Command</span><wbr><span class="parameters">(int&nbsp;line,
+ int&nbsp;column,
+ <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;? extends <a href="ASTNode.html" title="class in ast">ASTNode</a>&gt;&nbsp;children)</span></div>
 </section>
 </li>
 </ul>

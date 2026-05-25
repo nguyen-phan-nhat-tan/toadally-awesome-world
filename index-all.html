@@ -66,14 +66,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Creates an action, optionally with an integer argument.</div>
 </dd>
-<dt><a href="ast/ActionNode.html" class="type-name-link" title="class in ast">ActionNode</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents an action command in the AST.</div>
-</dd>
-<dt><a href="ast/ActionNode.html#%3Cinit%3E(lexer.TokenType,int,int,ast.Expression)" class="member-name-link">ActionNode(TokenType, int, int, Expression)</a> - Constructor for class ast.<a href="ast/ActionNode.html" title="class in ast">ActionNode</a></dt>
-<dd>
-<div class="block">Creates an action node.</div>
-</dd>
 <dt><a href="simulation/ActionType.html" class="type-name-link" title="enum class in simulation">ActionType</a> - Enum Class in <a href="simulation/package-summary.html">simulation</a></dt>
 <dd>
 <div class="block">Runtime action types supported by critters.</div>
@@ -89,10 +81,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="simulation/World.html#addFood(int,int,int)" class="member-name-link">addFood(int, int, int)</a> - Method in class simulation.<a href="simulation/World.html" title="class in simulation">World</a></dt>
 <dd>
 <div class="block">Adds food to a valid non-rock, non-critter hex.</div>
-</dd>
-<dt><a href="lexer/TokenType.html#ADDOP" class="member-name-link">ADDOP</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
-<dd>
-<div class="block">Category: additive operators (+ or -).</div>
 </dd>
 <dt><a href="simulation/AdjustablePriorityQueue.html" class="type-name-link" title="interface in simulation">AdjustablePriorityQueue&lt;E&gt;</a> - Interface in <a href="simulation/package-summary.html">simulation</a></dt>
 <dd>
@@ -134,7 +122,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="ast/ASTNode.html#%3Cinit%3E(int,int,ast.ASTNode...)" class="member-name-link">ASTNode(int, int, ASTNode...)</a> - Constructor for class ast.<a href="ast/ASTNode.html" title="class in ast">ASTNode</a></dt>
 <dd>
-<div class="block">Initializes an AST node at the given source location.</div>
+<div class="block">Initializes an AST node at the given source location using a variadic array of children.</div>
 </dd>
 <dt><a href="ast/ASTNode.html#%3Cinit%3E(int,int,java.util.List)" class="member-name-link">ASTNode(int, int, List&lt;? extends ASTNode&gt;)</a> - Constructor for class ast.<a href="ast/ASTNode.html" title="class in ast">ASTNode</a></dt>
 <dd>
@@ -144,6 +132,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Utility methods for common AST node operations.</div>
 </dd>
+<dt><a href="Release/CritterWorldController.html#attachScene(javafx.scene.Scene)" class="member-name-link">attachScene(Scene)</a> - Method in class Release.<a href="Release/CritterWorldController.html" title="class in Release">CritterWorldController</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="lexer/TokenType.html#ATTACK" class="member-name-link">ATTACK</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
 <dd>
 <div class="block">Keyword: attack (attack adjacent enemy).</div>
@@ -167,14 +157,6 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/Constants.html#BASE_DAMAGE" class="member-name-link">BASE_DAMAGE</a> - Static variable in class simulation.<a href="simulation/Constants.html" title="class in simulation">Constants</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ast/BinaryExpr.html" class="type-name-link" title="class in ast">BinaryExpr</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents a binary arithmetic expression in the AST.</div>
-</dd>
-<dt><a href="ast/BinaryExpr.html#%3Cinit%3E(ast.Expression,java.lang.String,ast.Expression,int,int)" class="member-name-link">BinaryExpr(Expression, String, Expression, int, int)</a> - Constructor for class ast.<a href="ast/BinaryExpr.html" title="class in ast">BinaryExpr</a></dt>
-<dd>
-<div class="block">Creates a binary arithmetic expression node.</div>
-</dd>
 <dt><a href="simulation/BinaryHeap.html" class="type-name-link" title="class in simulation">BinaryHeap&lt;E&gt;</a> - Class in <a href="simulation/package-summary.html">simulation</a></dt>
 <dd>
 <div class="block">A binary heap implementation of AdjustablePriorityQueue.</div>
@@ -221,17 +203,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Base class for all command AST nodes.</div>
 </dd>
 <dt><a href="ast/Command.html#%3Cinit%3E(int,int,ast.ASTNode...)" class="member-name-link">Command(int, int, ASTNode...)</a> - Constructor for class ast.<a href="ast/Command.html" title="class in ast">Command</a></dt>
-<dd>
-<div class="block">Initializes a Command node at the given source location.</div>
-</dd>
-<dt><a href="ast/CommandList.html" class="type-name-link" title="class in ast">CommandList</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents a command sequence: zero or more memory updates followed by a terminal action.</div>
-</dd>
-<dt><a href="ast/CommandList.html#%3Cinit%3E(java.util.List,ast.Command,int,int)" class="member-name-link">CommandList(List&lt;UpdateNode&gt;, Command, int, int)</a> - Constructor for class ast.<a href="ast/CommandList.html" title="class in ast">CommandList</a></dt>
-<dd>
-<div class="block">Creates a command list with optional memory updates followed by a terminal action.</div>
-</dd>
+<dd>&nbsp;</dd>
+<dt><a href="ast/Command.html#%3Cinit%3E(int,int,java.util.List)" class="member-name-link">Command(int, int, List&lt;? extends ASTNode&gt;)</a> - Constructor for class ast.<a href="ast/Command.html" title="class in ast">Command</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="ast/marker/Cond.html" class="type-name-link" title="interface in ast.marker">Cond</a> - Interface in <a href="ast/marker/package-summary.html">ast.marker</a></dt>
 <dd>
 <div class="block">Marker interface for AST condition nodes.</div>
@@ -330,6 +304,10 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/CritterSnapshot.html#%3Cinit%3E(simulation.Critter)" class="member-name-link">CritterSnapshot(Critter)</a> - Constructor for class simulation.<a href="simulation/CritterSnapshot.html" title="class in simulation">CritterSnapshot</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="Release/CritterWorldController.html" class="type-name-link" title="class in Release">CritterWorldController</a> - Class in <a href="Release/package-summary.html">Release</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="Release/CritterWorldController.html#%3Cinit%3E()" class="member-name-link">CritterWorldController()</a> - Constructor for class Release.<a href="Release/CritterWorldController.html" title="class in Release">CritterWorldController</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
@@ -337,7 +315,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="simulation/CritterSnapshot.html#defense" class="member-name-link">defense</a> - Variable in class simulation.<a href="simulation/CritterSnapshot.html" title="class in simulation">CritterSnapshot</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="lexer/Sugar.html#DEFENSE" class="member-name-link">DEFENSE</a> - Enum constant in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#DEFENSE" class="member-name-link">DEFENSE</a> - Enum constant in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Defense stat slot.</div>
 </dd>
@@ -350,6 +328,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="simulation/World.html#distance(int,int,int,int)" class="member-name-link">distance(int, int, int, int)</a> - Method in class simulation.<a href="simulation/World.html" title="class in simulation">World</a></dt>
 <dd>
 <div class="block">Computes hex distance between two coordinates.</div>
+</dd>
+<dt><a href="lexer/TokenType.html#DIV" class="member-name-link">DIV</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dd>
+<div class="block">Arithmetic division operator (/)</div>
 </dd>
 <dt><a href="simulation/HexDirection.html#dx()" class="member-name-link">dx()</a> - Method in enum class simulation.<a href="simulation/HexDirection.html" title="enum class in simulation">HexDirection</a></dt>
 <dd>
@@ -376,7 +358,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/CritterSnapshot.html#energy" class="member-name-link">energy</a> - Variable in class simulation.<a href="simulation/CritterSnapshot.html" title="class in simulation">CritterSnapshot</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="lexer/Sugar.html#ENERGY" class="member-name-link">ENERGY</a> - Enum constant in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#ENERGY" class="member-name-link">ENERGY</a> - Enum constant in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Energy stat slot.</div>
 </dd>
@@ -386,6 +368,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Special: end of input marker.</div>
 </dd>
+<dt><a href="lexer/TokenType.html#EQ" class="member-name-link">EQ</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="simulation/HexCoordinate.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in record class simulation.<a href="simulation/HexCoordinate.html" title="class in simulation">HexCoordinate</a></dt>
 <dd>
 <div class="block">Indicates whether some other object is "equal to" this one.</div>
@@ -413,10 +397,6 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
-<dt><a href="lexer/Sugar.html#findSugarIndex(java.lang.String)" class="member-name-link">findSugarIndex(String)</a> - Static method in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
-<dd>
-<div class="block">Resolves a sugar name to its memory index.</div>
-</dd>
 <dt><a href="simulation/HexState.html#food(int)" class="member-name-link">food(int)</a> - Static method in class simulation.<a href="simulation/HexState.html" title="class in simulation">HexState</a></dt>
 <dd>
 <div class="block">Creates a food-containing hex state.</div>
@@ -476,47 +456,19 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
-<dt><a href="ast/ActionNode.html#getActionType()" class="member-name-link">getActionType()</a> - Method in class ast.<a href="ast/ActionNode.html" title="class in ast">ActionNode</a></dt>
-<dd>
-<div class="block">Returns the action type.</div>
-</dd>
-<dt><a href="ast/ActionNode.html#getArgument()" class="member-name-link">getArgument()</a> - Method in class ast.<a href="ast/ActionNode.html" title="class in ast">ActionNode</a></dt>
-<dd>
-<div class="block">Returns the optional argument (for SERVE action only).</div>
-</dd>
-<dt><a href="ast/SensorNode.html#getArgument()" class="member-name-link">getArgument()</a> - Method in class ast.<a href="ast/SensorNode.html" title="class in ast">SensorNode</a></dt>
-<dd>
-<div class="block">Returns the optional argument expression.</div>
-</dd>
+<dt><a href="lexer/TokenType.html#GE" class="member-name-link">GE</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="simulation/Action.html#getArgument()" class="member-name-link">getArgument()</a> - Method in class simulation.<a href="simulation/Action.html" title="class in simulation">Action</a></dt>
 <dd>
 <div class="block">Returns the optional argument.</div>
 </dd>
-<dt><a href="ast/ActionNode.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/ActionNode.html" title="class in ast">ActionNode</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="ast/ASTNode.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/ASTNode.html" title="class in ast">ASTNode</a></dt>
 <dd>
 <div class="block">Returns the immediate children of this node in source order.</div>
 </dd>
-<dt><a href="ast/BinaryExpr.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/BinaryExpr.html" title="class in ast">BinaryExpr</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ast/CommandList.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/CommandList.html" title="class in ast">CommandList</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ast/LogicNode.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/LogicNode.html" title="class in ast">LogicNode</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ast/MemoryNode.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/MemoryNode.html" title="class in ast">MemoryNode</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ast/NumberNode.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/NumberNode.html" title="class in ast">NumberNode</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="ast/Program.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/Program.html" title="class in ast">Program</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ast/RelationNode.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/RelationNode.html" title="class in ast">RelationNode</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="ast/Rule.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/Rule.html" title="class in ast">Rule</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ast/SensorNode.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/SensorNode.html" title="class in ast">SensorNode</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ast/UpdateNode.html#getChildren()" class="member-name-link">getChildren()</a> - Method in class ast.<a href="ast/UpdateNode.html" title="class in ast">UpdateNode</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ast/ASTNode.html#getColumn()" class="member-name-link">getColumn()</a> - Method in class ast.<a href="ast/ASTNode.html" title="class in ast">ASTNode</a></dt>
 <dd>
@@ -581,33 +533,17 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/WorldSnapshot.html#getHex(int,int)" class="member-name-link">getHex(int, int)</a> - Method in class simulation.<a href="simulation/WorldSnapshot.html" title="class in simulation">WorldSnapshot</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ast/MemoryNode.html#getIndex()" class="member-name-link">getIndex()</a> - Method in class ast.<a href="ast/MemoryNode.html" title="class in ast">MemoryNode</a></dt>
-<dd>
-<div class="block">Returns the index expression.</div>
-</dd>
-<dt><a href="lexer/Sugar.html#getIndex()" class="member-name-link">getIndex()</a> - Method in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#getIndex()" class="member-name-link">getIndex()</a> - Method in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Returns the backing memory index for this sugar name.</div>
 </dd>
-<dt><a href="lexer/Sugar.html#getIndexSugar(java.lang.String)" class="member-name-link">getIndexSugar(String)</a> - Static method in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#getIndexSugar(java.lang.String)" class="member-name-link">getIndexSugar(String)</a> - Static method in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
-<div class="block">Resolves a sugar name to its memory index, or returns null when unknown.</div>
+<div class="block">Resolves a sugar name to its memory index.</div>
 </dd>
 <dt><a href="simulation/Critter.html#getLastRule()" class="member-name-link">getLastRule()</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
 <div class="block">Returns the last fired rule string (if any).</div>
-</dd>
-<dt><a href="ast/BinaryExpr.html#getLeft()" class="member-name-link">getLeft()</a> - Method in class ast.<a href="ast/BinaryExpr.html" title="class in ast">BinaryExpr</a></dt>
-<dd>
-<div class="block">Returns the left operand.</div>
-</dd>
-<dt><a href="ast/LogicNode.html#getLeft()" class="member-name-link">getLeft()</a> - Method in class ast.<a href="ast/LogicNode.html" title="class in ast">LogicNode</a></dt>
-<dd>
-<div class="block">Returns the left-hand side condition.</div>
-</dd>
-<dt><a href="ast/RelationNode.html#getLeft()" class="member-name-link">getLeft()</a> - Method in class ast.<a href="ast/RelationNode.html" title="class in ast">RelationNode</a></dt>
-<dd>
-<div class="block">Returns the left-hand side expression.</div>
 </dd>
 <dt><a href="lexer/Token.html#getLexeme()" class="member-name-link">getLexeme()</a> - Method in class lexer.<a href="lexer/Token.html" title="class in lexer">Token</a></dt>
 <dd>
@@ -625,9 +561,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the source line number.</div>
 </dd>
-<dt><a href="lexer/TokenType.html#getliteral()" class="member-name-link">getliteral()</a> - Method in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dt><a href="lexer/TokenType.html#getLiteral()" class="member-name-link">getLiteral()</a> - Method in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
 <dd>
-<div class="block">Returns the canonical textual representation of this token type.</div>
+<div class="block">Retrieves the string representation of the token</div>
 </dd>
 <dt><a href="simulation/Critter.html#getMemory()" class="member-name-link">getMemory()</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
@@ -637,25 +573,13 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the memory size (number of memory slots).</div>
 </dd>
-<dt><a href="simulation/ProgramCritterInterpreter.html#getMemoryValue(int)" class="member-name-link">getMemoryValue(int)</a> - Method in class simulation.<a href="simulation/ProgramCritterInterpreter.html" title="class in simulation">ProgramCritterInterpreter</a></dt>
+<dt><a href="ast/ProgramCritterInterpreter.html#getMemoryValue(int)" class="member-name-link">getMemoryValue(int)</a> - Method in class ast.<a href="ast/ProgramCritterInterpreter.html" title="class in ast">ProgramCritterInterpreter</a></dt>
 <dd>
 <div class="block">Reads a value from the critter's memory array (for testing/debugging).</div>
 </dd>
 <dt><a href="simulation/Critter.html#getOffense()" class="member-name-link">getOffense()</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
 <div class="block">Returns offensive ability.</div>
-</dd>
-<dt><a href="ast/BinaryExpr.html#getOperator()" class="member-name-link">getOperator()</a> - Method in class ast.<a href="ast/BinaryExpr.html" title="class in ast">BinaryExpr</a></dt>
-<dd>
-<div class="block">Returns the operator.</div>
-</dd>
-<dt><a href="ast/LogicNode.html#getOperator()" class="member-name-link">getOperator()</a> - Method in class ast.<a href="ast/LogicNode.html" title="class in ast">LogicNode</a></dt>
-<dd>
-<div class="block">Returns the logical operator.</div>
-</dd>
-<dt><a href="ast/RelationNode.html#getOperator()" class="member-name-link">getOperator()</a> - Method in class ast.<a href="ast/RelationNode.html" title="class in ast">RelationNode</a></dt>
-<dd>
-<div class="block">Returns the relational operator.</div>
 </dd>
 <dt><a href="simulation/Critter.html#getPosture()" class="member-name-link">getPosture()</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
@@ -667,33 +591,17 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/BinaryHeap.html#getPriority(E)" class="member-name-link">getPriority(E)</a> - Method in class simulation.<a href="simulation/BinaryHeap.html" title="class in simulation">BinaryHeap</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="simulation/ProgramCritterInterpreter.html#getProgram()" class="member-name-link">getProgram()</a> - Method in class simulation.<a href="simulation/ProgramCritterInterpreter.html" title="class in simulation">ProgramCritterInterpreter</a></dt>
+<dt><a href="ast/ProgramCritterInterpreter.html#getProgram()" class="member-name-link">getProgram()</a> - Method in class ast.<a href="ast/ProgramCritterInterpreter.html" title="class in ast">ProgramCritterInterpreter</a></dt>
 <dd>
 <div class="block">Returns the backing program (immutable reference).</div>
 </dd>
-<dt><a href="ast/BinaryExpr.html#getRight()" class="member-name-link">getRight()</a> - Method in class ast.<a href="ast/BinaryExpr.html" title="class in ast">BinaryExpr</a></dt>
-<dd>
-<div class="block">Returns the right operand.</div>
-</dd>
-<dt><a href="ast/LogicNode.html#getRight()" class="member-name-link">getRight()</a> - Method in class ast.<a href="ast/LogicNode.html" title="class in ast">LogicNode</a></dt>
-<dd>
-<div class="block">Returns the right-hand side condition.</div>
-</dd>
-<dt><a href="ast/RelationNode.html#getRight()" class="member-name-link">getRight()</a> - Method in class ast.<a href="ast/RelationNode.html" title="class in ast">RelationNode</a></dt>
-<dd>
-<div class="block">Returns the right-hand side expression.</div>
-</dd>
-<dt><a href="simulation/ProgramCritterInterpreter.html#getRuleCount()" class="member-name-link">getRuleCount()</a> - Method in class simulation.<a href="simulation/ProgramCritterInterpreter.html" title="class in simulation">ProgramCritterInterpreter</a></dt>
+<dt><a href="ast/ProgramCritterInterpreter.html#getRuleCount()" class="member-name-link">getRuleCount()</a> - Method in class ast.<a href="ast/ProgramCritterInterpreter.html" title="class in ast">ProgramCritterInterpreter</a></dt>
 <dd>
 <div class="block">Returns the number of rules in the backing program.</div>
 </dd>
 <dt><a href="ast/Program.html#getRules()" class="member-name-link">getRules()</a> - Method in class ast.<a href="ast/Program.html" title="class in ast">Program</a></dt>
 <dd>
 <div class="block">Returns the ordered list of rules in this program.</div>
-</dd>
-<dt><a href="ast/SensorNode.html#getSensorType()" class="member-name-link">getSensorType()</a> - Method in class ast.<a href="ast/SensorNode.html" title="class in ast">SensorNode</a></dt>
-<dd>
-<div class="block">Returns the sensor type.</div>
 </dd>
 <dt><a href="simulation/Critter.html#getSize()" class="member-name-link">getSize()</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
@@ -702,14 +610,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="simulation/Critter.html#getSpecies()" class="member-name-link">getSpecies()</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
 <div class="block">Returns the critter species name.</div>
-</dd>
-<dt><a href="ast/UpdateNode.html#getTargetMemory()" class="member-name-link">getTargetMemory()</a> - Method in class ast.<a href="ast/UpdateNode.html" title="class in ast">UpdateNode</a></dt>
-<dd>
-<div class="block">Returns the target memory slot index expression.</div>
-</dd>
-<dt><a href="ast/CommandList.html#getTerminalAction()" class="member-name-link">getTerminalAction()</a> - Method in class ast.<a href="ast/CommandList.html" title="class in ast">CommandList</a></dt>
-<dd>
-<div class="block">Returns the terminal action executed after all updates.</div>
 </dd>
 <dt><a href="simulation/Controller.html#getTurnOrder()" class="member-name-link">getTurnOrder()</a> - Method in class simulation.<a href="simulation/Controller.html" title="class in simulation">Controller</a></dt>
 <dd>
@@ -722,18 +622,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="simulation/Action.html#getType()" class="member-name-link">getType()</a> - Method in class simulation.<a href="simulation/Action.html" title="class in simulation">Action</a></dt>
 <dd>
 <div class="block">Returns the action kind.</div>
-</dd>
-<dt><a href="ast/CommandList.html#getUpdates()" class="member-name-link">getUpdates()</a> - Method in class ast.<a href="ast/CommandList.html" title="class in ast">CommandList</a></dt>
-<dd>
-<div class="block">Returns the memory updates in execution order.</div>
-</dd>
-<dt><a href="ast/NumberNode.html#getValue()" class="member-name-link">getValue()</a> - Method in class ast.<a href="ast/NumberNode.html" title="class in ast">NumberNode</a></dt>
-<dd>
-<div class="block">Returns the numeric value.</div>
-</dd>
-<dt><a href="ast/UpdateNode.html#getValue()" class="member-name-link">getValue()</a> - Method in class ast.<a href="ast/UpdateNode.html" title="class in ast">UpdateNode</a></dt>
-<dd>
-<div class="block">Returns the value expression to be stored.</div>
 </dd>
 <dt><a href="lexer/Token.html#getValue()" class="member-name-link">getValue()</a> - Method in class lexer.<a href="lexer/Token.html" title="class in lexer">Token</a></dt>
 <dd>
@@ -769,21 +657,15 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/Constants.html#GROW_COST" class="member-name-link">GROW_COST</a> - Static variable in class simulation.<a href="simulation/Constants.html" title="class in simulation">Constants</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="GuiMain.html" class="type-name-link" title="class in Unnamed Package">GuiMain</a> - Class in <a href="package-summary.html">Unnamed Package</a></dt>
+<dt><a href="lexer/TokenType.html#GT" class="member-name-link">GT</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="GuiMain.html#%3Cinit%3E()" class="member-name-link">GuiMain()</a> - Constructor for class <a href="GuiMain.html" title="class in Unnamed Package">GuiMain</a></dt>
+<dt><a href="Release/GuiMain.html" class="type-name-link" title="class in Release">GuiMain</a> - Class in <a href="Release/package-summary.html">Release</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="Release/GuiMain.html#%3Cinit%3E()" class="member-name-link">GuiMain()</a> - Constructor for class Release.<a href="Release/GuiMain.html" title="class in Release">GuiMain</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:H">H</h2>
 <dl class="index">
-<dt><a href="ast/ActionNode.html#hasArgument()" class="member-name-link">hasArgument()</a> - Method in class ast.<a href="ast/ActionNode.html" title="class in ast">ActionNode</a></dt>
-<dd>
-<div class="block">Checks whether this action has an argument.</div>
-</dd>
-<dt><a href="ast/SensorNode.html#hasArgument()" class="member-name-link">hasArgument()</a> - Method in class ast.<a href="ast/SensorNode.html" title="class in ast">SensorNode</a></dt>
-<dd>
-<div class="block">Checks whether this sensor query has an argument.</div>
-</dd>
 <dt><a href="simulation/Action.html#hasArgument()" class="member-name-link">hasArgument()</a> - Method in class simulation.<a href="simulation/Action.html" title="class in simulation">Action</a></dt>
 <dd>
 <div class="block">Indicates whether this action carries an argument.</div>
@@ -837,9 +719,9 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the canonical direction index.</div>
 </dd>
-<dt><a href="GuiMain.html#init()" class="member-name-link">init()</a> - Method in class <a href="GuiMain.html" title="class in Unnamed Package">GuiMain</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="simulation/Constants.html#INITIAL_ENERGY" class="member-name-link">INITIAL_ENERGY</a> - Static variable in class simulation.<a href="simulation/Constants.html" title="class in simulation">Constants</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="Release/CritterWorldController.html#initialize()" class="member-name-link">initialize()</a> - Method in class Release.<a href="Release/CritterWorldController.html" title="class in Release">CritterWorldController</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="simulation/AdjustablePriorityQueue.html#insert(E,int)" class="member-name-link">insert(E, int)</a> - Method in interface simulation.<a href="simulation/AdjustablePriorityQueue.html" title="interface in simulation">AdjustablePriorityQueue</a></dt>
 <dd>
@@ -847,23 +729,23 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/BinaryHeap.html#insert(E,int)" class="member-name-link">insert(E, int)</a> - Method in class simulation.<a href="simulation/BinaryHeap.html" title="class in simulation">BinaryHeap</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="ast/ProgramCritterInterpreter.html#interpret(simulation.Critter,simulation.World)" class="member-name-link">interpret(Critter, World)</a> - Method in class ast.<a href="ast/ProgramCritterInterpreter.html" title="class in ast">ProgramCritterInterpreter</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="simulation/CritterInterpreter.html#interpret(simulation.Critter,simulation.World)" class="member-name-link">interpret(Critter, World)</a> - Method in interface simulation.<a href="simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a></dt>
 <dd>
 <div class="block">Chooses the next action for a critter in the current world state.</div>
 </dd>
-<dt><a href="simulation/ProgramCritterInterpreter.html#interpret(simulation.Critter,simulation.World)" class="member-name-link">interpret(Critter, World)</a> - Method in class simulation.<a href="simulation/ProgramCritterInterpreter.html" title="class in simulation">ProgramCritterInterpreter</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/package-summary.html">io</a> - package io</dt>
 <dd>&nbsp;</dd>
 <dt><a href="simulation/Critter.html#isAlive()" class="member-name-link">isAlive()</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
 <div class="block">Indicates whether the critter is alive.</div>
 </dd>
-<dt><a href="lexer/Sugar.html#isAssignable()" class="member-name-link">isAssignable()</a> - Method in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#isAssignable()" class="member-name-link">isAssignable()</a> - Method in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Indicates whether this slot is writable via assignment sugar.</div>
 </dd>
-<dt><a href="lexer/Sugar.html#isAssignableSugar(int)" class="member-name-link">isAssignableSugar(int)</a> - Static method in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#isAssignableSugar(int)" class="member-name-link">isAssignableSugar(int)</a> - Static method in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Checks whether a memory index is writable according to sugar rules.</div>
 </dd>
@@ -877,13 +759,21 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Indicates whether this hex is empty (no rock, no food, no critter).</div>
 </dd>
+<dt><a href="simulation/Controller.html#isForceMutationEnabled()" class="member-name-link">isForceMutationEnabled()</a> - Method in class simulation.<a href="simulation/Controller.html" title="class in simulation">Controller</a></dt>
+<dd>
+<div class="block">Returns whether budding should force at least one mutation when possible.</div>
+</dd>
 <dt><a href="simulation/World.html#isInBounds(int,int)" class="member-name-link">isInBounds(int, int)</a> - Method in class simulation.<a href="simulation/World.html" title="class in simulation">World</a></dt>
 <dd>
 <div class="block">Checks whether a coordinate lies inside rectangular world bounds.</div>
 </dd>
 <dt><a href="simulation/Controller.html#isMannaEnabled()" class="member-name-link">isMannaEnabled()</a> - Method in class simulation.<a href="simulation/Controller.html" title="class in simulation">Controller</a></dt>
 <dd>
-<div class="block">Returns current manna enabled state.</div>
+<div class="block">Returns whether random manna drops are enabled.</div>
+</dd>
+<dt><a href="simulation/Controller.html#isMutationEnabled()" class="member-name-link">isMutationEnabled()</a> - Method in class simulation.<a href="simulation/Controller.html" title="class in simulation">Controller</a></dt>
+<dd>
+<div class="block">Returns whether mutations are enabled for budding offspring.</div>
 </dd>
 <dt><a href="simulation/HexState.html#isRock()" class="member-name-link">isRock()</a> - Method in class simulation.<a href="simulation/HexState.html" title="class in simulation">HexState</a></dt>
 <dd>
@@ -923,6 +813,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Punctuation: [ (left bracket for arrays/lists).</div>
 </dd>
+<dt><a href="lexer/TokenType.html#LE" class="member-name-link">LE</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="lexer/TokenType.html#LEFT" class="member-name-link">LEFT</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
 <dd>
 <div class="block">Keyword: left (turn left).</div>
@@ -953,30 +845,26 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Loads a world from a file at the given path.</div>
 </dd>
-<dt><a href="ast/LogicNode.html" class="type-name-link" title="class in ast">LogicNode</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents a logical combination of conditions (AND/OR chains).</div>
-</dd>
-<dt><a href="ast/LogicNode.html#%3Cinit%3E(ast.Condition,java.lang.String,ast.Condition,int,int)" class="member-name-link">LogicNode(Condition, String, Condition, int, int)</a> - Constructor for class ast.<a href="ast/LogicNode.html" title="class in ast">LogicNode</a></dt>
-<dd>
-<div class="block">Creates a logical condition node.</div>
-</dd>
 <dt><a href="lexer/TokenType.html#LPAREN" class="member-name-link">LPAREN</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
 <dd>
 <div class="block">Punctuation: ( (left parenthesis for grouping/function calls).</div>
 </dd>
+<dt><a href="lexer/TokenType.html#LT" class="member-name-link">LT</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dd>
+<div class="block">Category: relational operators (&lt;, &gt;, &lt;=, &gt;=, =, !=).</div>
+</dd>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
-<dt><a href="GuiMain.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class <a href="GuiMain.html" title="class in Unnamed Package">GuiMain</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/Console.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class io.<a href="io/Console.html" title="class in io">Console</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="Main.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class <a href="Main.html" title="class in Unnamed Package">Main</a></dt>
+<dt><a href="Release/GuiMain.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class Release.<a href="Release/GuiMain.html" title="class in Release">GuiMain</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="Release/Main.html#main(java.lang.String%5B%5D)" class="member-name-link">main(String[])</a> - Static method in class Release.<a href="Release/Main.html" title="class in Release">Main</a></dt>
 <dd>
 <div class="block">Loads world and critters, then runs a real-time simulation.</div>
 </dd>
-<dt><a href="Main.html" class="type-name-link" title="class in Unnamed Package">Main</a> - Class in <a href="package-summary.html">Unnamed Package</a></dt>
+<dt><a href="Release/Main.html" class="type-name-link" title="class in Release">Main</a> - Class in <a href="Release/package-summary.html">Release</a></dt>
 <dd>
 <div class="block">Entry point for the Toadally Awesome World Simulator.</div>
 </dd>
@@ -994,19 +882,17 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/CritterSnapshot.html#memory" class="member-name-link">memory</a> - Variable in class simulation.<a href="simulation/CritterSnapshot.html" title="class in simulation">CritterSnapshot</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ast/MemoryNode.html" class="type-name-link" title="class in ast">MemoryNode</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents a memory access expression in the AST.</div>
-</dd>
-<dt><a href="ast/MemoryNode.html#%3Cinit%3E(ast.Expression,int,int)" class="member-name-link">MemoryNode(Expression, int, int)</a> - Constructor for class ast.<a href="ast/MemoryNode.html" title="class in ast">MemoryNode</a></dt>
-<dd>
-<div class="block">Creates a memory access node.</div>
-</dd>
-<dt><a href="lexer/Sugar.html#MEMSIZE" class="member-name-link">MEMSIZE</a> - Enum constant in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#MEMSIZE" class="member-name-link">MEMSIZE</a> - Enum constant in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Memory size slot.</div>
 </dd>
 <dt><a href="simulation/Constants.html#MIN_MEMORY" class="member-name-link">MIN_MEMORY</a> - Static variable in class simulation.<a href="simulation/Constants.html" title="class in simulation">Constants</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="lexer/TokenType.html#MINUS" class="member-name-link">MINUS</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dd>
+<div class="block">Arithmetic subtraction operator (-).</div>
+</dd>
+<dt><a href="lexer/TokenType.html#MOD" class="member-name-link">MOD</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="simulation/Constants.html#MOVE_COST" class="member-name-link">MOVE_COST</a> - Static variable in class simulation.<a href="simulation/Constants.html" title="class in simulation">Constants</a></dt>
 <dd>&nbsp;</dd>
@@ -1018,15 +904,24 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Moves critter to a new location.</div>
 </dd>
-<dt><a href="lexer/TokenType.html#MULOP" class="member-name-link">MULOP</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dt><a href="lexer/TokenType.html#MUL" class="member-name-link">MUL</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
 <dd>
-<div class="block">Category: multiplicative operators (* or /).</div>
+<div class="block">Arithmetic multiplication operator (*)</div>
 </dd>
 <dt><a href="ast/Mutator.html#mutate(ast.Program)" class="member-name-link">mutate(Program)</a> - Method in class ast.<a href="ast/Mutator.html" title="class in ast">Mutator</a></dt>
 <dd>
 <div class="block">Applies one or more random mutations to the input program.</div>
 </dd>
+<dt><a href="ast/Mutator.html#mutate(ast.Program,boolean)" class="member-name-link">mutate(Program, boolean)</a> - Method in class ast.<a href="ast/Mutator.html" title="class in ast">Mutator</a></dt>
+<dd>
+<div class="block">Applies random structural mutations to the input program, forcing at least one
+ visible change in the rendered source when requested.</div>
+</dd>
 <dt><a href="ast/Mutator.html#mutate(ast.Program,java.util.Random)" class="member-name-link">mutate(Program, Random)</a> - Static method in class ast.<a href="ast/Mutator.html" title="class in ast">Mutator</a></dt>
+<dd>
+<div class="block">Applies zero or more random mutations to the input program.</div>
+</dd>
+<dt><a href="ast/Mutator.html#mutate(ast.Program,java.util.Random,boolean)" class="member-name-link">mutate(Program, Random, boolean)</a> - Static method in class ast.<a href="ast/Mutator.html" title="class in ast">Mutator</a></dt>
 <dd>
 <div class="block">Applies zero or more random mutations to the input program.</div>
 </dd>
@@ -1061,6 +956,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns neighboring coordinate in the given direction.</div>
 </dd>
+<dt><a href="lexer/TokenType.html#NEQ" class="member-name-link">NEQ</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="simulation/HexDirection.html#NORTH" class="member-name-link">NORTH</a> - Enum constant in enum class simulation.<a href="simulation/HexDirection.html" title="enum class in simulation">HexDirection</a></dt>
 <dd>
 <div class="block">Direction index 0 with delta (0, +2).</div>
@@ -1077,29 +974,21 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Literal: numeric value (integer).</div>
 </dd>
-<dt><a href="ast/NumberNode.html" class="type-name-link" title="class in ast">NumberNode</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents a numeric literal in the AST.</div>
-</dd>
-<dt><a href="ast/NumberNode.html#%3Cinit%3E(int,int,int)" class="member-name-link">NumberNode(int, int, int)</a> - Constructor for class ast.<a href="ast/NumberNode.html" title="class in ast">NumberNode</a></dt>
-<dd>
-<div class="block">Creates a numeric literal node.</div>
-</dd>
 </dl>
 <h2 class="title" id="I:O">O</h2>
 <dl class="index">
 <dt><a href="simulation/CritterSnapshot.html#offense" class="member-name-link">offense</a> - Variable in class simulation.<a href="simulation/CritterSnapshot.html" title="class in simulation">CritterSnapshot</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="lexer/Sugar.html#OFFENSE" class="member-name-link">OFFENSE</a> - Enum constant in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#OFFENSE" class="member-name-link">OFFENSE</a> - Enum constant in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Offense stat slot.</div>
 </dd>
+<dt><a href="ast/ProgramCritterInterpreter.html#offspringCopy()" class="member-name-link">offspringCopy()</a> - Method in class ast.<a href="ast/ProgramCritterInterpreter.html" title="class in ast">ProgramCritterInterpreter</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="simulation/CritterInterpreter.html#offspringCopy()" class="member-name-link">offspringCopy()</a> - Method in interface simulation.<a href="simulation/CritterInterpreter.html" title="interface in simulation">CritterInterpreter</a></dt>
 <dd>
 <div class="block">Creates an interpreter copy suitable for an offspring critter.</div>
 </dd>
-<dt><a href="simulation/ProgramCritterInterpreter.html#offspringCopy()" class="member-name-link">offspringCopy()</a> - Method in class simulation.<a href="simulation/ProgramCritterInterpreter.html" title="class in simulation">ProgramCritterInterpreter</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="simulation/HexDirection.html#opposite()" class="member-name-link">opposite()</a> - Method in enum class simulation.<a href="simulation/HexDirection.html" title="enum class in simulation">HexDirection</a></dt>
 <dd>
 <div class="block">Returns the opposite direction.</div>
@@ -1119,21 +1008,19 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Parses world specification from text content.</div>
 </dd>
-<dt><a href="parser/Parser.html#parseProgram()" class="member-name-link">parseProgram()</a> - Method in class parser.<a href="parser/Parser.html" title="class in parser">Parser</a></dt>
+<dt><a href="ast/Parser.html#parseProgram()" class="member-name-link">parseProgram()</a> - Method in class ast.<a href="ast/Parser.html" title="class in ast">Parser</a></dt>
 <dd>
 <div class="block">Parses a complete program from the token stream.</div>
 </dd>
-<dt><a href="parser/package-summary.html">parser</a> - package parser</dt>
-<dd>&nbsp;</dd>
-<dt><a href="parser/Parser.html" class="type-name-link" title="class in parser">Parser</a> - Class in <a href="parser/package-summary.html">parser</a></dt>
+<dt><a href="ast/Parser.html" class="type-name-link" title="class in ast">Parser</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
 <dd>
 <div class="block">Performs syntax analysis using recursive descent parsing.</div>
 </dd>
-<dt><a href="parser/Parser.html#%3Cinit%3E(java.lang.String)" class="member-name-link">Parser(String)</a> - Constructor for class parser.<a href="parser/Parser.html" title="class in parser">Parser</a></dt>
+<dt><a href="ast/Parser.html#%3Cinit%3E(java.lang.String)" class="member-name-link">Parser(String)</a> - Constructor for class ast.<a href="ast/Parser.html" title="class in ast">Parser</a></dt>
 <dd>
 <div class="block">Initializes the parser and performs lexical analysis in one step.</div>
 </dd>
-<dt><a href="lexer/Sugar.html#PASS" class="member-name-link">PASS</a> - Enum constant in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#PASS" class="member-name-link">PASS</a> - Enum constant in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Pass counter slot.</div>
 </dd>
@@ -1155,9 +1042,13 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Places a rock on an empty valid hex.</div>
 </dd>
+<dt><a href="lexer/TokenType.html#PLUS" class="member-name-link">PLUS</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
+<dd>
+<div class="block">Arithmetic addition operator (+).</div>
+</dd>
 <dt><a href="simulation/CritterSnapshot.html#posture" class="member-name-link">posture</a> - Variable in class simulation.<a href="simulation/CritterSnapshot.html" title="class in simulation">CritterSnapshot</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="lexer/Sugar.html#POSTURE" class="member-name-link">POSTURE</a> - Enum constant in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#POSTURE" class="member-name-link">POSTURE</a> - Enum constant in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Posture slot (assignable).</div>
 </dd>
@@ -1207,15 +1098,15 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Keeps rule order intact because evaluation semantics depend on source ordering.</div>
 </dd>
-<dt><a href="simulation/ProgramCritterInterpreter.html" class="type-name-link" title="class in simulation">ProgramCritterInterpreter</a> - Class in <a href="simulation/package-summary.html">simulation</a></dt>
+<dt><a href="ast/ProgramCritterInterpreter.html" class="type-name-link" title="class in ast">ProgramCritterInterpreter</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
 <dd>
 <div class="block">Interprets a parsed AST program for one critter.</div>
 </dd>
-<dt><a href="simulation/ProgramCritterInterpreter.html#%3Cinit%3E(ast.Program)" class="member-name-link">ProgramCritterInterpreter(Program)</a> - Constructor for class simulation.<a href="simulation/ProgramCritterInterpreter.html" title="class in simulation">ProgramCritterInterpreter</a></dt>
+<dt><a href="ast/ProgramCritterInterpreter.html#%3Cinit%3E(ast.Program)" class="member-name-link">ProgramCritterInterpreter(Program)</a> - Constructor for class ast.<a href="ast/ProgramCritterInterpreter.html" title="class in ast">ProgramCritterInterpreter</a></dt>
 <dd>
 <div class="block">Creates an interpreter with a default random source.</div>
 </dd>
-<dt><a href="simulation/ProgramCritterInterpreter.html#%3Cinit%3E(ast.Program,java.util.Random)" class="member-name-link">ProgramCritterInterpreter(Program, Random)</a> - Constructor for class simulation.<a href="simulation/ProgramCritterInterpreter.html" title="class in simulation">ProgramCritterInterpreter</a></dt>
+<dt><a href="ast/ProgramCritterInterpreter.html#%3Cinit%3E(ast.Program,java.util.Random)" class="member-name-link">ProgramCritterInterpreter(Program, Random)</a> - Constructor for class ast.<a href="ast/ProgramCritterInterpreter.html" title="class in ast">ProgramCritterInterpreter</a></dt>
 <dd>
 <div class="block">Creates an interpreter with an explicit random source.</div>
 </dd>
@@ -1240,18 +1131,8 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a value from the critter's memory array.</div>
 </dd>
-<dt><a href="lexer/TokenType.html#REL" class="member-name-link">REL</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
-<dd>
-<div class="block">Category: relational operators (&lt;, &gt;, &lt;=, &gt;=, =, !=).</div>
-</dd>
-<dt><a href="ast/RelationNode.html" class="type-name-link" title="class in ast">RelationNode</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents an atomic relational condition in the AST.</div>
-</dd>
-<dt><a href="ast/RelationNode.html#%3Cinit%3E(ast.Expression,java.lang.String,ast.Expression,int,int)" class="member-name-link">RelationNode(Expression, String, Expression, int, int)</a> - Constructor for class ast.<a href="ast/RelationNode.html" title="class in ast">RelationNode</a></dt>
-<dd>
-<div class="block">Creates a relational condition node.</div>
-</dd>
+<dt><a href="Release/package-summary.html">Release</a> - package Release</dt>
+<dd>&nbsp;</dd>
 <dt><a href="simulation/BinaryHeap.html#remove(java.lang.Object)" class="member-name-link">remove(Object)</a> - Method in class simulation.<a href="simulation/BinaryHeap.html" title="class in simulation">BinaryHeap</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="simulation/BinaryHeap.html#removeAll(java.util.Collection)" class="member-name-link">removeAll(Collection&lt;?&gt;)</a> - Method in class simulation.<a href="simulation/BinaryHeap.html" title="class in simulation">BinaryHeap</a></dt>
@@ -1315,14 +1196,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Punctuation: ; (statement terminator).</div>
 </dd>
-<dt><a href="ast/SensorNode.html" class="type-name-link" title="class in ast">SensorNode</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents a sensor query expression in the AST.</div>
-</dd>
-<dt><a href="ast/SensorNode.html#%3Cinit%3E(lexer.TokenType,ast.Expression,int,int)" class="member-name-link">SensorNode(TokenType, Expression, int, int)</a> - Constructor for class ast.<a href="ast/SensorNode.html" title="class in ast">SensorNode</a></dt>
-<dd>
-<div class="block">Creates a sensor query node.</div>
-</dd>
 <dt><a href="lexer/TokenType.html#SERVE" class="member-name-link">SERVE</a> - Enum constant in enum class lexer.<a href="lexer/TokenType.html" title="enum class in lexer">TokenType</a></dt>
 <dd>
 <div class="block">Keyword: serve (serve food to allies).</div>
@@ -1339,17 +1212,27 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Sets the direction using modular normalization into range 0..5.</div>
 </dd>
+<dt><a href="simulation/Controller.html#setForceMutationEnabled(boolean)" class="member-name-link">setForceMutationEnabled(boolean)</a> - Method in class simulation.<a href="simulation/Controller.html" title="class in simulation">Controller</a></dt>
+<dd>
+<div class="block">Enables or disables forced mutation mode for budding.</div>
+</dd>
 <dt><a href="simulation/Critter.html#setLastRule(java.lang.String)" class="member-name-link">setLastRule(String)</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
 <div class="block">Sets the last fired rule string.</div>
 </dd>
+<dt><a href="Release/CritterWorldController.html#setLaunchArguments(java.util.List)" class="member-name-link">setLaunchArguments(List&lt;String&gt;)</a> - Method in class Release.<a href="Release/CritterWorldController.html" title="class in Release">CritterWorldController</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="simulation/Controller.html#setMannaEnabled(boolean)" class="member-name-link">setMannaEnabled(boolean)</a> - Method in class simulation.<a href="simulation/Controller.html" title="class in simulation">Controller</a></dt>
 <dd>
-<div class="block">Enable or disable manna drops.</div>
+<div class="block">Enables or disables random manna drops during simulation steps.</div>
 </dd>
 <dt><a href="simulation/Critter.html#setMemorySize(int)" class="member-name-link">setMemorySize(int)</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
 <div class="block">Sets memory size with minimum 7 enforcement.</div>
+</dd>
+<dt><a href="simulation/Controller.html#setMutationEnabled(boolean)" class="member-name-link">setMutationEnabled(boolean)</a> - Method in class simulation.<a href="simulation/Controller.html" title="class in simulation">Controller</a></dt>
+<dd>
+<div class="block">Enables or disables mutation mode for budding offspring.</div>
 </dd>
 <dt><a href="simulation/Critter.html#setOffense(int)" class="member-name-link">setOffense(int)</a> - Method in class simulation.<a href="simulation/Critter.html" title="class in simulation">Critter</a></dt>
 <dd>
@@ -1373,7 +1256,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/BinaryHeap.html#size()" class="member-name-link">size()</a> - Method in class simulation.<a href="simulation/BinaryHeap.html" title="class in simulation">BinaryHeap</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="lexer/Sugar.html#SIZE" class="member-name-link">SIZE</a> - Enum constant in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#SIZE" class="member-name-link">SIZE</a> - Enum constant in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Size stat slot.</div>
 </dd>
@@ -1397,7 +1280,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="simulation/CritterSnapshot.html#speciesKey" class="member-name-link">speciesKey</a> - Variable in class simulation.<a href="simulation/CritterSnapshot.html" title="class in simulation">CritterSnapshot</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="GuiMain.html#start(javafx.stage.Stage)" class="member-name-link">start(Stage)</a> - Method in class <a href="GuiMain.html" title="class in Unnamed Package">GuiMain</a></dt>
+<dt><a href="Release/GuiMain.html#start(javafx.stage.Stage)" class="member-name-link">start(Stage)</a> - Method in class Release.<a href="Release/GuiMain.html" title="class in Release">GuiMain</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="simulation/Controller.html#step()" class="member-name-link">step()</a> - Method in class simulation.<a href="simulation/Controller.html" title="class in simulation">Controller</a></dt>
 <dd>
@@ -1407,13 +1290,11 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns a new coordinate one step in the provided direction.</div>
 </dd>
-<dt><a href="GuiMain.html#stop()" class="member-name-link">stop()</a> - Method in class <a href="GuiMain.html" title="class in Unnamed Package">GuiMain</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="ast/ASTNode.html#subtreeSize" class="member-name-link">subtreeSize</a> - Variable in class ast.<a href="ast/ASTNode.html" title="class in ast">ASTNode</a></dt>
 <dd>
 <div class="block">Total number of nodes in this subtree (including this node).</div>
 </dd>
-<dt><a href="lexer/Sugar.html" class="type-name-link" title="enum class in lexer">Sugar</a> - Enum Class in <a href="lexer/package-summary.html">lexer</a></dt>
+<dt><a href="lexer/SugarTokenType.html" class="type-name-link" title="enum class in lexer">SugarTokenType</a> - Enum Class in <a href="lexer/package-summary.html">lexer</a></dt>
 <dd>
 <div class="block">Named aliases for fixed critter memory slots.</div>
 </dd>
@@ -1444,26 +1325,28 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Safely constructs a child list from an optional node.</div>
 </dd>
+<dt><a href="ast/ASTNodeUtils.html#toChildList(ast.ASTNode...)" class="member-name-link">toChildList(ASTNode...)</a> - Static method in class ast.<a href="ast/ASTNodeUtils.html" title="class in ast">ASTNodeUtils</a></dt>
+<dd>
+<div class="block">Safely constructs an immutable child list from multiple nodes, filtering out nulls.</div>
+</dd>
 <dt><a href="lexer/Token.html" class="type-name-link" title="class in lexer">Token</a> - Class in <a href="lexer/package-summary.html">lexer</a></dt>
 <dd>
 <div class="block">Represents a single lexical token extracted from source code.</div>
 </dd>
 <dt><a href="lexer/Token.html#%3Cinit%3E(lexer.TokenType,java.lang.String,int,int)" class="member-name-link">Token(TokenType, String, int, int)</a> - Constructor for class lexer.<a href="lexer/Token.html" title="class in lexer">Token</a></dt>
 <dd>
-<div class="block">Convenience overload for non-numeric tokens (keywords, operators, identifiers).</div>
+<div class="block">Overload for non-numeric tokens (keywords, operators, identifiers).</div>
 </dd>
 <dt><a href="lexer/Token.html#%3Cinit%3E(lexer.TokenType,java.lang.String,int,int,int)" class="member-name-link">Token(TokenType, String, int, int, int)</a> - Constructor for class lexer.<a href="lexer/Token.html" title="class in lexer">Token</a></dt>
 <dd>
-<div class="block">Full constructor carrying both textual and numeric forms.</div>
+<div class="block">Constructor carrying both textual and numeric forms.</div>
 </dd>
 <dt><a href="lexer/Lexer.html#tokenize()" class="member-name-link">tokenize()</a> - Method in class lexer.<a href="lexer/Lexer.html" title="class in lexer">Lexer</a></dt>
 <dd>
 <div class="block">Tokenizes the entire source code and returns a list of tokens in source order.</div>
 </dd>
 <dt><a href="lexer/TokenType.html" class="type-name-link" title="enum class in lexer">TokenType</a> - Enum Class in <a href="lexer/package-summary.html">lexer</a></dt>
-<dd>
-<div class="block">Enumeration of all token types in the language grammar.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="simulation/HexCoordinate.html#toString()" class="member-name-link">toString()</a> - Method in record class simulation.<a href="simulation/HexCoordinate.html" title="class in simulation">HexCoordinate</a></dt>
 <dd>
 <div class="block">Returns a string representation of this record class.</div>
@@ -1479,14 +1362,6 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Updates the interpreter for this critter (used by mutation system).</div>
 </dd>
-<dt><a href="ast/UpdateNode.html" class="type-name-link" title="class in ast">UpdateNode</a> - Class in <a href="ast/package-summary.html">ast</a></dt>
-<dd>
-<div class="block">Represents a memory update command in the AST.</div>
-</dd>
-<dt><a href="ast/UpdateNode.html#%3Cinit%3E(ast.Expression,ast.Expression,int,int)" class="member-name-link">UpdateNode(Expression, Expression, int, int)</a> - Constructor for class ast.<a href="ast/UpdateNode.html" title="class in ast">UpdateNode</a></dt>
-<dd>
-<div class="block">Creates a memory update node.</div>
-</dd>
 <dt><a href="simulation/AdjustablePriorityQueue.html#updatePriority(E,int)" class="member-name-link">updatePriority(E, int)</a> - Method in interface simulation.<a href="simulation/AdjustablePriorityQueue.html" title="interface in simulation">AdjustablePriorityQueue</a></dt>
 <dd>
 <div class="block">Updates the priority of an element already in the queue.</div>
@@ -1496,7 +1371,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:V">V</h2>
 <dl class="index">
-<dt><a href="lexer/Sugar.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
@@ -1512,7 +1387,7 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
-<dt><a href="lexer/Sugar.html#values()" class="member-name-link">values()</a> - Static method in enum class lexer.<a href="lexer/Sugar.html" title="enum class in lexer">Sugar</a></dt>
+<dt><a href="lexer/SugarTokenType.html#values()" class="member-name-link">values()</a> - Static method in enum class lexer.<a href="lexer/SugarTokenType.html" title="enum class in lexer">SugarTokenType</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>

@@ -112,6 +112,11 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Safely constructs a child list from an optional node.</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="ASTNode.html" title="class in ast">ASTNode</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#toChildList(ast.ASTNode...)" class="member-name-link">toChildList</a><wbr>(<a href="ASTNode.html" title="class in ast">ASTNode</a>...&nbsp;children)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Safely constructs an immutable child list from multiple nodes, filtering out nulls.</div>
+</div>
 </div>
 </div>
 </div>
@@ -140,6 +145,19 @@ loadScripts(document, 'script');</script>
 <dd><code>child</code> - the optional child node, may be null</dd>
 <dt>Returns:</dt>
 <dd>immutable list containing the child if non-null, otherwise empty list</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="toChildList(ast.ASTNode...)">
+<h3>toChildList</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="ASTNode.html" title="class in ast">ASTNode</a>&gt;</span>&nbsp;<span class="element-name">toChildList</span><wbr><span class="parameters">(<a href="ASTNode.html" title="class in ast">ASTNode</a>...&nbsp;children)</span></div>
+<div class="block">Safely constructs an immutable child list from multiple nodes, filtering out nulls.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>children</code> - varargs of child nodes, may contain nulls</dd>
+<dt>Returns:</dt>
+<dd>immutable list containing only the non-null children</dd>
 </dl>
 </section>
 </li>

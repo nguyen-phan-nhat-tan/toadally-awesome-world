@@ -97,32 +97,6 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public enum </span><span class="element-name type-name-label">TokenType</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link">Enum</a>&lt;<a href="TokenType.html" title="enum class in lexer">TokenType</a>&gt;</span></div>
-<div class="block">Enumeration of all token types in the language grammar.
- 
- TokenType serves as the shared vocabulary between the lexer (which produces tokens)
- and the parser (which consumes them). By using an enum instead of string-based type checks,
- we avoid fragile coupling and enable compiler optimizations.
- 
- Token types include:
- <ul>
-   <li><b>Punctuation:</b> brackets, braces, parentheses, semicolons, arrows, assignment</li>
-   <li><b>Action Keywords:</b> wait, forward, backward, left, right, eat, attack, grow, bud, serve</li>
-   <li><b>Sensor Keywords:</b> mem (memory), nearby, ahead, random, smell</li>
-   <li><b>Logical Operators:</b> and, or</li>
-   <li><b>Arithmetic Operators:</b> +, -, *, / (addop, mulop)</li>
-   <li><b>Relational Operators:</b> &lt;, &gt;, &lt;=, &gt;=, =, != (rel)</li>
-   <li><b>Literals:</b> numeric values</li>
-   <li><b>Special:</b> EOF (end of file)</li>
- </ul></div>
-<dl class="notes">
-<dt>See Also:</dt>
-<dd>
-<ul class="tag-list">
-<li><a href="Lexer.html" title="class in lexer"><code>Lexer</code></a></li>
-<li><a href="Token.html" title="class in lexer"><code>Token</code></a></li>
-</ul>
-</dd>
-</dl>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -143,37 +117,37 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Enum Constant</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code><a href="#ADDOP" class="member-name-link">ADDOP</a></code></div>
+<div class="col-first even-row-color"><code><a href="#AHEAD" class="member-name-link">AHEAD</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Category: additive operators (+ or -).</div>
-</div>
-<div class="col-first odd-row-color"><code><a href="#AHEAD" class="member-name-link">AHEAD</a></code></div>
-<div class="col-last odd-row-color">
 <div class="block">Keyword: ahead (query the cell ahead).</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#AND" class="member-name-link">AND</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="#AND" class="member-name-link">AND</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Keyword: and (logical conjunction).</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#ARROW" class="member-name-link">ARROW</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="#ARROW" class="member-name-link">ARROW</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Punctuation: --&gt; (used in rule syntax).</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#ASSIGN" class="member-name-link">ASSIGN</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="#ASSIGN" class="member-name-link">ASSIGN</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Punctuation: := (assignment operator).</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#ATTACK" class="member-name-link">ATTACK</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="#ATTACK" class="member-name-link">ATTACK</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Keyword: attack (attack adjacent enemy).</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#BACKWARD" class="member-name-link">BACKWARD</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="#BACKWARD" class="member-name-link">BACKWARD</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Keyword: backward (move opposite to current direction).</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#BUD" class="member-name-link">BUD</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="#BUD" class="member-name-link">BUD</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Keyword: bud (reproduce).</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#DIV" class="member-name-link">DIV</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Arithmetic division operator (/)</div>
 </div>
 <div class="col-first even-row-color"><code><a href="#EAT" class="member-name-link">EAT</a></code></div>
 <div class="col-last even-row-color">
@@ -183,22 +157,30 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Special: end of input marker.</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#FORWARD" class="member-name-link">FORWARD</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first even-row-color"><code><a href="#EQ" class="member-name-link">EQ</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code><a href="#FORWARD" class="member-name-link">FORWARD</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Keyword: forward (move in current direction).</div>
 </div>
+<div class="col-first even-row-color"><code><a href="#GE" class="member-name-link">GE</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code><a href="#GROW" class="member-name-link">GROW</a></code></div>
 <div class="col-last odd-row-color">
 <div class="block">Keyword: grow (increase size).</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#LBRACE" class="member-name-link">LBRACE</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first even-row-color"><code><a href="#GT" class="member-name-link">GT</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code><a href="#LBRACE" class="member-name-link">LBRACE</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Punctuation: { (left brace for command blocks).</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#LBRACKET" class="member-name-link">LBRACKET</a></code></div>
-<div class="col-last odd-row-color">
+<div class="col-first even-row-color"><code><a href="#LBRACKET" class="member-name-link">LBRACKET</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Punctuation: [ (left bracket for arrays/lists).</div>
 </div>
+<div class="col-first odd-row-color"><code><a href="#LE" class="member-name-link">LE</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code><a href="#LEFT" class="member-name-link">LEFT</a></code></div>
 <div class="col-last even-row-color">
 <div class="block">Keyword: left (turn left).</div>
@@ -207,18 +189,30 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Punctuation: ( (left parenthesis for grouping/function calls).</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#MEM" class="member-name-link">MEM</a></code></div>
+<div class="col-first even-row-color"><code><a href="#LT" class="member-name-link">LT</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">Category: relational operators (&lt;, &gt;, &lt;=, &gt;=, =, !=).</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#MEM" class="member-name-link">MEM</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Keyword: mem (access memory location).</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#MULOP" class="member-name-link">MULOP</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Category: multiplicative operators (* or /).</div>
-</div>
-<div class="col-first even-row-color"><code><a href="#NEARBY" class="member-name-link">NEARBY</a></code></div>
+<div class="col-first even-row-color"><code><a href="#MINUS" class="member-name-link">MINUS</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">Arithmetic subtraction operator (-).</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#MOD" class="member-name-link">MOD</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code><a href="#MUL" class="member-name-link">MUL</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Arithmetic multiplication operator (*)</div>
+</div>
+<div class="col-first odd-row-color"><code><a href="#NEARBY" class="member-name-link">NEARBY</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Keyword: nearby (query nearby cells).</div>
 </div>
+<div class="col-first even-row-color"><code><a href="#NEQ" class="member-name-link">NEQ</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code><a href="#NUMBER" class="member-name-link">NUMBER</a></code></div>
 <div class="col-last odd-row-color">
 <div class="block">Literal: numeric value (integer).</div>
@@ -227,21 +221,21 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Keyword: or (logical disjunction).</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#RANDOM" class="member-name-link">RANDOM</a></code></div>
+<div class="col-first odd-row-color"><code><a href="#PLUS" class="member-name-link">PLUS</a></code></div>
 <div class="col-last odd-row-color">
+<div class="block">Arithmetic addition operator (+).</div>
+</div>
+<div class="col-first even-row-color"><code><a href="#RANDOM" class="member-name-link">RANDOM</a></code></div>
+<div class="col-last even-row-color">
 <div class="block">Keyword: random (generate random value).</div>
 </div>
-<div class="col-first even-row-color"><code><a href="#RBRACE" class="member-name-link">RBRACE</a></code></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><code><a href="#RBRACE" class="member-name-link">RBRACE</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Punctuation: } (right brace for command blocks).</div>
 </div>
-<div class="col-first odd-row-color"><code><a href="#RBRACKET" class="member-name-link">RBRACKET</a></code></div>
-<div class="col-last odd-row-color">
-<div class="block">Punctuation: ] (right bracket for arrays/lists).</div>
-</div>
-<div class="col-first even-row-color"><code><a href="#REL" class="member-name-link">REL</a></code></div>
+<div class="col-first even-row-color"><code><a href="#RBRACKET" class="member-name-link">RBRACKET</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">Category: relational operators (&lt;, &gt;, &lt;=, &gt;=, =, !=).</div>
+<div class="block">Punctuation: ] (right bracket for arrays/lists).</div>
 </div>
 <div class="col-first odd-row-color"><code><a href="#RIGHT" class="member-name-link">RIGHT</a></code></div>
 <div class="col-last odd-row-color">
@@ -282,9 +276,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getliteral()" class="member-name-link">getliteral</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLiteral()" class="member-name-link">getLiteral</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the canonical textual representation of this token type.</div>
+<div class="block">Retrieves the string representation of the token</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="TokenType.html" title="enum class in lexer">TokenType</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
@@ -500,24 +494,74 @@ the order they are declared.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="ADDOP">
-<h3>ADDOP</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">ADDOP</span></div>
-<div class="block">Category: additive operators (+ or -).</div>
+<section class="detail" id="PLUS">
+<h3>PLUS</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">PLUS</span></div>
+<div class="block">Arithmetic addition operator (+).</div>
 </section>
 </li>
 <li>
-<section class="detail" id="MULOP">
-<h3>MULOP</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">MULOP</span></div>
-<div class="block">Category: multiplicative operators (* or /).</div>
+<section class="detail" id="MINUS">
+<h3>MINUS</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">MINUS</span></div>
+<div class="block">Arithmetic subtraction operator (-).</div>
 </section>
 </li>
 <li>
-<section class="detail" id="REL">
-<h3>REL</h3>
-<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">REL</span></div>
+<section class="detail" id="MUL">
+<h3>MUL</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">MUL</span></div>
+<div class="block">Arithmetic multiplication operator (*)</div>
+</section>
+</li>
+<li>
+<section class="detail" id="DIV">
+<h3>DIV</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">DIV</span></div>
+<div class="block">Arithmetic division operator (/)</div>
+</section>
+</li>
+<li>
+<section class="detail" id="MOD">
+<h3>MOD</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">MOD</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="LT">
+<h3>LT</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">LT</span></div>
 <div class="block">Category: relational operators (&lt;, &gt;, &lt;=, &gt;=, =, !=).</div>
+</section>
+</li>
+<li>
+<section class="detail" id="LE">
+<h3>LE</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">LE</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="EQ">
+<h3>EQ</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">EQ</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="GT">
+<h3>GT</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">GT</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="GE">
+<h3>GE</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">GE</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="NEQ">
+<h3>NEQ</h3>
+<div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span class="return-type"><a href="TokenType.html" title="enum class in lexer">TokenType</a></span>&nbsp;<span class="element-name">NEQ</span></div>
 </section>
 </li>
 <li>
@@ -574,17 +618,13 @@ not permitted.)</div>
 </section>
 </li>
 <li>
-<section class="detail" id="getliteral()">
-<h3>getliteral</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getliteral</span>()</div>
-<div class="block">Returns the canonical textual representation of this token type.
- 
- For keywords and operators with fixed spellings (WAIT, ASSIGN, etc.), this returns the text.
- For synthetic categories (ADDOP, MULOP, REL) and literals (NUMBER, EOF), this returns null
- because they don't have a single fixed representation.</div>
+<section class="detail" id="getLiteral()">
+<h3>getLiteral</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getLiteral</span>()</div>
+<div class="block">Retrieves the string representation of the token</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>literal string (e.g., "and", ":="), or null for synthetic/literal token kinds</dd>
+<dd>the literal string associated with the token, or null if there is no literal.</dd>
 </dl>
 </section>
 </li>
