@@ -30,6 +30,8 @@ import java.util.List;
  * @see TokenType
  */
 public class Lexer {
+    // Class Invariant: source and tokens are not null.
+    // currentIndex >= 0. line >= 1, column >= 1.
     /** Complete source text being tokenized. */
     private final String source;
     
@@ -47,7 +49,7 @@ public class Lexer {
     
     /** Column number where the current token started. */
     private int tokenColumn;
-    
+
     /** Accumulator for tokens found during scanning; finalized by {@link #tokenize()}. */
     private final List<Token> tokens;
 
@@ -59,7 +61,7 @@ public class Lexer {
      * @param source the complete source code to lex (non-null)
      * @throws NullPointerException if source is null
      */
-    public Lexer(String source) {
+    public Lexer(String source){
         this.source = source;
         this.currentIndex = 0;
         this.line = 1;
@@ -78,11 +80,11 @@ public class Lexer {
      * @return immutable token list in source order (always ends with EOF token)
      * @throws SyntaxException when a lexical error is detected (e.g., invalid character, malformed token)
      */
-    public List<Token> tokenize() {
-        while (!isAtEnd()) {
-           start = currentIndex;
-           tokenColumn = column;
-           scanToken();
+    public List<Token> tokenize(){
+        while (!isAtEnd()){
+            start = currentIndex;
+            tokenColumn = column;
+            scanToken();
         }
         tokens.add(new Token(TokenType.EOF, "", line, column));
         return tokens;
@@ -95,8 +97,8 @@ public class Lexer {
      * 
      * @throws SyntaxException for any lexical errors encountered during scanning
      */
-    private void scanToken() {
-        char c = advance();
+    private void scanToken(){
+        char c = consumeAndAdvance();
         switch (c) {
             case ' ':
             case '\r':
@@ -128,62 +130,64 @@ public class Lexer {
                 if (match('=')){
                     addToken(TokenType.ASSIGN, ":=");
                 } else {
-                    throw new SyntaxException("Unexpected character: " + c, line, column);
+                    throw new SyntaxException("Incomplete assignment operator, expected '='", line, column);
                 }
                 return;
             case '+':
-                addToken(TokenType.ADDOP, "+");
+                addToken(TokenType.PLUS, "+");
                 return;
             case '*':
-                addToken(TokenType.MULOP, "*");
+                addToken(TokenType.MUL, "*");
                 return;
             case '-':
-                if (peek() == '-' && peekNext() == '>') {
-                    advance();
-                    advance();
-                    addToken(TokenType.ARROW, "-->");
+                if (match('-')){
+                    if (match('>')){
+                        addToken(TokenType.ARROW, "-->");
+                    } else {
+                        throw new SyntaxException("Incomplete arrow operator, expected '>'", line, column);
+                    }
                 } else {
-                    addToken(TokenType.ADDOP, "-");
+                    addToken(TokenType.MINUS, "-");
                 }
                 return;
             case '/':
-                if (match('/')) {
-                    while (peek() != '\n' && !isAtEnd()) {
-                        advance();
+                if (match('/')){
+                    while(peek() != '\n' && !isAtEnd()){
+                        consumeAndAdvance();
                     }
                 } else {
-                    addToken(TokenType.MULOP, "/");
+                    addToken(TokenType.DIV, "/");
                 }
                 return;
             case '<':
                 if (match('=')){
-                    addToken(TokenType.REL, "<=");
+                    addToken(TokenType.LE, "<=");
                 } else {
-                    addToken(TokenType.REL, "<");
+                    addToken(TokenType.LT, "<");
                 }
                 return;
             case '>':
                 if (match('=')){
-                    addToken(TokenType.REL, ">=");
+                    addToken(TokenType.GE, ">=");
                 } else {
-                    addToken(TokenType.REL, ">");
+                    addToken(TokenType.GT, ">");
                 }
                 return;
             case '=':
-                addToken(TokenType.REL, "=");
+                addToken(TokenType.EQ, "=");
                 return;
             case '!':
                 if (match('=')){
-                    addToken(TokenType.REL, "!=");
+                    addToken(TokenType.NEQ, "!=");
                 } else {
                     throw new SyntaxException("Unexpected character: " + c, line, column);
-                }
+                } 
                 return;
             default:
-                if (isDigit(c)) {
-                    number();
-                } else if (isAlpha(c)) {
-                    identifier();
+                if (isDigit(c)){
+                    numberTokenizer();
+                } else if (isAlpha(c)){
+                    identifierTokenizer();
                 } else {
                     throw new SyntaxException("Unexpected character: " + c, line, column);
                 }
@@ -194,9 +198,9 @@ public class Lexer {
     /**
      * Scans a number literal from the source, validates it, and adds it as a token.
      */
-    private void number(){
-        while (isDigit(peek())) {
-            advance();
+    private void numberTokenizer(){
+        while (isDigit(peek())){
+            consumeAndAdvance();
         }
         String lexeme = source.substring(start, currentIndex);
         int value;
@@ -208,23 +212,34 @@ public class Lexer {
         addToken(TokenType.NUMBER, lexeme, value);
     }
 
-
     /**
      * Scans an identifier or keyword from the source, checks for reserved words and "sugar" syntax, 
      * and adds the appropriate token(s).
      */
-    private void identifier() {
-        while (isAlpha(peek()) || isDigit(peek())) {
-            advance();
+    private void identifierTokenizer(){
+        while (isAlpha(peek()) || isDigit(peek())){
+            consumeAndAdvance();
         }
         String lexeme = source.substring(start, currentIndex);
-        Integer sugarIndex = Sugar.getIndexSugar(lexeme);
-        if (sugarIndex != null) {
-            injectSugarToken(sugarIndex);
+        Integer sugarIndex = SugarTokenType.getIndexSugar(lexeme);
+        if (sugarIndex != null){
+            injectToken(sugarIndex);
             return;
         }
         TokenType type = keyword(lexeme);
         addToken(type, lexeme);
+    }
+
+    /**
+     * Injects a sequence of tokens representing a sugar access for the given sugar index.
+     * 
+     * @param index the sugar index to inject (e.g., 0 for MEMSIZE, 1 for DEFENSE, etc.)
+     */
+    private void injectToken(int index){
+        addToken(TokenType.MEM, "mem");
+        addToken(TokenType.LBRACKET, "[");
+        addToken(TokenType.NUMBER, String.valueOf(index), index);
+        addToken(TokenType.RBRACKET, "]");
     }
 
     /**
@@ -270,55 +285,43 @@ public class Lexer {
             case "smell":
                 return TokenType.SMELL;
             case "mod":
-                return TokenType.MULOP;
+                return TokenType.MOD;
             default:
                 throw new SyntaxException("Unknown identifier: " + lexeme, line, column);
         }
     }
-    
-    /**
-     * Injects a sequence of tokens representing a sugar access for the given sugar index.
-     * 
-     * @param index the sugar index to inject (e.g., 0 for MEMSIZE, 1 for DEFENSE, etc.)
-     */
-    private void injectSugarToken(int index) {
-        addToken(TokenType.MEM, "mem");
-        addToken(TokenType.LBRACKET, "[");
-        addToken(TokenType.NUMBER, String.valueOf(index), index);
-        addToken(TokenType.RBRACKET, "]");
+
+    // ========== Helper functions ==========
+    private static boolean isDigit(char c){
+        return '0' <= c && c <= '9';
     }
 
-    private static boolean isDigit(char c) {
-        return c >= '0' && c <= '9';
+    private static boolean isAlpha(char c){
+        return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || c == '_';
     }
 
-    private static boolean isAlpha(char c) {
-        return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
-    }
-
-    // Overloading addToken 
-    private void addToken(TokenType type, String lexeme) {
+    private void addToken(TokenType type, String lexeme){
         addToken(type, lexeme, 0);
     }
 
-    private void addToken(TokenType type, String lexeme, int value) {
+    private void addToken(TokenType type, String lexeme, int value){
         tokens.add(new Token(type, lexeme, line, tokenColumn, value));
     }
 
     private boolean match(char expected){
-        if (isAtEnd()) {
+        if (isAtEnd()){
             return false;
         }
-        if (source.charAt(currentIndex) != expected) {
+        if (source.charAt(currentIndex) != expected){
             return false;
         }
-        advance();
+        consumeAndAdvance();
         return true;
     }
 
-    private char advance() {
+    private char consumeAndAdvance(){
         char c = source.charAt(currentIndex++);
-        if (c == '\n') {
+        if (c == '\n'){
             line++;
             column = 1;
         } else {
@@ -327,21 +330,14 @@ public class Lexer {
         return c;
     }
 
-    private char peek() {
-        if (isAtEnd()) {
+    private char peek(){
+        if (isAtEnd()){
             return '\0';
         }
         return source.charAt(currentIndex);
     }
 
-    private char peekNext() {
-        if (currentIndex + 1 >= source.length()) {
-            return '\0';
-        }
-        return source.charAt(currentIndex + 1);
-    }
-
-    private boolean isAtEnd() {
+    private boolean isAtEnd(){
         return currentIndex >= source.length();
     }
 }

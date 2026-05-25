@@ -1,6 +1,7 @@
 package simulation;
 
 import ast.Program;
+import ast.ProgramCritterInterpreter;
 import java.util.Objects;
 
 /**

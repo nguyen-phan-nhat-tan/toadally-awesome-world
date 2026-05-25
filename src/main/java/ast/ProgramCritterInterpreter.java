@@ -1,11 +1,10 @@
-package simulation;
+package ast;
 
-import ast.*;
-import lexer.Sugar;
+import lexer.SugarTokenType;
 import lexer.TokenType;
+import simulation.*;
 
 import java.util.Objects;
-import ast.PrettyPrinter;
 import java.util.Random;
 
 /**
@@ -58,7 +57,6 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
 
                 Action action = executeCommand(rule.getCommand(), critter, world, memory);
                 if (action != null) {
-                    // record last fired rule text on critter for inspection
                     try {
                         critter.setLastRule(pretty.format(rule));
                     } catch (Exception ex) {
@@ -66,9 +64,7 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
                     }
                     return action;
                 }
-                // If action is null (memory-only update), continue scanning the next rule in this pass
             }
-            // Inner loop completed without a physical action; try next pass
         }
 
         return new Action(ActionType.WAIT);
@@ -104,7 +100,7 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
      *
      * @return program AST
      */
-    public ast.Program getProgram() {
+    public Program getProgram() {
         return program;
     }
 
@@ -136,7 +132,7 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
         if (targetIndex < 0 || targetIndex >= memory.length) {
             return;
         }
-        if (!Sugar.isAssignableSugar(targetIndex)) {
+        if (!SugarTokenType.isAssignableSugar(targetIndex)) {
             return;
         }
         critter.writeMemory(targetIndex, value);
@@ -248,19 +244,17 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
      * Distance 0 returns self appearance, distance > 0 looks ahead.
      */
     private int senseAhead(World world, Critter critter, int distance) {
-        // Treat negative as 0
         if (distance < 0) {
             distance = 0;
         }
-        
+
         HexCoordinate coordinate = new HexCoordinate(critter.getX(), critter.getY());
         HexDirection direction = HexDirection.fromIndex(critter.getDirection());
-        
-        // Step forward distance times
+
         for (int i = 0; i < distance; i++) {
             coordinate = coordinate.step(direction);
         }
-        
+
         return senseCoordinateWithAppearance(world, critter, coordinate);
     }
 
@@ -270,23 +264,23 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
      */
     private int senseCoordinateWithAppearance(World world, Critter critter, HexCoordinate coordinate) {
         HexState hex = world.getHex(coordinate.x(), coordinate.y());
-        
+
         if (hex.isRock()) {
-            return -1; // Rock encoding
+            return -1;
         }
-        
+
         if (hex.hasCritter()) {
             Critter observedCritter = world.getCritterAt(coordinate.x(), coordinate.y());
             if (observedCritter != null) {
                 return observedCritter.calculateAppearance(critter.getDirection());
             }
         }
-        
+
         if (hex.hasFood()) {
             int foodAmount = hex.getFoodAmount();
             return -(foodAmount) - 1;
         }
-        
+
         return 0;
     }
 
@@ -328,63 +322,63 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
 
         AdjustablePriorityQueue<SmellState> queue = new BinaryHeap<>();
         java.util.Map<SmellState, Integer> costs = new java.util.HashMap<>();
-        java.util.Map<SmellState, Integer> bestInitialDir = new java.util.HashMap<>();
+        java.util.Map<SmellState, Integer> firstStepDir = new java.util.HashMap<>();
         java.util.Set<SmellState> visited = new java.util.HashSet<>();
 
         SmellState startState = new SmellState(startHex, startDir);
         queue.insert(startState, 0);
         costs.put(startState, 0);
-        bestInitialDir.put(startState, 0);
+        firstStepDir.put(startState, -1); 
 
         while (queue.size() > 0) {
             SmellState current = queue.peekMin();
             int currentCost = queue.getPriority(current);
             queue.extractMin();
 
-            if (visited.contains(current)) {
+            if (!visited.add(current)) {
                 continue;
             }
-            visited.add(current);
 
-            int initialDir = bestInitialDir.get(current);
+            int initialDir = firstStepDir.get(current);
 
-            // Check if facing food
-            HexCoordinate forwardHex = current.hex.step(HexDirection.fromIndex(current.dir));
-            HexState forwardState = world.getHex(forwardHex.x(), forwardHex.y());
-            if (forwardState.hasFood() && forwardState.getFoodAmount() > 0) {
-                if (HexMath.distance(startHex.x(), startHex.y(), forwardHex.x(), forwardHex.y()) <= Constants.MAX_SMELL_DISTANCE) {
-                    return (currentCost / size) * 1000 + initialDir;
+            HexCoordinate forwardHex = world.neighbor(current.hex.x(), current.hex.y(), HexDirection.fromIndex(current.dir));
+            
+            if (world.isValidCoordinate(forwardHex.x(), forwardHex.y())) {
+                HexState forwardState = world.getHex(forwardHex.x(), forwardHex.y());
+                
+                if (forwardState.hasFood() && forwardState.getFoodAmount() > 0) {
+                    int totalDistance = HexMath.distance(startHex.x(), startHex.y(), forwardHex.x(), forwardHex.y());
+                    if (totalDistance <= Constants.MAX_SMELL_DISTANCE) {
+                        int finalCost = currentCost + (Constants.MOVE_COST * size);
+                        int scalarDistance = finalCost / size;
+                        
+                        int finalRelativeDir = (initialDir == -1) ? (current.dir - startDir + 6) % 6 : initialDir;
+                        return scalarDistance * 1000 + finalRelativeDir;
+                    }
                 }
-            }
 
-            // Generate neighbors
-            // 1. Turn left
-            int leftDir = (current.dir + 5) % 6;
-            SmellState leftState = new SmellState(current.hex, leftDir);
-            int leftCost = currentCost + size;
-            int leftInitial = current.hex.equals(startHex) ? (leftDir - startDir + 6) % 6 : initialDir;
-            relaxSmellState(queue, visited, costs, bestInitialDir, leftState, leftCost, leftInitial);
+                int leftDir = (current.dir + 5) % 6;
+                SmellState leftState = new SmellState(current.hex, leftDir);
+                relaxSmellState(queue, visited, costs, firstStepDir, leftState, currentCost + size, initialDir);
 
-            // 2. Turn right
-            int rightDir = (current.dir + 1) % 6;
-            SmellState rightState = new SmellState(current.hex, rightDir);
-            int rightCost = currentCost + size;
-            int rightInitial = current.hex.equals(startHex) ? (rightDir - startDir + 6) % 6 : initialDir;
-            relaxSmellState(queue, visited, costs, bestInitialDir, rightState, rightCost, rightInitial);
+                int rightDir = (current.dir + 1) % 6;
+                SmellState rightState = new SmellState(current.hex, rightDir);
+                relaxSmellState(queue, visited, costs, firstStepDir, rightState, currentCost + size, initialDir);
 
-            // 3. Move forward
-            if (!forwardState.isRock()) {
-                SmellState forwardStepState = new SmellState(forwardHex, current.dir);
-                int moveCost = currentCost + Constants.MOVE_COST * size;
-                int forwardInitial = current.hex.equals(startHex) ? (current.dir - startDir + 6) % 6 : initialDir;
+                if (!forwardState.isRock()) {
+                    SmellState forwardStepState = new SmellState(forwardHex, current.dir);
+                    int moveCost = currentCost + Constants.MOVE_COST * size;
+                    
+                    int nextInitialDir = (initialDir == -1) ? (current.dir - startDir + 6) % 6 : initialDir;
 
-                if (HexMath.distance(startHex.x(), startHex.y(), forwardHex.x(), forwardHex.y()) <= Constants.MAX_SMELL_DISTANCE + 5) {
-                    relaxSmellState(queue, visited, costs, bestInitialDir, forwardStepState, moveCost, forwardInitial);
+                    if (HexMath.distance(startHex.x(), startHex.y(), forwardHex.x(), forwardHex.y()) <= Constants.MAX_SMELL_DISTANCE) {
+                        relaxSmellState(queue, visited, costs, firstStepDir, forwardStepState, moveCost, nextInitialDir);
+                    }
                 }
             }
         }
 
-        return -1; // No food found
+        return -1;
     }
 
     private void relaxSmellState(AdjustablePriorityQueue<SmellState> queue,
@@ -404,21 +398,6 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
             bestInitialDir.put(state, initialDir);
             queue.updatePriority(state, newCost);
         }
-    }
-
-    /**
-     * Approximate hex direction from delta coordinates.
-     * This is a simplified approximation for the smell sensor.
-     */
-    private HexDirection approximateDirection(int dx, int dy) {
-        // Simplified direction calculation for doubled coordinates
-        // Return the closest of the 6 directions
-        if (dx > 0 && dy >= 0) return HexDirection.fromIndex(0); // East
-        if (dx > 0 && dy < 0) return HexDirection.fromIndex(1);  // Southeast
-        if (dx <= 0 && dy < 0) return HexDirection.fromIndex(2); // Southwest
-        if (dx < 0 && dy <= 0) return HexDirection.fromIndex(3); // West
-        if (dx < 0 && dy > 0) return HexDirection.fromIndex(4);  // Northwest
-        return HexDirection.fromIndex(5); // Northeast
     }
 
     private int readMemory(int index, int[] memory) {

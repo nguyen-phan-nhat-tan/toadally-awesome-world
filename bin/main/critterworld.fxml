@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" styleClass="critter-world-root">
+    <children>
+        <Canvas fx:id="worldCanvas" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" onMousePressed="#handleCanvasMousePressed" onMouseDragged="#handleCanvasMouseDragged" onMouseClicked="#handleCanvasClicked" onScroll="#handleCanvasScroll" />
+
+        <VBox fx:id="controlsPanel" layoutX="28.0" layoutY="28.0" prefWidth="330.0" spacing="10.0" onMousePressed="#handlePanelMousePressed" onMouseDragged="#handlePanelMouseDragged" styleClass="floating-panel">
+            <children>
+                <Text text="Controls" styleClass="panel-title" />
+                <Label text="A draggable control stack for simulation actions." wrapText="true" styleClass="panel-subtitle" />
+                <Separator />
+                <HBox spacing="8.0">
+                    <children>
+                        <Button fx:id="toggleBtn" mnemonicParsing="false" onAction="#handleRunToggle" prefWidth="140.0" text="Run" styleClass="primary-button" />
+                        <Button fx:id="stepBtn" mnemonicParsing="false" onAction="#handleStep" prefWidth="140.0" text="Step" styleClass="secondary-button" />
+                    </children>
+                </HBox>
+                <HBox spacing="8.0">
+                    <children>
+                        <Button fx:id="loadWorldBtn" mnemonicParsing="false" onAction="#handleLoadWorld" prefWidth="140.0" text="Load World" styleClass="secondary-button" />
+                        <Button fx:id="loadCritterBtn" mnemonicParsing="false" onAction="#handleLoadCritter" prefWidth="140.0" text="Load Critter" styleClass="secondary-button" />
+                    </children>
+                </HBox>
+                <Button fx:id="helpBtn" mnemonicParsing="false" onAction="#handleHelp" prefWidth="1.7976931348623157E308" text="Help" styleClass="ghost-button" />
+                <Separator />
+                <Label text="Execution Mode" styleClass="section-label" />
+                <RadioButton fx:id="continuousRb" mnemonicParsing="false" text="Continuous" />
+                <RadioButton fx:id="stepRb" mnemonicParsing="false" text="One-by-One" />
+                <Label text="Speed (steps/sec)" styleClass="section-label" />
+                <Spinner fx:id="speedSpinner" prefWidth="140.0" />
+                <CheckBox fx:id="forcedMutationCb" mnemonicParsing="false" text="Forced Mutation" />
+                <CheckBox fx:id="mannaCb" mnemonicParsing="false" text="Manna" />
+            </children>
+        </VBox>
+
+        <VBox fx:id="statsPanel" layoutX="1060.0" layoutY="28.0" prefWidth="300.0" spacing="8.0" onMousePressed="#handlePanelMousePressed" onMouseDragged="#handlePanelMouseDragged" styleClass="floating-panel">
+            <children>
+                <Text text="Statistics" styleClass="panel-title" />
+                <Label fx:id="worldNameLabel" text="World" wrapText="true" styleClass="panel-subtitle" />
+                <Separator />
+                <Label fx:id="stepLabel" text="Steps: 0" styleClass="stat-label" />
+                <Label fx:id="critterLabel" text="Critters: 0" styleClass="stat-label" />
+                <Label fx:id="fpsLabel" text="FPS: 0" styleClass="stat-label" />
+                <Label fx:id="spsLabel" text="SPS: 0" styleClass="stat-label" />
+            </children>
+        </VBox>
+
+        <VBox fx:id="detailsPanel" layoutX="1000.0" layoutY="540.0" prefWidth="360.0" spacing="10.0" onMousePressed="#handlePanelMousePressed" onMouseDragged="#handlePanelMouseDragged" styleClass="floating-panel">
+            <children>
+                <Text text="Details" styleClass="panel-title" />
+                <Label fx:id="selectedLabel" text="Selected: none" styleClass="panel-subtitle" />
+                <Separator />
+                <VBox fx:id="inspectorContent" spacing="8.0" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

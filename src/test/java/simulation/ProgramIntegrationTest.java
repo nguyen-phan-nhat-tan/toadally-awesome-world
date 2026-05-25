@@ -1,7 +1,9 @@
 package simulation;
 
+import ast.Parser;
 import ast.Program;
-import parser.Parser;
+import ast.ProgramCritterInterpreter;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

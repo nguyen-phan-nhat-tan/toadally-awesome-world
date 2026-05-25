@@ -34,6 +34,5 @@ build
 .kotlin
 
 # Custom
-a4
 *.txt
-
+.bat

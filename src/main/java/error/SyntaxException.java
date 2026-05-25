@@ -8,7 +8,7 @@ package error;
  * location in source where the error was detected, enabling precise error reporting.
  * 
  * @see lexer.Lexer
- * @see parser.Parser
+ * @see ast.Parser
  */
 public class SyntaxException extends RuntimeException {
     /** Source line number (1-based) where the error was detected. */

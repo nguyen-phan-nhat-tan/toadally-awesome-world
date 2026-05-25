@@ -14,6 +14,7 @@ import java.util.Random;
  */
 public final class Mutator {
     private static final int MAX_ATTEMPTS = 20;
+    private static final int MAX_MUTATION_ATTEMPTS = 50;
 
     private static final List<String> BINARY_OPS = List.of("+", "-", "*", "/", "mod");
     private static final List<String> REL_OPS = List.of("<", "<=", ">", ">=", "=", "!=");
@@ -83,6 +84,18 @@ public final class Mutator {
     }
 
     /**
+     * Applies random structural mutations to the input program, forcing at least one
+     * visible change in the rendered source when requested.
+     *
+     * @param program program to mutate
+     * @param forceMutation true to retry until the pretty-printed program changes
+     * @return mutated program
+     */
+    public Program mutate(Program program, boolean forceMutation) {
+        return mutate(program, random, forceMutation);
+    }
+
+    /**
      * Applies zero or more random mutations to the input program.
      *
      * @param root program to mutate
@@ -90,11 +103,25 @@ public final class Mutator {
      * @return mutated program (or original when no mutation is chosen)
      */
     public static Program mutate(Program root, Random random) {
+        return mutate(root, random, false);
+    }
+
+    /**
+     * Applies zero or more random mutations to the input program.
+     *
+     * @param root program to mutate
+     * @param random randomness source controlling target and operation selection
+     * @param forceMutation true to keep retrying until the rendered program changes
+     * @return mutated program (or original when no mutation is chosen)
+     */
+    public static Program mutate(Program root, Random random, boolean forceMutation) {
         Program current = root;
-        
-        if (random.nextInt(4) != 0) {
+        if (!forceMutation && random.nextInt(4) != 0) {
             return current;
         }
+
+        String originalText = forceMutation ? new PrettyPrinter().format(root) : null;
+        int attempts = 0;
 
         do {
             ASTNode target = selectRandomNode(current, random);
@@ -104,7 +131,13 @@ public final class Mutator {
             if (mutated instanceof Program mutatedProgram) {
                 current = mutatedProgram;
             }
-        } while (random.nextInt(4) == 0);
+
+            if (forceMutation && !new PrettyPrinter().format(current).equals(originalText)) {
+                return current;
+            }
+
+            attempts++;
+        } while (forceMutation ? attempts < MAX_MUTATION_ATTEMPTS : random.nextInt(4) == 0);
 
         return current;
     }
@@ -202,12 +235,12 @@ public final class Mutator {
                 rules.add(randomRule(program.getLine(), program.getColumn()));
             } else {
                 int index = random.nextInt(rules.size());
-                rules.set(index, (Rule) transformNode(rules.get(index)));
+                rules.set(index, mutateRule(rules.get(index)));
             }
             return new Program(rules, program.getLine(), program.getColumn());
         }
         if (node instanceof Rule rule) {
-            return new Rule(rule.getCondition(), rule.getCommand(), rule.getLine(), rule.getColumn());
+            return mutateRule(rule);
         }
         if (node instanceof BinaryExpr expr) {
             return new BinaryExpr(expr.getLeft(), randomFrom(BINARY_OPS), expr.getRight(), expr.getLine(), expr.getColumn());
@@ -245,7 +278,7 @@ public final class Mutator {
             if (actionType == TokenType.SERVE && argument == null) {
                 argument = new NumberNode(Math.abs(random.nextInt(10)) + 1, action.getLine(), action.getColumn());
             }
-            return new ActionNode(actionType, action.getLine(), action.getColumn(), argument);
+            return new ActionNode(actionType, argument, action.getLine(), action.getColumn());
         }
         if (node instanceof UpdateNode update) {
             return new UpdateNode(update.getTargetMemory(), update.getValue(), update.getLine(), update.getColumn());
@@ -254,6 +287,22 @@ public final class Mutator {
             return new CommandList(new ArrayList<>(commandList.getUpdates()), commandList.getTerminalAction(), commandList.getLine(), commandList.getColumn());
         }
         return node;
+    }
+
+    private Rule mutateRule(Rule rule) {
+        if (random.nextBoolean()) {
+            Condition condition = (Condition) transformNode(rule.getCondition());
+            if (condition == rule.getCondition()) {
+                condition = randomCondition(rule.getLine(), rule.getColumn());
+            }
+            return new Rule(condition, rule.getCommand(), rule.getLine(), rule.getColumn());
+        }
+
+        Command command = (Command) transformNode(rule.getCommand());
+        if (command == rule.getCommand()) {
+            command = randomCommand(rule.getLine(), rule.getColumn());
+        }
+        return new Rule(rule.getCondition(), command, rule.getLine(), rule.getColumn());
     }
 
     private ASTNode insertNode(ASTNode node) {
@@ -373,7 +422,7 @@ public final class Mutator {
         }
         if (node instanceof ActionNode action) {
             Expression argument = action.hasArgument() ? (Expression) deepCopy(action.getArgument()) : null;
-            return new ActionNode(action.getActionType(), action.getLine(), action.getColumn(), argument);
+            return new ActionNode(action.getActionType(), argument, action.getLine(), action.getColumn());
         }
         if (node instanceof UpdateNode update) {
             return new UpdateNode((Expression) deepCopy(update.getTargetMemory()), (Expression) deepCopy(update.getValue()), update.getLine(), update.getColumn());
@@ -395,7 +444,7 @@ public final class Mutator {
     private Command randomCommand(int line, int column) {
         TokenType actionType = randomFrom(ACTIONS);
         Expression argument = actionType == TokenType.SERVE ? randomExpression(line, column) : null;
-        return new ActionNode(actionType, line, column, argument);
+        return new ActionNode(actionType, argument, line, column);
     }
 
     private UpdateNode randomUpdate(int line, int column) {
@@ -518,7 +567,7 @@ public final class Mutator {
         if (argument == action.getArgument()) {
             return action;
         }
-        return new ActionNode(action.getActionType(), action.getLine(), action.getColumn(), argument);
+        return new ActionNode(action.getActionType(), argument, action.getLine(), action.getColumn());
     }
     private ASTNode rewrite(UpdateNode update) {
         if (update == target) {
@@ -563,7 +612,7 @@ public final class Mutator {
             }
         } else {
             // If terminal action is null, use a default wait action
-            terminal = new ActionNode(TokenType.WAIT, commandList.getLine(), commandList.getColumn(), null);
+            terminal = new ActionNode(TokenType.WAIT, null, commandList.getLine(), commandList.getColumn());
             changed = true;
         }
 

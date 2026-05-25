@@ -1,5 +1,6 @@
 package parser;
 
+import ast.Parser;
 import ast.Program;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

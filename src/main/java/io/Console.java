@@ -1,6 +1,7 @@
 package io;
 
 import ast.PrettyPrinter;
+import ast.ProgramCritterInterpreter;
 import simulation.Controller;
 import simulation.Critter;
 import simulation.World;
@@ -246,7 +247,7 @@ public class Console {
             System.out.println("  Direction: " + critter.getDirection());
             
             var interpreter = critter.getCritterInterpreter();
-            if (interpreter instanceof simulation.ProgramCritterInterpreter pi) {
+            if (interpreter instanceof ProgramCritterInterpreter pi) {
                 System.out.println("  Rules:");
                 String program = new PrettyPrinter().format(pi.getProgram());
                 for (String ruleLine : program.split("\n")) {

@@ -2,6 +2,7 @@ package simulation;
 
 import java.util.Arrays;
 import ast.PrettyPrinter;
+import ast.ProgramCritterInterpreter;
 
 /**
  * Lightweight immutable snapshot of a critter for rendering/inspection.

@@ -1,12 +1,9 @@
 package lexer;
 
-import java.util.Objects;
-import java.util.Optional;
-
 /**
  * Named aliases for fixed critter memory slots.
  */
-public enum Sugar {
+public enum SugarTokenType {
     /** Memory size slot. */
     MEMSIZE(0, false),
     /** Defense stat slot. */
@@ -25,7 +22,7 @@ public enum Sugar {
     private final int index;
     private final boolean assignable;
 
-    Sugar(int index, boolean assignable) {
+    SugarTokenType(int index, boolean assignable){
         this.index = index;
         this.assignable = assignable;
     }
@@ -35,16 +32,16 @@ public enum Sugar {
      *
      * @return non-negative memory index
      */
-    public int getIndex() {
+    public int getIndex(){
         return index;
-    }   
+    }
 
     /**
      * Indicates whether this slot is writable via assignment sugar.
      *
      * @return true when assignments to this slot are allowed
      */
-    public boolean isAssignable() {
+    public boolean isAssignable(){
         return assignable;
     }
 
@@ -54,23 +51,12 @@ public enum Sugar {
      * @param name sugar identifier text
      * @return optional index for known names
      */
-    public static Optional<Integer> findSugarIndex(String name) {
-        Objects.requireNonNull(name, "name");
+    public static Integer getIndexSugar(String name){
         try {
-            return Optional.of(Sugar.valueOf(name.toUpperCase()).getIndex());
-        } catch (IllegalArgumentException exception) {
-            return Optional.empty();
+            return SugarTokenType.valueOf(name.toUpperCase()).getIndex();
+        } catch (IllegalArgumentException exception){
+            return null;
         }
-    }
-
-    /**
-     * Resolves a sugar name to its memory index, or returns null when unknown.
-     *
-     * @param name sugar identifier text
-     * @return memory index or null if unresolved
-     */
-    public static Integer getIndexSugar(String name) {
-        return findSugarIndex(name).orElse(null);
     }
 
     /**
@@ -79,14 +65,12 @@ public enum Sugar {
      * @param index memory index to test
      * @return true if assignments are allowed for that index
      */
-    public static boolean isAssignableSugar(int index) {
-        for (Sugar slot: values()) {
-            if (slot.getIndex() == index) {
-                return slot.assignable;
+    public static boolean isAssignableSugar(int index){
+        for (SugarTokenType slot: values()){
+            if (slot.getIndex() == index){
+                return slot.isAssignable();
             }
         }
         return index >= values().length;
     }
-
-    
 }

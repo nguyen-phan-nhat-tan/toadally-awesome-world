@@ -4,18 +4,18 @@ import java.util.List;
 
 /**
  * Base class for all abstract syntax tree nodes.
- * 
- * Every AST node carries source position information (line and column) so that error
- * diagnostics, debug output, and IDE tooling can pinpoint issues in the source code.
- * Additionally, each node tracks the total size of its subtree for metrics and traversal.
- * 
- * All AST nodes are immutable after construction; their children and attributes cannot change.
- * This design enables safe sharing of AST references across compiler phases.
+ *  
+ * * Class Invariants:
+ * - Nodes are strictly immutable.
+ * - getLine() >= 1 and getColumn() >= 1.
+ * - subtreeSize >= 1, representing this node plus the sum of all descendants' subtree sizes.
+ * - The order of children in getChildren() perfectly mirrors their appearance in the source code.
  * 
  * @see Program
  * @see Rule
  */
-public sealed abstract class ASTNode permits Program, Rule, Command, Condition, Expression {
+public sealed abstract class ASTNode 
+    permits Program, Rule, Expression, Condition, Command {
     /** Source line number (1-based) where this node begins in the source code. */
     protected final int line;
     
@@ -24,17 +24,17 @@ public sealed abstract class ASTNode permits Program, Rule, Command, Condition, 
     
     /** Total number of nodes in this subtree (including this node). Used for metrics and bounds-checking. */
     public final int subtreeSize;
-    
-    /**
-     * Initializes an AST node at the given source location.
+
+/**
+     * Initializes an AST node at the given source location using a variadic array of children.
      * 
-     * This constructor is called by concrete AST node subclasses. Position information is
-     * recorded at creation time so it remains available for error reporting throughout compilation,
-     * even if source text is no longer accessible.
+     * Position information is recorded at creation time to ensure accurate 
+     * error reporting during interpretation or mutation, even if the original source 
+     * text is discarded.
      *
-     * @param line source line number (1-based, where line 1 is the first line)
-     * @param column source column number (1-based, where column 1 is the first character)
-     * @param children direct child nodes in source order (may be null or empty)
+     * @param line     The source line number (1-based)
+     * @param column   The source column number (1-based)
+     * @param children Direct child nodes in source order (null elements are ignored in size calculations)
      */
     protected ASTNode(int line, int column, ASTNode... children) {
         this.line = line;
@@ -44,22 +44,23 @@ public sealed abstract class ASTNode permits Program, Rule, Command, Condition, 
 
     /**
      * Alternative constructor accepting children as a List.
-     * 
-     * Useful for parsing phases that accumulate children in a collection before
-     * creating the parent node.
      *
      * @param line source line number (1-based)
      * @param column source column number (1-based)
      * @param children direct child nodes as a list (may be null or empty)
      */
-
     protected ASTNode(int line, int column, List<? extends ASTNode> children) {
         this.line = line;
         this.column = column;
         this.subtreeSize = 1 + sumChildren(children);
     }
 
-
+    /**
+     * Computes the sum of the subtree sizes for an array of child nodes.
+     * 
+     * @param children An array of ASTNodes
+     * @return The combined total of all children's subtree sizes
+     */
     private static int sumChildren(ASTNode... children) {
         int sum = 0;
         if (children == null) {
@@ -73,7 +74,12 @@ public sealed abstract class ASTNode permits Program, Rule, Command, Condition, 
         return sum;
     }
 
-
+    /**
+     * Computes the sum of the subtree sizes for a list of child nodes.
+     * 
+     * @param children A List of ASTNodes
+     * @return The combined total of all children's subtree sizes
+     */
     private static int sumChildren(List<? extends ASTNode> children) {
         int sum = 0;
         if (children == null) {
@@ -86,28 +92,22 @@ public sealed abstract class ASTNode permits Program, Rule, Command, Condition, 
         }
         return sum;
     }
-    
+
     /**
      * Returns the source line number where this node begins.
      * 
-     * Used by error reporting, debugging, and IDE features to show the user
-     * exactly where in the source file a problem occurred.
-     * 
      * @return the line number (1-based)
      */
-    public int getLine() {
+    public int getLine(){
         return line;
     }
 
     /**
      * Returns the source column number where this node begins.
      * 
-     * Used by error reporting, debugging, and IDE features to pinpoint the exact
-     * character position in the source line where an issue starts.
-     * 
      * @return the column number (1-based)
      */
-    public int getColumn() {
+    public int getColumn(){
         return column;
     }
 
@@ -120,5 +120,5 @@ public sealed abstract class ASTNode permits Program, Rule, Command, Condition, 
      * @return list of direct child nodes (may be empty, never null)
      */
     public abstract List<ASTNode> getChildren();
-
 }
+

@@ -2,8 +2,8 @@ package io;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ast.ProgramCritterInterpreter;
 import simulation.Critter;
-import simulation.ProgramCritterInterpreter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

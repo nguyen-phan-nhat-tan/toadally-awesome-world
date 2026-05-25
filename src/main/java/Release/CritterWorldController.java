@@ -1,3 +1,4 @@
+package Release;
 import ast.Mutator;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -147,9 +148,23 @@ public class CritterWorldController {
         tooltip(continuousRb, "Continuous playback executes steps automatically");
         tooltip(stepRb, "One-by-one mode lets you step manually");
         tooltip(speedSpinner, "Choose steps per second for continuous mode");
-        tooltip(forcedMutationCb, "Available for future mutation controls");
-        tooltip(mannaCb, "Available for future manna controls");
+        tooltip(forcedMutationCb, "Force offspring mutation when critters bud");
+        tooltip(mannaCb, "Toggle random manna food drops during simulation");
         tooltip(toggleBtn, "Run or pause the simulation");
+
+        simulationController.setForceMutationEnabled(forcedMutationCb.isSelected());
+        forcedMutationCb.selectedProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                simulationController.setForceMutationEnabled(newValue);
+            }
+        });
+
+        mannaCb.setSelected(simulationController.isMannaEnabled());
+        mannaCb.selectedProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                simulationController.setMannaEnabled(newValue);
+            }
+        });
 
         renderTimer = new AnimationTimer() {
             @Override
@@ -196,15 +211,21 @@ public class CritterWorldController {
                 WorldLoader.WorldAndController wac = WorldLoader.loadFromFile(Path.of(launchArguments.get(0)));
                 world = wac.world;
                 simulationController = wac.controller;
+                simulationController.setForceMutationEnabled(forcedMutationCb == null || forcedMutationCb.isSelected());
+                simulationController.setMannaEnabled(mannaCb == null || mannaCb.isSelected());
                 worldName = wac.name;
             } else {
                 world = new World(50, 50);
                 simulationController = new Controller(world, new ArrayList<>());
+                simulationController.setForceMutationEnabled(forcedMutationCb == null || forcedMutationCb.isSelected());
+                simulationController.setMannaEnabled(mannaCb == null || mannaCb.isSelected());
                 worldName = "Default Empty World";
             }
         } catch (Exception ex) {
             world = new World(50, 50);
             simulationController = new Controller(world, new ArrayList<>());
+            simulationController.setForceMutationEnabled(forcedMutationCb == null || forcedMutationCb.isSelected());
+            simulationController.setMannaEnabled(mannaCb == null || mannaCb.isSelected());
             worldName = "Default Empty World";
             ex.printStackTrace();
         }
@@ -240,6 +261,8 @@ public class CritterWorldController {
             WorldLoader.WorldAndController wac = WorldLoader.loadFromFile(file.toPath());
             world = wac.world;
             simulationController = wac.controller;
+            simulationController.setForceMutationEnabled(forcedMutationCb.isSelected());
+            simulationController.setMannaEnabled(mannaCb.isSelected());
             worldName = wac.name;
             stepCount = 0;
             latestSnapshot.set(WorldSnapshot.from(world));
@@ -707,14 +730,26 @@ public class CritterWorldController {
         running = true;
         simThread = new Thread(() -> {
             while (running) {
-                simulationController.step();
-                stepCount++;
                 try {
+                    simulationController.step();
+                    stepCount++;
                     latestSnapshot.set(WorldSnapshot.from(world));
+                    stepTimestamps.add(System.nanoTime());
                 } catch (Exception ex) {
+                    // Catch silent crashes — show error in UI so it's visible in the .exe
                     ex.printStackTrace();
+                    running = false;
+                    Platform.runLater(() -> {
+                        setRunButtonPaused();
+                        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
+                            javafx.scene.control.Alert.AlertType.ERROR);
+                        alert.setTitle("Simulation Error");
+                        alert.setHeaderText("The simulation stopped due to an error:");
+                        alert.setContentText(ex.getClass().getSimpleName() + ": " + ex.getMessage());
+                        alert.showAndWait();
+                    });
+                    break;
                 }
-                stepTimestamps.add(System.nanoTime());
                 try {
                     long sleepMs = Math.max(1, 1000 / Math.max(1, stepsPerSec));
                     Thread.sleep(sleepMs);

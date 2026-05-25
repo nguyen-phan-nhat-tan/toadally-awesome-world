@@ -1,6 +1,7 @@
 package simulation;
 
 import ast.Mutator;
+import ast.ProgramCritterInterpreter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,15 +14,15 @@ import java.util.Random;
 public class Controller {
     /** Energy spent each turn for base movement/rotation actions. */
     public static final int TURN_ENERGY_COST = 1;
-    private static final int SOLAR_FLUX = 1;
-    private static final int INITIAL_ENERGY = 250;
-    private static final int CORPSE_FOOD_VALUE = 1;
     private static final int MANA_DROP_ATTEMPTS = 100;
     private static final double MUTATION_PROBABILITY = 0.25;
 
     private final World world;
     private final List<Critter> turnOrder;
     private final Random random;
+    private volatile boolean mannaEnabled = true;
+    private volatile boolean mutationEnabled = true;
+    private volatile boolean forceMutationEnabled = false;
 
     /**
      * Creates a controller with an explicit initial turn order.
@@ -74,6 +75,60 @@ public class Controller {
     }
 
     /**
+     * Returns whether random manna drops are enabled.
+     *
+     * @return true when manna may spawn during step()
+     */
+    public boolean isMannaEnabled() {
+        return mannaEnabled;
+    }
+
+    /**
+     * Enables or disables random manna drops during simulation steps.
+     *
+     * @param enabled true to allow manna spawning
+     */
+    public void setMannaEnabled(boolean enabled) {
+        mannaEnabled = enabled;
+    }
+
+    /**
+     * Returns whether mutations are enabled for budding offspring.
+     *
+     * @return true when mutation mode is enabled
+     */
+    public boolean isMutationEnabled() {
+        return mutationEnabled;
+    }
+
+    /**
+     * Enables or disables mutation mode for budding offspring.
+     *
+     * @param enabled true to allow mutations on offspring
+     */
+    public void setMutationEnabled(boolean enabled) {
+        mutationEnabled = enabled;
+    }
+
+    /**
+     * Returns whether budding should force at least one mutation when possible.
+     *
+     * @return true when forced mutation mode is enabled
+     */
+    public boolean isForceMutationEnabled() {
+        return forceMutationEnabled;
+    }
+
+    /**
+     * Enables or disables forced mutation mode for budding.
+     *
+     * @param enabled true to force at least one mutation attempt on offspring
+     */
+    public void setForceMutationEnabled(boolean enabled) {
+        forceMutationEnabled = enabled;
+    }
+
+    /**
      * Adds a critter to the world and schedules it for future turns.
      *
      * @param critter critter to add
@@ -97,7 +152,6 @@ public class Controller {
         for (java.util.Iterator<Critter> iterator = turnOrder.iterator(); iterator.hasNext();) {
             Critter critter = iterator.next();
             if (critter.isDead()) {
-                world.killCritter(critter, Constants.FOOD_PER_SIZE * critter.getSize());
                 iterator.remove();
                 continue;
             }
@@ -182,6 +236,9 @@ public class Controller {
                     double px = 1.0 / (1.0 + Math.exp(-x));
                     int damage = (int) Math.round(Constants.BASE_DAMAGE * size * px);
                     target.adjustEnergy(-damage);
+                    if (target.isDead()) {
+                        world.killCritter(target, Constants.FOOD_PER_SIZE * target.getSize());
+                    }
                 }
             }
             case GROW -> {
@@ -198,15 +255,15 @@ public class Controller {
                 if (!world.isValidCoordinate(behind.x(), behind.y())) {
                     return null;
                 }
-                // Check for rock or critter; food is acceptable and will be destroyed
                 HexState targetHex = world.getHex(behind.x(), behind.y());
                 if (targetHex.isRock() || targetHex.hasCritter()) {
                     return null;
                 }
-                // Destroy any food on the target hex (budding succeeds regardless)
                 world.takeFood(behind.x(), behind.y(), Integer.MAX_VALUE);
                 Critter offspring = critter.createOffspring(Constants.INITIAL_ENERGY);
-                applyMutations(offspring);
+                if (isMutationEnabled()) {
+                    applyMutations(offspring);
+                }
                 world.placeCritter(offspring, behind.x(), behind.y());
                 return offspring;
             }
@@ -232,6 +289,9 @@ public class Controller {
     }
 
     private void maybeDropManna() {
+        if (!mannaEnabled) {
+            return;
+        }
         int numHexes = world.getWidth() * world.getHeight() / 2;
         // Use a proportional expected value so small worlds can still receive occasional manna.
         double expected = (numHexes / 1000.0) * Constants.MANNA_COUNT;
@@ -267,42 +327,42 @@ public class Controller {
      * @param offspring critter to mutate
      */
     private void applyMutations(Critter offspring) {
-        double roll = random.nextDouble();
-        // System.out.println("[MUTATE] Bud event! Mutation roll: " + roll + " vs threshold " + MUTATION_PROBABILITY);
-        if (roll >= MUTATION_PROBABILITY) {
-            // System.out.println("[MUTATE] No mutation triggered (roll failed)");
+        if (forceMutationEnabled) {
+            try {
+                if (offspring.getCritterInterpreter() instanceof ProgramCritterInterpreter interp) {
+                    ast.Program mutated = new Mutator(random).mutate(interp.getProgram(), true);
+                    if (mutated != interp.getProgram()) {
+                        offspring.updateInterpreter(new ProgramCritterInterpreter(mutated, random));
+                    } else {
+                        offspring.mutateAttribute(random);
+                    }
+                } else {
+                    offspring.mutateAttribute(random);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return;
         }
-        
-        // System.out.println("[MUTATE] Mutation triggered! Beginning mutation loop...");
-        int mutationCount = 0;
+
+        double roll = random.nextDouble();
+        if (roll >= MUTATION_PROBABILITY) {
+            return;
+        }
+
         do {
-            mutationCount++;
-            // System.out.println("[MUTATE] Mutation #" + mutationCount);
-            
             if (random.nextBoolean()) {
-                // System.out.println("[MUTATE] -> Attribute mutation");
                 offspring.mutateAttribute(random);
             } else {
-                // System.out.println("[MUTATE] -> AST mutation");
                 if (offspring.getCritterInterpreter() instanceof ProgramCritterInterpreter) {
                     ProgramCritterInterpreter interp = (ProgramCritterInterpreter) offspring.getCritterInterpreter();
-                    int beforeRules = interp.getProgram().getRules().size();
-                    // System.out.println("[MUTATE] Before: " + beforeRules + " rules");
-                    
                     try {
                         ast.Program mutated = new Mutator(random).mutate(interp.getProgram());
-                        int afterRules = mutated != null ? mutated.getRules().size() : -1;
-                        // System.out.println("[MUTATE] After: " + afterRules + " rules, Object changed? " + (mutated != interp.getProgram()));
-                        
+
                         if (mutated != null && mutated != interp.getProgram()) {
                             offspring.updateInterpreter(new ProgramCritterInterpreter(mutated, random));
-                            // System.out.println("[MUTATE] Offspring interpreter updated! (Rules: " + beforeRules + " -> " + afterRules + ")");
-                        } else {
-                            // System.out.println("[MUTATE] Mutation returned same object (no change)");
-                        }
+                        } else {                        }
                     } catch (Exception e) {
-                        // System.out.println("[MUTATE] CRITICAL: Mutator crashed!");
                         e.printStackTrace();
                     }
                 }
@@ -310,11 +370,8 @@ public class Controller {
             
             double continueRoll = random.nextDouble();
             if (continueRoll >= MUTATION_PROBABILITY) {
-                // System.out.println("[MUTATE] Mutation loop ending (continue roll: " + continueRoll + " >= " + MUTATION_PROBABILITY + ")");
                 break;
             }
-            // System.out.println("[MUTATE] Continuing loop (continue roll: " + continueRoll + " < " + MUTATION_PROBABILITY + ")");
         } while (true);
-        // System.out.println("[MUTATE] Total mutations applied: " + mutationCount);
     }
 }

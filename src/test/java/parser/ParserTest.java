@@ -3,6 +3,8 @@ package parser;
 import error.SyntaxException;
 import org.junit.jupiter.api.Test;
 
+import ast.Parser;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 

@@ -1,9 +1,7 @@
-package parser;
+package ast;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import ast.*;
 import lexer.*;
 import error.SyntaxException;
 
@@ -46,7 +44,7 @@ import error.SyntaxException;
 public final class Parser {
     /** Ordered list of tokens from the lexer. Built once in constructor, then scanned sequentially. */
     private final List<Token> tokens;
-    
+
     /** Current position in the token stream (0-based index). Advanced by match() and consume(). */
     private int currentIndex;
 
@@ -59,7 +57,7 @@ public final class Parser {
      * @param source the complete source code to parse (non-null)
      * @throws SyntaxException if lexical errors are detected during tokenization
      */
-    public Parser(String source) {
+    public Parser(String source){
         this.tokens = new Lexer(source).tokenize();
         this.currentIndex = 0;
     }
@@ -74,10 +72,10 @@ public final class Parser {
      * @return a Program node containing all parsed rules in source order
      * @throws SyntaxException if the input does not conform to the grammar
      */
-    public Program parseProgram() {
+    public Program parseProgram(){
         List<Rule> parsedRules = new ArrayList<>();
-    
-        while (!isAtEnd() && peek().getType() != TokenType.EOF) {
+
+        while (!isAtEnd()) {
             parsedRules.add(parseRule());
         }
         return new Program(parsedRules, 0, 0);
@@ -92,13 +90,14 @@ public final class Parser {
      * @return a Rule node pairing the parsed condition and command
      * @throws SyntaxException if the rule format is violated
      */
-    private Rule parseRule() {
+    private Rule parseRule(){
         Token firstToken = peek();
         Condition condition = parseCondition();
         consume(TokenType.ARROW, "Expected '-->' after condition");
         Command command = parseCommand();
         consume(TokenType.SEMICOLON, "Expected ';' after command");
         return new Rule(condition, command, firstToken.getLine(), firstToken.getColumn());
+
     }
 
     /**
@@ -110,10 +109,10 @@ public final class Parser {
      * @return a Condition AST node
      * @throws SyntaxException if the condition syntax is invalid
      */
-    private Condition parseCondition() {
+    private Condition parseCondition(){
         Condition condition = parseConjunction();
 
-        while (match(TokenType.OR)) {
+        while (match(TokenType.OR)){
             Token operator = previous();
             Condition right = parseConjunction();
             condition = new LogicNode(condition, operator.getLexeme(), right, operator.getLine(), operator.getColumn());
@@ -131,7 +130,7 @@ public final class Parser {
      * @return a Condition AST node
      * @throws SyntaxException if the conjunction syntax is invalid
      */
-    private Condition parseConjunction() {
+    private Condition parseConjunction(){
         Condition condition = parseRelation();
 
         while (match(TokenType.AND)) {
@@ -155,20 +154,20 @@ public final class Parser {
      * @return a RelationNode or parenthesized Condition
      * @throws SyntaxException if the relation format is violated
      */
-    private Condition parseRelation() {
+    private Condition parseRelation(){
         Token startToken = peek();
 
-        if (match(TokenType.LBRACE)) {
+        if (match(TokenType.LBRACE)){
             Condition condition = parseCondition();
             consume(TokenType.RBRACE, "Expected '}' after condition");
             return condition;
         }
-
-        if (match(TokenType.LPAREN)) {
+        
+        if (match(TokenType.LPAREN)){
             Expression left = parseExpression();
             consume(TokenType.RPAREN, "Expected ')' after expression");
-
-            if (isRelOp(peek().getType())) {
+            
+            if (isRelOp(peek().getType())){
                 Token operator = advance();
                 Expression right = parseExpression();
                 return new RelationNode(left, operator.getLexeme(), right, operator.getLine(), operator.getColumn());
@@ -183,13 +182,17 @@ public final class Parser {
 
         Expression left = parseExpression();
 
-        if (isRelOp(peek().getType())) {
+        if (isRelOp((peek().getType()))){
             Token operator = advance();
             Expression right = parseExpression();
             return new RelationNode(left, operator.getLexeme(), right, operator.getLine(), operator.getColumn());
         }
 
-        throw new SyntaxException("Expected a relation operator or a parenthesized condition", startToken.getLine(), startToken.getColumn());
+        throw new SyntaxException(
+            "Expected a relation operator or a parenthesized condition", 
+            startToken.getLine(), 
+            startToken.getColumn()
+        );
     }
 
     /**
@@ -204,13 +207,13 @@ public final class Parser {
     private Command parseCommand() {
         Token startToken = peek();
         List<UpdateNode> updates = new ArrayList<>();
-        
+
         while (check(TokenType.MEM)){
             updates.add(parseUpdate());
         }
 
         Command terminalAction;
-        if (isActionKeyword(peek().getType())) {
+        if (isActionKeyword(peek().getType())){
             terminalAction = parseAction();
         } else if (!updates.isEmpty()) {
             terminalAction = updates.remove(updates.size() - 1);
@@ -220,14 +223,6 @@ public final class Parser {
         return new CommandList(updates, terminalAction, startToken.getLine(), startToken.getColumn());
     }
 
-    /**
-     * Parses a memory update: mem[index] := value.
-     * 
-     * Validates that the target memory slot is writable (not read-only).
-     *
-     * @return an UpdateNode
-     * @throws SyntaxException if the update format is invalid or target is read-only
-     */
     private UpdateNode parseUpdate() {
         Token start = consume(TokenType.MEM, "Expected 'MEM' for an update command");
         consume(TokenType.LBRACKET, "Expected '[' after 'MEM'");
@@ -237,7 +232,7 @@ public final class Parser {
         if (index instanceof NumberNode) {
             NumberNode numberIndex = (NumberNode) index;
             int slot = numberIndex.getValue();
-            if (!Sugar.isAssignableSugar(slot)) {
+            if (!SugarTokenType.isAssignableSugar(slot)) {
                 throw new SyntaxException(
                     "Cannot assign to read-only memory slot mem[" + slot + "]",
                     numberIndex.getLine(),
@@ -261,28 +256,20 @@ public final class Parser {
      * @return an Expression AST node
      * @throws SyntaxException if the expression is invalid
      */
-    private Expression parseExpression() {
+    private Expression parseExpression(){
         Expression expr = parseTerm();
-        while (match(TokenType.ADDOP)) {
+        while (match(TokenType.PLUS, TokenType.MINUS)) {
                 Token operator = previous();
                 Expression right = parseTerm();
                 expr = new BinaryExpr(expr, operator.getLexeme(), right, operator.getLine(), operator.getColumn());
          }
         return expr;
     }
-
-    /**
-     * Parses a multiplicative term (multiplication and division).
-     * 
-     * Higher precedence than addition. Left-associative: a * b / c = (a * b) / c.
-     *
-     * @return an Expression AST node
-     * @throws SyntaxException if the term is invalid
-     */
+    
     private Expression parseTerm() {
         Expression expr = parseFactor();
 
-        while (match(TokenType.MULOP)) {
+        while (match(TokenType.MUL, TokenType.DIV, TokenType.MOD)) {
                 Token operator = previous();
                 Expression right = parseFactor();
                 expr = new BinaryExpr(expr, operator.getLexeme(), right, operator.getLine(), operator.getColumn());
@@ -305,7 +292,7 @@ public final class Parser {
      * @return an Expression AST node
      * @throws SyntaxException if no valid factor is found
      */
-    private Expression parseFactor() {
+    private Expression parseFactor(){
         Token token = peek();
         if (match(TokenType.NUMBER)){
             return new NumberNode(token.getValue(), token.getLine(), token.getColumn());
@@ -324,12 +311,12 @@ public final class Parser {
             return expr;
         }
 
-        if (check(TokenType.ADDOP) && peek().getLexeme().equals("-")) {
+        if (check(TokenType.MINUS)) {
             Token op = advance();
             Expression right = parseFactor();
 
             Expression zero = new NumberNode(0, op.getLine(), op.getColumn());
-        
+
             return new BinaryExpr(zero, op.getLexeme(), right, op.getLine(), op.getColumn());
         }
 
@@ -349,19 +336,19 @@ public final class Parser {
      * @return an ActionNode
      * @throws SyntaxException if action arguments are invalid
      */
-    private Command parseAction() {
+    private Command parseAction(){
         Token actionToken = advance();
         TokenType type = actionToken.getType();
 
         if (type != TokenType.SERVE){
-            return new ActionNode(type, actionToken.getLine(), actionToken.getColumn(), null);
+            return new ActionNode(type, null, actionToken.getLine(), actionToken.getColumn());
         }
 
         consume(TokenType.LBRACKET, "Expected '[' after SERVE");
         Expression argument = parseExpression();
         consume(TokenType.RBRACKET, "Expected ']' after SERVE argument");
 
-        return new ActionNode(type, actionToken.getLine(), actionToken.getColumn(), argument);
+        return new ActionNode(type, argument, actionToken.getLine(), actionToken.getColumn());
     }
 
     /**
@@ -373,22 +360,20 @@ public final class Parser {
      * @return a SensorNode
      * @throws SyntaxException if sensor arguments are invalid
      */
-    private Expression parseSensor() {
+    private Expression parseSensor(){
         Token sensorToken = advance();
         TokenType type = sensorToken.getType();
 
         if (type == TokenType.SMELL){
             return new SensorNode(type, null, sensorToken.getLine(), sensorToken.getColumn());
         }
-
-        consume(TokenType.LBRACKET, "Expected '[' after " + sensorToken.getLexeme() + " sensor");
+        consume(TokenType.LBRACKET, "Expected '[ after " + sensorToken.getLexeme() + " sensor");
         Expression argument = parseExpression();
         consume(TokenType.RBRACKET, "Expected ']' after " + sensorToken.getLexeme() + " sensor argument");
-
         return new SensorNode(type, argument, sensorToken.getLine(), sensorToken.getColumn());
     }
 
-    // Helper methods for parsing
+    // ========== Helper functions ==========
     /**
      * Checks if the given token type is a relational operator (<, >, <=, >=, =, !=).
      *
@@ -397,7 +382,12 @@ public final class Parser {
      */
     private boolean isRelOp(TokenType type) {
         switch (type) {
-            case REL:
+            case LT:
+            case LE:
+            case EQ:
+            case GT:
+            case GE:
+            case NEQ:
                 return true;
             default:
                 return false;
@@ -433,7 +423,7 @@ public final class Parser {
      * @param type token type to check
      * @return true if type is a sensor keyword; false otherwise
      */
-    private boolean isSensorKeyword(TokenType type) {
+    private boolean isSensorKeyword(TokenType type){
         switch (type) {
             case NEARBY:
             case AHEAD:
@@ -445,21 +435,37 @@ public final class Parser {
         }
     }
 
-    /**
-     * Returns the current token without consuming it.
-     * Ensures token stream integrity through bounds checking.
-     *
-     * @return current token, guaranteed to be non-null (EOF token if at end)
-     * @throws SyntaxException if token stream integrity is violated
-     */
-    private Token peek() {
-        if (currentIndex < 0 || currentIndex >= tokens.size()) {
-            throw new SyntaxException(
-                "Token stream integrity violated: invalid token index " + currentIndex,
-                -1, -1
-            );
+    private boolean match(TokenType... types){
+        for (TokenType type: types){
+            if (check(type)){
+                advance();
+                return true;
+            }
         }
-        return tokens.get(currentIndex);
+        return false;
+    }
+
+    /**
+     * Consumes and returns the expected token type, or throws a detailed error.
+     *
+     * @param type the expected token type
+     * @param errorMessage message for error reporting
+     * @return the consumed token
+     * @throws SyntaxException if the current token does not match the expected type
+     */
+    private Token consume(TokenType type, String errorMessage) {
+        if (check(type)) return advance();
+        throw new SyntaxException(errorMessage, peek().getLine(), peek().getColumn());
+    }
+
+    private boolean check(TokenType type){
+        if (isAtEnd()) return false;
+        return peek().getType() == type;
+    }
+
+    private Token advance(){
+        if (!isAtEnd()) currentIndex++;
+        return previous();
     }
 
     /**
@@ -469,54 +475,37 @@ public final class Parser {
      * @return previous token
      * @throws SyntaxException if no previous token exists (index underflow)
      */
-    private Token previous() {
-        if (currentIndex <= 0 || currentIndex - 1 < 0 || currentIndex - 1 >= tokens.size()) {
+    private Token previous(){
+        if (currentIndex <= 0 || currentIndex - 1 < 0 || currentIndex - 1 >= tokens.size()){
             throw new SyntaxException(
-                "Token stream integrity violated: no previous token at index " + (currentIndex - 1),
+                "Token stream integrity violated: no previous token.",
                 -1, -1
             );
         }
         return tokens.get(currentIndex - 1);
     }
 
-    private boolean isAtEnd() {
-        // Check bounds BEFORE calling peek() to avoid NPE/AIOOB.
-        if (currentIndex < 0 || currentIndex >= tokens.size()) {
+    private boolean isAtEnd(){
+        if (currentIndex < 0 || currentIndex >= tokens.size()){
             return true;
         }
         return peek().getType() == TokenType.EOF;
     }
 
-    private boolean check(TokenType type) {
-        if (isAtEnd()) return false;
-        return peek().getType() == type;
-    }
-
-    private boolean match(TokenType... types) {
-        for (TokenType type : types) {
-            if (check(type)) {
-                advance();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Token advance() {
-        if (!isAtEnd()) currentIndex++;
-        return previous();
-    }
-
     /**
-     * Consumes and returns the expected token type, or throws a detailed error.
+     * Returns the current token without consuming it.
+     * Ensures token stream integrity through bounds checking.
      *
-     * @param type the expected token type
-     * @param errorMessage human-readable message for error reporting
-     * @return the consumed token
-     * @throws SyntaxException if the current token does not match the expected type
+     * @return current token, guaranteed to be non-null (EOF token if at end)
+     * @throws SyntaxException if token stream integrity is violated
      */
-    private Token consume(TokenType type, String errorMessage) {
-        if (check(type)) return advance();
-        throw new SyntaxException(errorMessage, peek().getLine(), peek().getColumn());
+    private Token peek(){
+        if (currentIndex < 0 || currentIndex >= tokens.size()) {
+            throw new SyntaxException(
+                "Token stream integrity violated, invalid token index " + currentIndex,
+                -1, -1
+            );
+        }
+        return tokens.get(currentIndex);
     }
 }

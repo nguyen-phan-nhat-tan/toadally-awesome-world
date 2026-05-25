@@ -18,6 +18,10 @@ package lexer;
  * @see Lexer#tokenize()
  */
 public class Token {
+    /** Class Invariant: type and lexeme are never null.
+     * 
+     * Line, column have the value of at least 1
+     */
     private final TokenType type;
     private final String lexeme;
     private final int line;
@@ -25,7 +29,7 @@ public class Token {
     private final int value;
 
     /**
-     * Convenience overload for non-numeric tokens (keywords, operators, identifiers).
+     * Overload for non-numeric tokens (keywords, operators, identifiers).
      * 
      * Initializes the numeric value to 0 since these token types do not represent numbers.
      *
@@ -34,12 +38,12 @@ public class Token {
      * @param line source line number (1-based)
      * @param column source column number (1-based)
      */
-    public Token(TokenType type, String lexeme, int line, int column) {
+    public Token(TokenType type, String lexeme, int line, int column){
         this(type, lexeme, line, column, 0);
     }
 
     /**
-     * Full constructor carrying both textual and numeric forms.
+     * Constructor carrying both textual and numeric forms.
      * 
      * For number tokens, the value is pre-parsed during lexing to avoid re-parsing in the parser.
      * For non-numeric tokens, value is typically 0.
@@ -50,7 +54,7 @@ public class Token {
      * @param column source column number (1-based)
      * @param value pre-parsed numeric value (0 for non-numeric tokens)
      */
-    public Token(TokenType type, String lexeme, int line, int column, int value) {
+    public Token(TokenType type, String lexeme, int line, int column, int value){
         this.type = type;
         this.lexeme = lexeme;
         this.line = line;
@@ -61,11 +65,9 @@ public class Token {
     /**
      * Returns the token type (category).
      * 
-     * The parser uses this to make dispatch decisions about how to handle the token.
-     * 
      * @return the token type (never null)
      */
-    public TokenType getType() {
+    public TokenType getType(){
         return type;
     }
 
@@ -74,7 +76,7 @@ public class Token {
      *
      * @return original text, useful for preserving user-facing formatting and messages
      */
-    public String getLexeme() {
+    public String getLexeme(){
         return lexeme;
     }
 
@@ -83,7 +85,7 @@ public class Token {
      *
      * @return line metadata for precise diagnostics
      */
-    public int getLine() {
+    public int getLine(){
         return line;
     }
 
@@ -92,7 +94,7 @@ public class Token {
      *
      * @return column metadata for precise diagnostics
      */
-    public int getColumn() {
+    public int getColumn(){
         return column;
     }
 
@@ -101,7 +103,7 @@ public class Token {
      *
      * @return pre-parsed numeric payload to avoid repeated string-to-int conversion
      */
-    public int getValue() {
+    public int getValue(){
         return value;
     }
 }

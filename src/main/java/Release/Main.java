@@ -1,4 +1,4 @@
-
+package Release;
 import io.WorldLoader;
 import simulation.World;
 import simulation.Controller;

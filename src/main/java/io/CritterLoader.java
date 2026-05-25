@@ -1,9 +1,9 @@
 package io;
 
+import ast.Parser;
 import ast.Program;
-import parser.Parser;
+import ast.ProgramCritterInterpreter;
 import simulation.Critter;
-import simulation.ProgramCritterInterpreter;
 
 import java.io.IOException;
 import java.nio.file.Files;
