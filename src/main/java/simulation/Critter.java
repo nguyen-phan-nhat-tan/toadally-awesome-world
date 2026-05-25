@@ -3,6 +3,8 @@ package simulation;
 import ast.Program;
 import ast.ProgramCritterInterpreter;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Mutable critter state tracked by the world and controller.
@@ -454,6 +456,23 @@ public class Critter {
         offspring.setMemorySize(memorySize);
         offspring.setOffense(offense);
         offspring.setDefense(defense);
+        // Inherit species and append/increment generation suffix for budded offspring
+        String parentSpecies = this.species == null ? "unknown" : this.species;
+        String childSpecies;
+        Pattern p = Pattern.compile("^(.*)\\s+[Ff]\\s*(\\d+)$");
+        Matcher m = p.matcher(parentSpecies);
+        if (m.matches()) {
+            String base = m.group(1).trim();
+            int gen = 0;
+            try {
+                gen = Integer.parseInt(m.group(2));
+            } catch (NumberFormatException ignored) {
+            }
+            childSpecies = base + " F" + (gen + 1);
+        } else {
+            childSpecies = parentSpecies + " F1";
+        }
+        offspring.setSpecies(childSpecies);
         offspring.setPosture(MIN_POSTURE);
         offspring.syncMemoryArray();
         return offspring;

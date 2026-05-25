@@ -248,9 +248,10 @@ public class Controller {
                 critter.grow();
             }
             case BUD -> {
-                if (!spendEnergy(critter, Constants.BUD_COST * complexity)) {
-                    return null;
-                }
+                // According to spec: parent always pays the execution cost even if budding fails due to a blocked tile.
+                int execCost = Constants.BUD_COST * complexity;
+                critter.adjustEnergy(-execCost);
+
                 HexCoordinate behind = neighborBehind(critter);
                 if (!world.isValidCoordinate(behind.x(), behind.y())) {
                     return null;
@@ -259,6 +260,11 @@ public class Controller {
                 if (targetHex.isRock() || targetHex.hasCritter()) {
                     return null;
                 }
+
+                // If placement succeeds, parent must also transfer INITIAL_ENERGY to the offspring.
+                // Deduct the endowment from the parent (this may kill the parent; that's allowed by spec).
+                critter.adjustEnergy(-Constants.INITIAL_ENERGY);
+
                 world.takeFood(behind.x(), behind.y(), Integer.MAX_VALUE);
                 Critter offspring = critter.createOffspring(Constants.INITIAL_ENERGY);
                 if (isMutationEnabled()) {

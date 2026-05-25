@@ -341,34 +341,33 @@ public final class ProgramCritterInterpreter implements CritterInterpreter {
 
             int initialDir = firstStepDir.get(current);
 
+            int leftDir = (current.dir + 5) % 6;
+            SmellState leftState = new SmellState(current.hex, leftDir);
+            relaxSmellState(queue, visited, costs, firstStepDir, leftState, currentCost + size, initialDir);
+
+            int rightDir = (current.dir + 1) % 6;
+            SmellState rightState = new SmellState(current.hex, rightDir);
+            relaxSmellState(queue, visited, costs, firstStepDir, rightState, currentCost + size, initialDir);
+
             HexCoordinate forwardHex = world.neighbor(current.hex.x(), current.hex.y(), HexDirection.fromIndex(current.dir));
-            
             if (world.isValidCoordinate(forwardHex.x(), forwardHex.y())) {
                 HexState forwardState = world.getHex(forwardHex.x(), forwardHex.y());
-                
+
                 if (forwardState.hasFood() && forwardState.getFoodAmount() > 0) {
                     int totalDistance = HexMath.distance(startHex.x(), startHex.y(), forwardHex.x(), forwardHex.y());
                     if (totalDistance <= Constants.MAX_SMELL_DISTANCE) {
                         int finalCost = currentCost + (Constants.MOVE_COST * size);
                         int scalarDistance = finalCost / size;
-                        
+
                         int finalRelativeDir = (initialDir == -1) ? (current.dir - startDir + 6) % 6 : initialDir;
                         return scalarDistance * 1000 + finalRelativeDir;
                     }
                 }
 
-                int leftDir = (current.dir + 5) % 6;
-                SmellState leftState = new SmellState(current.hex, leftDir);
-                relaxSmellState(queue, visited, costs, firstStepDir, leftState, currentCost + size, initialDir);
-
-                int rightDir = (current.dir + 1) % 6;
-                SmellState rightState = new SmellState(current.hex, rightDir);
-                relaxSmellState(queue, visited, costs, firstStepDir, rightState, currentCost + size, initialDir);
-
                 if (!forwardState.isRock()) {
                     SmellState forwardStepState = new SmellState(forwardHex, current.dir);
                     int moveCost = currentCost + Constants.MOVE_COST * size;
-                    
+
                     int nextInitialDir = (initialDir == -1) ? (current.dir - startDir + 6) % 6 : initialDir;
 
                     if (HexMath.distance(startHex.x(), startHex.y(), forwardHex.x(), forwardHex.y()) <= Constants.MAX_SMELL_DISTANCE) {

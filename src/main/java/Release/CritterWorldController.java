@@ -123,6 +123,7 @@ public class CritterWorldController {
         worldCanvas.heightProperty().bind(((AnchorPane) worldCanvas.getParent()).heightProperty());
 
         speedSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 20));
+        speedSpinner.setEditable(true);
         stepsPerSec = speedSpinner.getValue();
         speedSpinner.valueProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue != null) {

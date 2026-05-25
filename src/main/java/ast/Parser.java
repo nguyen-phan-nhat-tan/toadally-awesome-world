@@ -207,19 +207,36 @@ public final class Parser {
     private Command parseCommand() {
         Token startToken = peek();
         List<UpdateNode> updates = new ArrayList<>();
-
-        while (check(TokenType.MEM)){
-            updates.add(parseUpdate());
-        }
-
         Command terminalAction;
-        if (isActionKeyword(peek().getType())){
+
+        // Two allowed forms:
+        // 1) action (and update)*
+        // 2) update (and update)*
+        if (isActionKeyword(peek().getType())) {
             terminalAction = parseAction();
-        } else if (!updates.isEmpty()) {
+            while (match(TokenType.AND)) {
+                if (check(TokenType.MEM)) {
+                    updates.add(parseUpdate());
+                } else {
+                    throw new SyntaxException("Expected an update after 'and'", peek().getLine(), peek().getColumn());
+                }
+            }
+        } else if (check(TokenType.MEM)) {
+            // must have at least one update
+            updates.add(parseUpdate());
+            while (match(TokenType.AND)) {
+                if (check(TokenType.MEM)) {
+                    updates.add(parseUpdate());
+                } else {
+                    throw new SyntaxException("Expected an update after 'and'", peek().getLine(), peek().getColumn());
+                }
+            }
+            // terminal action is the last update when no explicit action provided
             terminalAction = updates.remove(updates.size() - 1);
         } else {
-            throw new SyntaxException("Expected an action command", peek().getLine(), peek().getColumn());
+            throw new SyntaxException("Expected an action or an update", peek().getLine(), peek().getColumn());
         }
+
         return new CommandList(updates, terminalAction, startToken.getLine(), startToken.getColumn());
     }
 
