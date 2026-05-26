@@ -17,6 +17,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -67,6 +68,7 @@ public class CritterWorldController {
     @FXML private Spinner<Integer> speedSpinner;
     @FXML private CheckBox forcedMutationCb;
     @FXML private CheckBox mannaCb;
+    @FXML private ToggleButton themeToggleBtn;
 
     private final List<String> launchArguments = new ArrayList<>();
     private final AtomicReference<WorldSnapshot> latestSnapshot = new AtomicReference<>();
@@ -152,6 +154,7 @@ public class CritterWorldController {
         tooltip(forcedMutationCb, "Force offspring mutation when critters bud");
         tooltip(mannaCb, "Toggle random manna food drops during simulation");
         tooltip(toggleBtn, "Run or pause the simulation");
+        tooltip(themeToggleBtn, "Toggle between light and dark mode");
 
         simulationController.setForceMutationEnabled(forcedMutationCb.isSelected());
         forcedMutationCb.selectedProperty().addListener((obs, oldValue, newValue) -> {
@@ -462,6 +465,8 @@ public class CritterWorldController {
         double offsetX = centerX - totalWidth / 2.0;
         double offsetY = centerY - totalHeight / 2.0;
 
+        boolean isLightMode = root.getStylesheets().contains(getClass().getResource("/light-mode.css").toExternalForm());
+
         for (int y = 0; y < snap.height; y++) {
             for (int x = 0; x < snap.width; x++) {
                 if (!world.isValidCoordinate(x, y)) {
@@ -475,18 +480,35 @@ public class CritterWorldController {
                 double cx = offsetX + x * colSpacing;
                 double cy = offsetY + y * rowSpacing;
 
-                Color fillColor = Color.web("#2d2d30");
-                Color strokeColor = Color.web("#3e3e42");
+                Color fillColor;
+                Color strokeColor;
 
-                if (hex.rock) {
-                    fillColor = Color.web("#424242");
-                    strokeColor = Color.web("#616161");
-                } else if (hex.critter != null) {
-                    fillColor = colorForKey(hex.critter.speciesKey, 0.25, 0.6);
-                    strokeColor = colorForKey(hex.critter.speciesKey, 0.35, 0.75);
-                } else if (hex.foodAmount > 0) {
-                    fillColor = Color.web("#d0eaff");
-                    strokeColor = Color.web("#b3d9ff");
+                if (isLightMode) {
+                    fillColor = Color.web("#f0f0f0");
+                    strokeColor = Color.web("#dcdcdc");
+                    if (hex.rock) {
+                        fillColor = Color.web("#c0c0c0");
+                        strokeColor = Color.web("#a9a9a9");
+                    } else if (hex.critter != null) {
+                        fillColor = colorForKey(hex.critter.speciesKey, 0.5, 0.9);
+                        strokeColor = colorForKey(hex.critter.speciesKey, 0.6, 1.0);
+                    } else if (hex.foodAmount > 0) {
+                        fillColor = Color.web("#fffacd");
+                        strokeColor = Color.web("#f5deb3");
+                    }
+                } else {
+                    fillColor = Color.web("#2d2d30");
+                    strokeColor = Color.web("#3e3e42");
+                    if (hex.rock) {
+                        fillColor = Color.web("#424242");
+                        strokeColor = Color.web("#616161");
+                    } else if (hex.critter != null) {
+                        fillColor = colorForKey(hex.critter.speciesKey, 0.25, 0.6);
+                        strokeColor = colorForKey(hex.critter.speciesKey, 0.35, 0.75);
+                    } else if (hex.foodAmount > 0) {
+                        fillColor = Color.web("#d0eaff");
+                        strokeColor = Color.web("#b3d9ff");
+                    }
                 }
 
                 drawHexagon(gc, cx, cy, radius, fillColor, strokeColor);
@@ -783,5 +805,17 @@ public class CritterWorldController {
 
     private void tooltip(Node node, String text) {
         Tooltip.install(node, new Tooltip(text));
+    }
+
+    @FXML
+    private void handleThemeToggle() {
+        boolean isLightMode = root.getStylesheets().contains(getClass().getResource("/light-mode.css").toExternalForm());
+        if (isLightMode) {
+            root.getStylesheets().remove(getClass().getResource("/light-mode.css").toExternalForm());
+            themeToggleBtn.setText("Light Mode");
+        } else {
+            root.getStylesheets().add(getClass().getResource("/light-mode.css").toExternalForm());
+            themeToggleBtn.setText("Dark Mode");
+        }
     }
 }

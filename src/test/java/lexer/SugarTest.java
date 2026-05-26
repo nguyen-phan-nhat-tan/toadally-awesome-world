@@ -17,39 +17,39 @@ public class SugarTest {
     @Test
     @DisplayName("findSugarIndex returns correct index for valid sugar names")
     void testFindSugarIndexValidNames() {
-        assertEquals(Optional.of(0), SugarTokenType.findSugarIndex("MEMSIZE"));
-        assertEquals(Optional.of(1), SugarTokenType.findSugarIndex("DEFENSE"));
-        assertEquals(Optional.of(2), SugarTokenType.findSugarIndex("OFFENSE"));
-        assertEquals(Optional.of(3), SugarTokenType.findSugarIndex("SIZE"));
-        assertEquals(Optional.of(4), SugarTokenType.findSugarIndex("ENERGY"));
-        assertEquals(Optional.of(5), SugarTokenType.findSugarIndex("PASS"));
-        assertEquals(Optional.of(6), SugarTokenType.findSugarIndex("POSTURE"));
+        assertEquals(Optional.of(0), Optional.ofNullable(SugarTokenType.getIndexSugar("MEMSIZE")));
+        assertEquals(Optional.of(1), Optional.ofNullable(SugarTokenType.getIndexSugar("DEFENSE")));
+        assertEquals(Optional.of(2), Optional.ofNullable(SugarTokenType.getIndexSugar("OFFENSE")));
+        assertEquals(Optional.of(3), Optional.ofNullable(SugarTokenType.getIndexSugar("SIZE")));
+        assertEquals(Optional.of(4), Optional.ofNullable(SugarTokenType.getIndexSugar("ENERGY")));
+        assertEquals(Optional.of(5), Optional.ofNullable(SugarTokenType.getIndexSugar("PASS")));
+        assertEquals(Optional.of(6), Optional.ofNullable(SugarTokenType.getIndexSugar("POSTURE")));
     }
 
     @Test
     @DisplayName("findSugarIndex handles case-insensitive lookup")
     void testFindSugarIndexCaseInsensitive() {
-        assertEquals(Optional.of(0), SugarTokenType.findSugarIndex("memsize"));
-        assertEquals(Optional.of(1), SugarTokenType.findSugarIndex("Defense"));
-        assertEquals(Optional.of(2), SugarTokenType.findSugarIndex("OFFENSE"));
-        assertEquals(Optional.of(3), SugarTokenType.findSugarIndex("size"));
+        assertEquals(Optional.of(0), Optional.ofNullable(SugarTokenType.getIndexSugar("memsize")));
+        assertEquals(Optional.of(1), Optional.ofNullable(SugarTokenType.getIndexSugar("Defense")));
+        assertEquals(Optional.of(2), Optional.ofNullable(SugarTokenType.getIndexSugar("OFFENSE")));
+        assertEquals(Optional.of(3), Optional.ofNullable(SugarTokenType.getIndexSugar("size")));
     }
 
     @Test
     @DisplayName("findSugarIndex returns empty Optional for non-sugar names")
     void testFindSugarIndexInvalidNames() {
-        assertTrue(SugarTokenType.findSugarIndex("INVALID").isEmpty());
-        assertTrue(SugarTokenType.findSugarIndex("NOTASUGAR").isEmpty());
-        assertTrue(SugarTokenType.findSugarIndex("").isEmpty());
-        assertTrue(SugarTokenType.findSugarIndex("123").isEmpty());
+        assertTrue(Optional.ofNullable(SugarTokenType.getIndexSugar("INVALID")).isEmpty());
+        assertTrue(Optional.ofNullable(SugarTokenType.getIndexSugar("NOTASUGAR")).isEmpty());
+        assertTrue(Optional.ofNullable(SugarTokenType.getIndexSugar("")).isEmpty());
+        assertTrue(Optional.ofNullable(SugarTokenType.getIndexSugar("123")).isEmpty());
     }
 
     @Test
     @DisplayName("findSugarIndex throws on null input (explicit error)")
     void testFindSugarIndexNullInput() {
-        assertThrows(Exception.class, 
-            () -> SugarTokenType.findSugarIndex(null),
-            "findSugarIndex should throw on null input (fail-loud)");
+        assertThrows(Exception.class,
+            () -> SugarTokenType.getIndexSugar(null),
+            "getIndexSugar should throw on null input (fail-loud)");
     }
 
     @Test
