@@ -9,6 +9,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.1.0'
+    id 'org.beryx.jlink' version '4.0.1'
 }
 
 repositories {
@@ -20,6 +21,8 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+
+    modularity.inferModulePath = true
 }
 
 dependencies {
@@ -49,6 +52,19 @@ javafx {
 }
 
 application {
+    mainModule = 'toadally.awesome.world'
     mainClass = 'Release.GuiMain'
 }
 
+jlink {
+    options = ['--strip-debug', '--compress=2', '--no-header-files', '--no-man-pages']
+
+    launcher {
+        name = 'toadally-awesome-world'
+    }
+
+    jpackage {
+        imageName = 'toadally-awesome-world'
+        skipInstaller = true
+    }
+}
